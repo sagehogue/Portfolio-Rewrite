@@ -9,6 +9,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using MongoDB.Bson;
 using MongoDB.Driver;
+using webSage.Models;
 
 namespace webSage
 {
@@ -31,8 +32,9 @@ namespace webSage
 
             //IMongoDatabase db = client.GetDatabase("Portfolio");
             //IMongoCollection<BsonDocument> collection = db.GetCollection<BsonDocument>("Stories");
-            IMongoDatabase testdb = client.GetDatabase("Test");
-            IMongoCollection<BsonDocument> collection = testdb.GetCollection<BsonDocument>("testies");
+            IMongoDatabase db = client.GetDatabase("Test");
+            IMongoCollection<BsonDocument> collection = db.GetCollection<BsonDocument>("Stories");
+            var story = new Story("test", "we are testing", "yeh this a test description", null);
             var document = new BsonDocument
             {
                 { "firstname", BsonValue.Create("Peter")},
@@ -44,7 +46,7 @@ namespace webSage
             .Add("first-name", "sagacious")
             .Add("last-name", "salubrious");
             document["sageAge"] = 21;
-            await collection.InsertOneAsync(document);
+            await collection.InsertOneAsync(story.ToBsonDocument());
         }
     }
 }

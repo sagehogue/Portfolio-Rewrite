@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using MongoDB.Bson;
 using MongoDB.Driver;
 
-namespace SagePortfolio.Models
+namespace webSage.Models
 {
     public class Scene
     {
@@ -14,17 +14,14 @@ namespace SagePortfolio.Models
         public string Text { get; private set; }
         public string Description { get; private set; }
         public string SceneType { get; private set; }
-        public List<Option> OptionList = new List<Option>();
-        public Scene(string title, string text, string description, string scenetype, Option[] args)
+        public List<Option> OptionList { get; set; }
+        public Scene(string title, string text, string description, string scenetype, List<Option> options)
         {
             Title = title;
             Text = text;
             Description = description;
             SceneType = scenetype;
-            foreach (var Option in args)
-            {
-                OptionList.Add(Option);
-            }
+            OptionList = options;
         }
     }
 }
