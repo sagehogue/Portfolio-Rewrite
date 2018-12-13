@@ -1,0 +1,20 @@
+:root {
+    --modal-font-size: 3rem;
+    --modal-font-weight: 600;
+    --modal-title-weight: 800;
+}
+
+.TextModal {
+    padding: 1.5rem 3rem;
+    background-color: lightcyan;
+    color: dimgray;
+    font-size: var(--modal-font-size);
+    border-radius: 15px;
+    font-weight:  var(--modal-font-weight);
+    
+}
+
+.TextModal > h3 {
+    font-size: 150%;
+    font-weight: var(--modal-title-weight);
+}

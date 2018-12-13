@@ -4,9 +4,9 @@ import TrayItem from './TrayItem/TrayItem';
 
 import './NavTray.module.css';
 
-const NavTray = (props) => {
+const NavTray = (props) => { 
     return (
-        <div className='navTray'>
+        <div className={props.menuClosed? 'navTray closed' : 'navTray'}>
             <TrayItem />
             <TrayItem />
             <TrayItem />

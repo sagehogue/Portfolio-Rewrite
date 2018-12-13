@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Route } from 'react-router';
 import Layout from './containers/Layout/Layout';
 import NavMenu from './components/NavMenu/NavMenu'
-import PageModal from './containers/PageModal/PageModal';
+import PageContainer from './containers/PageContainer/PageContainer';
 
 //  Save below for react-router testing
 // import { Home } from './components/Home';
@@ -22,10 +22,8 @@ export default class App extends Component {
       <Route path='/fetch-data' component={FetchData} /> */
       <div className="App">
         <Layout>
-          <h1>"This is the base view.</h1>
-          <h2>"Wow, is this alive?"</h2>
           <NavMenu />
-          <PageModal></PageModal>
+          <PageContainer></PageContainer>
         </Layout>
 
       </div>

@@ -13,17 +13,17 @@ class NavMenu extends Component {
 
     toggleMenu = () => {
         console.log('I ran')
-        this.setState({menuIsClosed: !this.state.menuIsClosed})
+        this.setState({ menuIsClosed: !this.state.menuIsClosed })
     }
 
     render() {
         return (
             <div className="NavMenu" >
-            
-                <NavButton 
-                menuClosed={this.state.menuIsClosed} 
-                toggleMenuHandler={this.toggleMenu} />
-                {this.state.menuIsClosed? null : <NavTray />}
+
+                <NavButton
+                    menuClosed={this.state.menuIsClosed}
+                    toggleMenuHandler={this.toggleMenu} />
+                <NavTray menuClosed={this.state.menuIsClosed} />
             </div>
         )
     }
