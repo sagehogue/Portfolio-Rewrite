@@ -1,28 +1,8 @@
 .NavMenu {
-    z-index: 50;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-end;
-    grid-column: 10 / 12;
+    grid-column: 8 / 12;
     grid-row: 1 / 2;
     width: 100%;
-}
-
-.NavMenu > div {
-    background-color: rgba(2, 2, 2, .9);
-    transition: all 1s;
-    width: 30%;
-    height: .8rem;
-    margin: .5rem 1.5rem .5rem 0;
-}
-
-.NavMenu > div.middle {
-    transition: all .2s;
-    /* width: 45%; */
-}
-
-.NavMenu > div.top {
-    margin-top: 1.5rem;
-    
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
 }

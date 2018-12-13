@@ -1,0 +1,9 @@
+.navTray {
+    transition: all .5s;
+    padding: 3rem 5rem;
+    background-color: darkslategrey;
+    display: flex;
+    flex-direction: row-reverse;
+    z-index: 25;
+    margin-right: 5rem;
+}
