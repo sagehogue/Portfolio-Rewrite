@@ -1,0 +1,16 @@
+.PageModal {
+    z-index: 10;
+    grid-row: 1 / 12;
+    grid-column: 2 / 11;
+    background-color: lightslategrey;
+    border-radius: .5rem;
+    box-shadow: 1rem 2rem 5px 1px rgba(3, 3, 3, .5);
+    margin-top: 6rem;
+    margin-bottom: 4rem;
+}
+
+@media screen and (min-width: 1000px) {
+    grid-column: 2 / 10;
+    grid-row: 2 / 10;
+    box-shadow: -.5rem .5rem rgba(3, 3, 3, .5);
+}
