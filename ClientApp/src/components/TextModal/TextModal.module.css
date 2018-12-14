@@ -5,16 +5,26 @@
 }
 
 .TextModal {
+    transition: all .5s;
     padding: 1.5rem 3rem;
     background-color: lightcyan;
     color: dimgray;
     font-size: var(--modal-font-size);
     border-radius: 15px;
     font-weight:  var(--modal-font-weight);
-    
+    box-shadow: 1rem 2rem 5px 1px rgba(3, 3, 3, .5);
+}
+
+.TextModal.hover {
+    transform: scaleX(5);
+}
+
+div.TextModal:hover, div.TextModal.hover {
+    /* font-size: 4.5rem; */
 }
 
 .TextModal > h3 {
+    text-align: center;
     font-size: 150%;
     font-weight: var(--modal-title-weight);
 }

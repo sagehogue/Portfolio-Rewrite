@@ -27,9 +27,14 @@
     
 }
 
+.PageModal.splash div:hover {
+    transform: translateX(10rem);
+}
+
 .PageModal.splash div:nth-child(1) {
     margin-top: 6rem;
 }
+
 
 .PageModal.splash div:nth-child(odd) {
     text-align: left;
