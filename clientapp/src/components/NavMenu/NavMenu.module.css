@@ -1,0 +1,8 @@
+.NavMenu {
+    grid-column: 8 / 12;
+    grid-row: 1 / 2;
+    width: 100%;
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+}
