@@ -1,9 +1,9 @@
 import React from 'react';
-import './NavButton.module.css';
+import classes from './NavButton.module.css';
 
 const NavButton = (props) => {
     let hamburgerButton = (
-        <div className="NavButton" onClick={props.toggleMenuHandler}>
+        <div className={classes.NavButton} onClick={props.toggleMenuHandler}>
             <div className="top"></div>
             <div className="middle"></div>
             <div className="bottom"></div>
@@ -11,7 +11,7 @@ const NavButton = (props) => {
     )
 
     let xButton = (
-        <div className="xButton" onClick={props.toggleMenuHandler}>
+        <div className={classes.xButton} onClick={props.toggleMenuHandler}>
             <div className="top"></div>
             <div className="middle"></div>
             <div className="bottom"></div>

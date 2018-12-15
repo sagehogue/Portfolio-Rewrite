@@ -12,7 +12,7 @@
     margin-top: 7rem;
     margin-bottom: 4rem;
     align-items: flex-start;
-    overflow: hidden;
+    /* overflow: hidden; */
 }
 
 .PageModal.splash {
@@ -24,15 +24,22 @@
 .PageModal.splash div {
     max-width: 75%;
     margin-top: 3.5rem;
+    margin-bottom: 2rem;
     
 }
 
 .PageModal.splash div:hover {
-    transform: translateX(10rem);
+    transform: translateY(-1rem);
+    color: cornflowerblue;
 }
 
 .PageModal.splash div:nth-child(1) {
     margin-top: 6rem;
+    margin-bottom: 6rem;
+}
+
+.hover {
+    font-size: 5rem;
 }
 
 

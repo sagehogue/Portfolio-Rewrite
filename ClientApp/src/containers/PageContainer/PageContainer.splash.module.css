@@ -1,0 +1,15 @@
+span.word--hi {
+    animation-duration: 2s;
+    animation-name: slide-in-to-right;
+}
+
+@keyframes slide-in-to-right {
+    from {
+        transform: translateX(-30rem) rotate(45deg);
+
+    }
+
+    to {
+        transform: translateX(0) rotate(0);
+    }
+}

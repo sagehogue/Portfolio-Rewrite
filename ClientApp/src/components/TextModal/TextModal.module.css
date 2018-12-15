@@ -16,11 +16,9 @@
 }
 
 .TextModal.hover {
-    transform: scaleX(5);
-}
-
-div.TextModal:hover, div.TextModal.hover {
-    /* font-size: 4.5rem; */
+    /* transform: scaleX(1.3); */
+    transform: translateY(-1rem);
+    color: cornflowerblue;
 }
 
 .TextModal > h3 {

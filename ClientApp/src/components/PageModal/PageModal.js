@@ -1,20 +1,21 @@
 import React from 'react';
-import './PageModal.module.css';
+import classes from './PageModal.module.css';
 
 const PageModal = (props) => {
-    let classes = 'PageModal';
+    let classList = [];
+    classList.push(classes.PageModal);
     switch (props.displayed) {
         case "splash":
-            classes += ' splash';
+            classList.push(classes.splash);
             break;
         case "story":
-            classes += ' story';
+            classList.push(classes.story);
             break;
         default:
             break;
     }
     return (
-        <div className={classes}>
+        <div className={classList.join(' ')}>
             {props.children}
         </div>
     )

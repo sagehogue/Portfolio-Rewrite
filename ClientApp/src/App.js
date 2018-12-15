@@ -9,7 +9,7 @@ import PageContainer from './containers/PageContainer/PageContainer';
 // import { FetchData } from './components/FetchData';
 // import { Counter } from './components/Counter';
 
-import './App.module.css';
+import classes from './App.module.css';
 
 
 export default class App extends Component {
@@ -20,7 +20,7 @@ export default class App extends Component {
       /* <Route exact path='/' component={Home} />
       <Route path='/counter' component={Counter} />
       <Route path='/fetch-data' component={FetchData} /> */
-      <div className="App">
+      <div className={classes.App}>
         <Layout>
           <NavMenu />
           <PageContainer></PageContainer>

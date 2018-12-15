@@ -4,26 +4,32 @@ import PageModal from '../../components/PageModal/PageModal';
 import TextModal from '../../components/TextModal/TextModal';
 
 import './PageContainer.module.css';
+import './PageContainer.splash.module.css';
 
 class PageContainer extends Component {
+    // currentPage options: 'splash', 'story'
     state = {
         currentPage: "splash",
     }
-
     splashPage = (
         <PageModal displayed={this.state.currentPage}>
-            <TextModal title="Hi. I'm Sage." >
+            <TextModal>
+                <h3>
+                    <span className="word--hi">
+                        Hi
+                    </span><span className="period">.</span>
+                    I'm <span className="word--sage">
+                    Sage
+                    </span><span className="period">.</span>
+                </h3>
+                <hr></hr>
                 <p>I'm a PDX-based web developer and tech enthusiast.</p>
             </TextModal>
-            {/* <TextModal>
-                    <span className="titleWord wordWeb">web</span>
-                    <span className="titleWord wordSage">Sage</span> is live!
-                </TextModal> */}
             <TextModal title='Welcome to my website.'>
                 {/* <p>To learn more, click a button below.</p> */}
             </TextModal>
             <TextModal title='My work'>
-                <p>vistelse app</p>
+                <p>Vistelse app, this website, my resume.</p>
             </TextModal>
             <TextModal title="Who am I?">
                 <p>What's my name? Learn a little something about me.</p>
@@ -34,8 +40,13 @@ class PageContainer extends Component {
         </PageModal>
     )
 
+    storyPage = (
+        <PageModal>
+
+        </PageModal>
+    )
     render() {
-        return this.state.currentPage === "splash" ? this.splashPage : null;
+        return this.state.currentPage === "splash" ? this.splashPage : this.storyPage;
     }
 }
 

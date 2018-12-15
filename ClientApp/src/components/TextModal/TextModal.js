@@ -20,7 +20,7 @@ class TextModal extends Component {
         return (
             <div className={classes}
                 onMouseEnter={this.hoverOn}
-                onMouseLeave={this.hoverOff}
+                onMouseLeave={ this.hoverOff}
             >
                 {this.props.title ? <h3>{this.props.title}</h3> : null}
                 {this.props.title ? <hr /> : null}
