@@ -1,5 +1,19 @@
+:root {
+    --tray-item-font-size: 3rem;
+    --tray-item-font-weight: 700;
+}
+
 .TrayItem {
+    font-size: var(--tray-item-font-size);
+    font-weight: var(--tray-item-font-weight);
+    border-radius: 1rem;
     padding: 1rem;
     background-color: lemonchiffon;
     margin: 1.5rem;
+    transition: all .2s;
+}
+
+.TrayItem:hover {
+    transform: translateY(-5px);
+    box-shadow: 2px 2px 1px 1px;
 }

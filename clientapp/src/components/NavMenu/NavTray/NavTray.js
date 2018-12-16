@@ -1,6 +1,6 @@
 import React from 'react';
 
-import TrayItem from './TrayItem/TrayItem';
+
 
 import classes from './NavTray.module.css';
 
@@ -11,9 +11,7 @@ const NavTray = (props) => {
     }
     return (
         <div className={classList.join(' ')}>
-            <TrayItem />
-            <TrayItem />
-            <TrayItem />
+            {props.children}
         </div>
     )
 }

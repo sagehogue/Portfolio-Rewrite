@@ -36,8 +36,8 @@
     width: 100%;
 }
 
-.xButton:hover > div {
-    background-color: rgba(red, .8);
+.xButton:hover > div, .xButton > div:hover {
+    background-color: red;
 }
 
 .xButton div {
