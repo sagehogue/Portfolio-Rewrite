@@ -7,6 +7,7 @@
 
 .TextModal {
     position: relative;
+    z-index: 5;
     transition: all .5s;
     padding: 1.5rem 3rem;
     background-color: lightcyan;
@@ -15,17 +16,16 @@
     border-radius: 15px;
     font-weight:  var(--modal-font-weight);
     box-shadow: 1rem 2rem 5px 1px rgba(3, 3, 3, .5);
+    transition: all .5s;
+    width: 75%;
 }
 
 .TextModal div {
     margin: 3rem 0;
 }
 
-.TextModal.hover {
-    /* transform: scaleX(1.3); */
-    transform: translateY(-1rem);
-    color: cornflowerblue;
-}
+/* hover ain't working cuz of specificity issues with the pagemodal I suspect */
+
 
 .TextModal > h3 {
     text-align: center;
@@ -40,8 +40,43 @@
     font-weight: var(--modal-font-weight);
 }
 
+.TextModal h3, .TextModal p {
+    transition: color .5s;
+}
+
+
+.TextModal.hover p, .TextModal.hover h3 {
+    color: cornflowerblue;
+}
 .TextModal hr {
     margin: 1rem .5rem;
+}
+
+.TextModal:nth-child(1) {
+    margin-top: 10rem;
+}
+
+.TextModal:nth-child(even) {
+    text-align: center;
+    align-self: flex-end;
+    transform: translateX(-1.5rem);
+}
+
+.TextModal:nth-child(odd) {
+    text-align: left;
+    transform: translateX(1.5rem);
+}
+
+.TextModal:nth-child(even).hover {
+    transform: translateY(-1.5rem) translateX(-1.5rem);
+    z-index: 20;
+    box-shadow: 1rem 2rem 5px 1px rgba(3, 3, 3, .5);
+}
+
+.TextModal:nth-child(odd).hover {
+    transform: translateY(-1.5rem) translateX(1.5rem);
+    z-index: 20;
+    box-shadow: 1rem 2rem 5px 1px rgba(3, 3, 3, .5);
 }
 
 .avatar {
