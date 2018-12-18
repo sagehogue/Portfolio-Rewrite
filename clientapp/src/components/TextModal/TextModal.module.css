@@ -1,11 +1,12 @@
 :root {
     --modal-font-size: 3rem;
-    --modal-font-weight: 600;
-    --modal-title-weight: 800;
+    --modal-font-weight: 650;
+    --modal-title-weight: 900;
     --modal-title-size: 3.5rem;
 }
 
 .TextModal {
+    position: relative;
     transition: all .5s;
     padding: 1.5rem 3rem;
     background-color: lightcyan;
@@ -14,6 +15,10 @@
     border-radius: 15px;
     font-weight:  var(--modal-font-weight);
     box-shadow: 1rem 2rem 5px 1px rgba(3, 3, 3, .5);
+}
+
+.TextModal div {
+    margin: 3rem 0;
 }
 
 .TextModal.hover {
@@ -26,8 +31,32 @@
     text-align: center;
     font-size: var(--modal-font-size);
     font-weight: var(--modal-title-weight);
+    margin: 0;
 }
 
 .TextModal p {
-    font-size: var(--modal-font-size)
+    font-size: var(--modal-font-size);
+    margin-bottom: .5rem;
+    font-weight: var(--modal-font-weight);
+}
+
+.TextModal hr {
+    margin: 1rem .5rem;
+}
+
+.avatar {
+    display: block;
+    font-size: 10rem;
+    position: absolute;
+    left: 0;
+    top: -11rem;
+    /* transform: translateY(-100%) */
+}
+
+.smallVertMargin {
+    margin: 2.5rem 0;
+}
+
+.largeWidth {
+    max-width: 85%;
 }

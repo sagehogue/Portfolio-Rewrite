@@ -12,7 +12,7 @@ class PageContainer extends Component {
     state = {
         currentPage: "splash",
     }
-    splashPage = <SplashPage displayed={this.state.currentPage}></SplashPage>
+    splashPage = <SplashPage currentPage={this.state.currentPage}></SplashPage>
 
     storyPage = (
         <PageModal>

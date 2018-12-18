@@ -1,0 +1,8 @@
+.avatar {
+    display: inline-block;
+    font-size: 10rem;
+    position: absolute;
+    left: 0;
+    top: -16rem;
+    /* transform: translateY(-100%) */
+}

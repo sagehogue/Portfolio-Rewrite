@@ -8,6 +8,10 @@
     margin-right: 5rem;
 }
 
+.NavTray a {
+    text-decoration: none;
+}
+
 .closed {
     transform: translateY(-20rem);
 }

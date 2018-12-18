@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 import NavButton from './NavButton/NavButton';
 import NavTray from './NavTray/NavTray';
@@ -24,10 +25,10 @@ class NavMenu extends Component {
                     menuClosed={this.state.menuIsClosed}
                     toggleMenuHandler={this.toggleMenu} />
                 <NavTray menuClosed={this.state.menuIsClosed}>
-                    <TrayItem>Home</TrayItem>
-                    <TrayItem>Vistelse</TrayItem>
-                    <TrayItem>About</TrayItem>
-                    <TrayItem>Resume</TrayItem>
+                    <Link to="/"><TrayItem>Home</TrayItem></Link>
+                    <Link to="/story"><TrayItem>Vistelse</TrayItem></Link>
+                    <Link to="/about"><TrayItem>About</TrayItem></Link>
+                    <Link to="/resume"><TrayItem>Resume</TrayItem></Link>
                 </NavTray>
                 <Backdrop isDisabled={this.state.menuIsClosed} menuHandler={this.toggleMenu}/>
             </div>
