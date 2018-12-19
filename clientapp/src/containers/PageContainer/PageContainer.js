@@ -1,9 +1,13 @@
 import React, { Component } from 'react';
 
+import { Route, Switch } from 'react-router-dom';
+
 import PageModal from '../../components/PageModal/PageModal';
 // import TextModal from '../../components/TextModal/TextModal';
 
+import AboutPage from '../../pages/AboutPage/AboutPage'
 import SplashPage from '../../pages/SplashPage/SplashPage';
+import StoryPage from '../../pages/StoryPage/StoryPage';
 
 import classes from './PageContainer.module.css';
 
@@ -12,6 +16,7 @@ class PageContainer extends Component {
     state = {
         currentPage: "splash",
     }
+
     splashPage = <SplashPage currentPage={this.state.currentPage}></SplashPage>
 
     storyPage = (
@@ -20,7 +25,14 @@ class PageContainer extends Component {
         </PageModal>
     )
     render() {
-        return this.state.currentPage === "splash" ? this.splashPage : this.storyPage;
+        return (
+            <Switch>
+                <Route path="/about" component={AboutPage} />
+                <Route path="/story" component={StoryPage} />
+                <Route path="/" component={SplashPage} />
+            </Switch>
+        );
+        // return this.state.currentPage === "splash" ? this.splashPage : this.storyPage;
     }
 }
 

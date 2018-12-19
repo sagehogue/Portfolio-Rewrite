@@ -8,8 +8,16 @@ class TextModal extends Component {
     state = {
         isHovered: false,
         displayUser: this.props.user,
-        typing: true,
+        typing: false,
+        hideModal: this.props.hide,
     }
+    // this is a mess right here.  have fun <3 I believe in you
+    // componentDidMount() {
+    //     const func = this.setState((oldState)=> {
+    //        return {...oldState,
+    //     typing: true}, 500).bind(this)
+    //     this.state.displayUser() ? setTimeout(() => {this.state}, args, timeout)
+    // }
 
     hoverOn = () => {
         this.setState({ isHovered: true });
@@ -21,9 +29,9 @@ class TextModal extends Component {
 
     toggleTyping = () => {
         this.setState((oldState) => {
-            return  {
+            return {
                 ...oldState,
-                loading: !oldState.typing,
+                typing: !oldState.typing,
             }
         })
     }
@@ -31,12 +39,12 @@ class TextModal extends Component {
     render() {
         let classList = + this.state.isHovered ? [classes.TextModal, classes.hover].join(' ') : classes.TextModal;
         classList = classList + ' ' + classes.largeWidth + ' ' + classes.smallVertMargin;
-        return (
+        return !this.props.hideModal ? (
             <>
                 <div className={classList}
                     onMouseEnter={this.hoverOn}
                     onMouseLeave={this.hoverOff}
-                    >
+                >
                     {this.state.displayUser ? <Avatar showBubble={this.state.typing} /> : null}
                     {this.props.title ? <h3>{this.props.title}</h3> : null}
                     {this.props.title ? <hr /> : null}
@@ -44,8 +52,8 @@ class TextModal extends Component {
                 </div>
             </>
 
-)
-}
+        ) : null;
+    }
 }
 
 export default TextModal;
