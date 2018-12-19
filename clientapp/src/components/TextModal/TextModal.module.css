@@ -3,7 +3,11 @@
     --modal-font-weight: 650;
     --modal-title-weight: 900;
     --modal-title-size: 3.5rem;
+    --translate-left: -150%;
+    --translate-right: 150%;
 }
+
+/* Current Issue: the avatar and textmodal are married together rn so I can't translate the textmodal without leaving the avatar on there. I may have to separate them, or else find a way to target the avatar.  */
 
 .TextModal {
     position: relative;
@@ -23,9 +27,6 @@
 .TextModal div {
     margin: 3rem 0;
 }
-
-/* hover ain't working cuz of specificity issues with the pagemodal I suspect */
-
 
 .TextModal > h3 {
     text-align: center;
@@ -62,21 +63,38 @@
     transform: translateX(-1.5rem);
 }
 
-.TextModal:nth-child(odd) {
-    text-align: left;
-    transform: translateX(1.5rem);
-}
-
 .TextModal:nth-child(even).hover {
     transform: translateY(-1.5rem) translateX(-1.5rem);
     z-index: 20;
     box-shadow: 1rem 2rem 5px 1px rgba(3, 3, 3, .5);
 }
 
+.TextModal:nth-child(even).hide {
+    transform: translateX(11.5rem);
+    z-index: 20;
+    box-shadow: 1rem 2rem 5px 1px rgba(3, 3, 3, .5);
+    transform: translateX(var(--translate-right));
+}
+
+.TextModal.hide {
+    
+}
+
+.TextModal:nth-child(odd) {
+    text-align: left;
+    transform: translateX(1.5rem);
+}
+
+
 .TextModal:nth-child(odd).hover {
     transform: translateY(-1.5rem) translateX(1.5rem);
     z-index: 20;
     box-shadow: 1rem 2rem 5px 1px rgba(3, 3, 3, .5);
+}
+
+.TextModal:nth-child(odd).hide {
+    text-align: left;
+    transform: translateX(var(--translate-left));
 }
 
 .avatar {

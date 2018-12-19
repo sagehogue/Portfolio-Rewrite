@@ -11,7 +11,7 @@ class SplashPage extends Component {
     render() {
         return (
             <PageModal displayed={this.state.currentPage}>
-                <div className={classes.FirstModalWrapper}><TextModal user="true">
+                <div className={classes.FirstModalWrapper}><TextModal user={true} hide={false}>
                     <h3>
                         <span className={classes.greeting}>
                             Hi
@@ -23,10 +23,10 @@ class SplashPage extends Component {
                     <hr></hr>
                     <p>I'm a PDX-based web developer and tech enthusiast.</p>
                 </TextModal></div>
-                <TextModal title='Welcome to my website.'>
+                <TextModal title='Welcome to my website.' hide={false}>
                     <p>To learn more, click a button below.</p>
                 </TextModal>
-                <TextModal>
+                <TextModal hide={false}>
                     <div className={classes.flexContainer}>
                         <div>Vistelse</div>
                         <div>Website Details</div>
