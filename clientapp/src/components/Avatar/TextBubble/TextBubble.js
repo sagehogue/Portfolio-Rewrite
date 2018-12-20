@@ -5,7 +5,7 @@ import classes from "./TextBubble.module.css";
 class textBubble extends Component {
 
     state = {
-        animating: false, // 'first', 'second', 'third', refers to which div 
+        animating: false, // 'first', 'second', 'third', animates selected 
 
     }
 
@@ -83,14 +83,5 @@ class textBubble extends Component {
         }
     }
 }
-// const bubble = (
-//     <div className={classes.bubble}>
-//         {(this.state.animating === 'first' ? <div className={`${classes.dot} ${classes.animating}`}></div> : <div className={classes.dot}></div>)}
-{/* {this.state.animating === 'second' ? <div className={`${classes.dot} ${classes.animating}`}></div>
-                                : <div className={classes.dot}></div>} */}
-{/* {this.state.animating === 'third' ? <div className={`${classes.dot} ${classes.animating}`}></div>
-                                : <div className={classes.dot}></div>} */}
-//     </div>
-// )
 
-export default textBubble
+export default textBubble;

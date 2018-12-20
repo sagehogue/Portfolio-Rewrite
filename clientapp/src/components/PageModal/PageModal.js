@@ -1,17 +1,12 @@
 import React, { Component } from 'react';
 import classes from './PageModal.module.css';
 
-class PageModal extends Component {
-    state = {
-        
-    }
+// This should probably be a dumb component.
 
-    
-
-    render() {
-        let classList = [];
+const PageModal = (props) => {
+    let classList = [];
     classList.push(classes.PageModal);
-    switch (this.props.displayed) {
+    switch (props.displayed) {
         case "splash":
             classList.push(classes.splash);
             break;
@@ -19,16 +14,15 @@ class PageModal extends Component {
             classList.push(classes.story);
             break;
         default:
-            console.log(this.props.displayed);
             classList.push(classes.splash);
             break;
     }
-        return (
-            <div className={classList.join(' ')}>
-                {this.props.children}
-            </div>
-        )
-    }
-} 
+    return (
+        <div className={classList.join(' ')}>
+            {props.children}
+        </div>
+    )
+}
+
 
 export default PageModal

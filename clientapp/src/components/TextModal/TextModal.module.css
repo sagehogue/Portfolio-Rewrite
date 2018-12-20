@@ -7,7 +7,7 @@
     --translate-right: 150%;
 }
 
-/* Current Issue: the avatar and textmodal are married together rn so I can't translate the textmodal without leaving the avatar on there. I may have to separate them, or else find a way to target the avatar.  */
+/* Current Issue: a lot of this styling needs to be moved to the splash page I think  */
 
 .TextModal {
     position: relative;
@@ -22,6 +22,7 @@
     box-shadow: 1rem 2rem 5px 1px rgba(3, 3, 3, .5);
     transition: all .5s;
     width: 75%;
+    display: inline-block;
 }
 
 .TextModal div {
@@ -53,11 +54,7 @@
     margin: 1rem .5rem;
 }
 
-.TextModal:nth-child(1) {
-    margin-top: 10rem;
-}
-
-.TextModal:nth-child(even) {
+/* .TextModal:nth-child(even) {
     text-align: center;
     align-self: flex-end;
     transform: translateX(-1.5rem);
@@ -95,16 +92,9 @@
 .TextModal:nth-child(odd).hide {
     text-align: left;
     transform: translateX(var(--translate-left));
-}
+} */
 
-.avatar {
-    display: block;
-    font-size: 10rem;
-    position: absolute;
-    left: 0;
-    top: -11rem;
-    /* transform: translateY(-100%) */
-}
+
 
 .smallVertMargin {
     margin: 2.5rem 0;
