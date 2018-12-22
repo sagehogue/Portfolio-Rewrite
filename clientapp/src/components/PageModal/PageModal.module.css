@@ -1,5 +1,5 @@
 :root {
-    
+    --modal-bg-col: rgba(245, 255, 250, 1);
 }
 
 * {
@@ -10,7 +10,7 @@
     z-index: 10;
     grid-row: 1 / 12;
     grid-column: 2 / 11;
-    background-color: lightslategrey;
+    background-color: var(--modal-bg-col);
     border-radius: .5rem;
     box-shadow: 1rem 2rem 5px 1px rgba(3, 3, 3, .5);
     margin-top: 7rem;

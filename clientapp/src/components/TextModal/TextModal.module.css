@@ -5,21 +5,24 @@
     --modal-title-size: 3.5rem;
     --translate-left: -150%;
     --translate-right: 150%;
+    --text-modal-bg-col: rgb(216, 222, 228);
 }
 
-/* Current Issue: a lot of this styling needs to be moved to the splash page I think  */
+/* TODOS
+Make hover/click anims for color, scale?, button effect, 
+Current Issue: a lot of this styling needs to be moved to the splash page I think  
+*/
 
 .TextModal {
     position: relative;
     z-index: 5;
     transition: all .5s;
     padding: 1.5rem 3rem;
-    background-color: lightcyan;
-    color: dimgray;
+    background-color: var(--text-modal-bg-col);
+    color: rgb(104, 99, 99);
     font-size: var(--modal-font-size);
     border-radius: 15px;
     font-weight:  var(--modal-font-weight);
-    box-shadow: 1rem 2rem 5px 1px rgba(3, 3, 3, .5);
     transition: all .5s;
     width: 75%;
     display: inline-block;
@@ -46,6 +49,15 @@
     transition: color .5s;
 }
 
+.TextModal.hover {
+    transform: translateY(-1rem);
+    box-shadow: 1rem 2rem 5px 1px rgba(3, 3, 3, .5);
+}
+
+.TextModal.hover:active {
+    transform: translateY(0);
+    box-shadow: .5rem 1rem 2px 1px rgba(3, 3, 3, .9);
+}
 
 .TextModal.hover p, .TextModal.hover h3 {
     color: cornflowerblue;

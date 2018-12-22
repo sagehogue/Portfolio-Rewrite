@@ -3,4 +3,5 @@
     grid-template-columns: repeat(11, 1fr);
     grid-template-rows: repeat(11, 1fr);
     max-height: 100vh;
+    background-color: lightslategray
 }

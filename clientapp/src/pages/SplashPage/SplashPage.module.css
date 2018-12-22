@@ -1,3 +1,12 @@
+:root {
+    --link-bg-col: rgba(135, 171, 238, 0.658);
+    --link-border-col: rgba(245, 255, 250, 1);
+    --modal-bg-col: rgba(245, 255, 250, 1);
+    --link-text-col: cornflowerblue;
+    --type-col-1: cornflowerblue;
+    --type-col-2: rgba(143, 5, 143, 0.61);
+}
+
 * {
     box-sizing: border-box;
     margin: 0;
@@ -8,16 +17,22 @@
     animation-name: slide-in-to-right;
 }
 
+.fontCol1 {
+    color: var(--type-col-1);
+}
+
+.fontCol2 {
+   color: var(--type-col-2);
+}
+
 .period {}
 
-.sage {}
+.sage {color: var(--type-col-2)}
 
 @keyframes slide-in-to-right {
     from {
         transform: translateX(-30rem) rotate(45deg);
-
     }
-
     to {
         transform: translateX(0) rotate(0);
     }
@@ -31,9 +46,33 @@
     margin: 1rem 0 0 1rem;
 }
 
+.Link {
+    padding: 1rem 2rem;
+    border-radius: 5px;
+    border: .5rem outset var(--link-bg-col);
+    background-color: var(--modal-bg-col);
+    transition: all .5s;
+    color: var(--link-text-col);
+}
+
+.Link:hover {
+    transform: translateY(-1rem);
+    box-shadow: 1rem 2rem 5px 1px rgba(3, 3, 3, .5);
+}
+
+.Link:hover:active {
+    transform: translateY(0);
+    box-shadow: .5rem 1rem 2px 1px rgba(3, 3, 3, .9);
+}
+
 .flexContainer {
     display: flex;
     flex-flow: row wrap;
+    justify-content: center;
+}
+
+.flexContainer a {
+    text-decoration: none;
 }
 
 .textModal {
@@ -68,7 +107,7 @@
     justify-content: flex-end;
 }
 
-.ToRight > div{
+.ToRight>div {
     /* position: absolute; */
     /* right: 20%; */
 }
@@ -78,6 +117,11 @@
     z-index: 20;
     box-shadow: 1rem 2rem 5px 1px rgba(3, 3, 3, .5);
 } */
+
 .spaceFromTop {
     margin-top: 10rem;
+}
+
+.SpaceFromBottom {
+    margin-bottom: 20rem;
 }

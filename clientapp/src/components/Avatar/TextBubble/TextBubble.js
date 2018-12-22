@@ -38,7 +38,6 @@ class textBubble extends Component {
 
     animateDots = () => {
         const dotToAnimate = this.getDotToAnimate();
-        console.log(dotToAnimate);
         this.setState({ animating: dotToAnimate });
     }
 

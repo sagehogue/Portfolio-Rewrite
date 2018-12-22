@@ -21,11 +21,7 @@ export default class App extends Component {
       // <Route path='/counter' component={Counter} />
       // <Route path='/fetch-data' component={FetchData} /> 
       <div className={classes.App}>
-        <Layout>
-          <NavMenu />
           <PageContainer></PageContainer>
-        </Layout>
-
       </div>
     );
   }

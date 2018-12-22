@@ -1,9 +1,14 @@
 .avatar {
     display: block;
     font-size: 10rem;
+    transition: color .25s;
     /* position: absolute;
     left: 0;
     top: -16rem; */
 
     /* transform: translateY(-100%) */
+}
+
+.typing {
+    color: cornflowerblue;
 }
