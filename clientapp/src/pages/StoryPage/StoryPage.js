@@ -18,6 +18,7 @@ class storyPage extends Component {
         },
         storyCollection: [],
         titleCollection: [],
+        buttonTitleAndDesc: [],
 
     }
 
@@ -26,8 +27,16 @@ class storyPage extends Component {
             this.getAllStories()
         } else {
             const retrievedStories = JSON.parse(localStorage.getItem('stories'))
-            console.log(retrievedStories);
-            console.log('used local storage!')
+            retrievedStories.forEach(story => {
+                this.setState((oldState) => {
+                    const updatedArray = [...oldState.buttonTitleAndDesc] 
+                    updatedArray.push({title: story.title, description: story.description, id: story.id})
+                    return {
+                        ...oldState,
+                        buttonTitleAndDesc: updatedArray
+                    }
+                })
+            })
             // this.setState({
                 // Logic to get localstorage, JSON.parse it, iterate through resulting object and set state with the story objects.
             // })
@@ -123,6 +132,13 @@ class storyPage extends Component {
                 </TextModal>
             </div>
         ),
+        third: (
+            <div className={`${classes.introModal} ${classes.textModal} ${this.state.display.introMessage ? '' : classes.Hide} ${classes.thirdIntro}`}>
+                <TextModal>
+                    <p>To begin, select a prompt.</p>
+                </TextModal>
+            </div>
+        )
     }
 
     render() {
@@ -131,6 +147,7 @@ class storyPage extends Component {
                 <div className={`${classes.pageWrapper}`}>
                     {this.introMessages.first}
                     {this.introMessages.second}
+                    {this.introMessages.third}
                     <div className={classes.ButtonBox}>
                     {this.testButton}
                     </div>

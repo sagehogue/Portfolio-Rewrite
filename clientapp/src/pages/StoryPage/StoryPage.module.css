@@ -11,6 +11,11 @@
     grid-column: 1 / 6;
 }
 
+.ButtonBox.intro {
+    
+    grid-row: 7 / 10;
+}
+
 .firstIntro {
     margin-top: 1.5rem;
     grid-column: 1 / 6;
@@ -20,6 +25,11 @@
 .secondIntro {
     grid-column: 1 / 6;
     grid-row: 3 / 5;
+}
+
+.thirdIntro {
+    grid-column: 1 / 6;
+    grid-row: 5 / 7;
 }
 
 .introModal {
@@ -48,4 +58,8 @@
     max-height: 25%;
     max-width: 75%;
     font-size: 5rem;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 10;
 }
