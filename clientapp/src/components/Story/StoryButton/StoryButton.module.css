@@ -1,0 +1,42 @@
+:root {
+    --story-btn-color:  rgba(108, 194, 197, .35);
+    --story-border-color: lightgray;
+    --box-shadow-black: rgba(3, 3, 3, .5)
+}
+
+* {
+    box-sizing: border-box;
+}
+
+.StoryButton {
+    display: flex;
+    border: solid, var(--story-border-color), medium;
+    padding: 1rem 2rem;
+    border-radius: 5px;
+    /* max-width: 60%; */
+    /* min-height: 20%; */
+    margin: 1rem 2rem;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;  
+    transition: all .3s;
+    flex-shrink: 1;
+    flex-grow: 1;
+}
+
+.StoryButton hr {
+    font-weight: 700;
+    margin: .5rem 1rem 1rem 1rem;
+}
+
+.StoryButton:hover {
+    box-shadow: .75rem 1rem 5px .25rem var(--box-shadow-black); 
+}
+
+.Story {
+    font-size: 2.5rem;
+    background-color: var(--story-btn-color);
+    padding: 3rem 5rem;
+    flex-basis: 33%;
+}
