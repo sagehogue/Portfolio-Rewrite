@@ -37,7 +37,7 @@ class storyPage extends Component {
                 return {
                     ...oldState,
                     display: { ...oldState.display },
-                    buttonTitleAndDesc: updatedArray
+                    buttonTitleAndDesc: updatedArray,
                 }
             })
         })
@@ -47,6 +47,7 @@ class storyPage extends Component {
             return {
                 ...oldState,
                 display: { ...oldState.display },
+                storyCollection: [...retrievedStories],
                 shouldGenerateStoryButtons: true,
             }
         })
@@ -56,7 +57,7 @@ class storyPage extends Component {
         if (this.state.shouldGenerateStoryButtons) {
             const storyButtons = this.state.buttonTitleAndDesc.map((story) => {
                 // Make storybutton components
-                return <StoryButton key={story.id} title={story.title} description={story.description} />
+                return <StoryButton key={story.id} id={story.id} title={story.title} description={story.description} clickHandler={this.switchToSelectedStory} />
             })
             this.setState((oldState) => {
                 const newState = {
@@ -65,6 +66,7 @@ class storyPage extends Component {
                         ...oldState.display,
                         storyButtons: storyButtons
                     }, shouldGenerateStoryButtons: false,
+                    storyCollection: [...oldState.storyCollection],
                 }
                 return newState;
             })
@@ -92,6 +94,32 @@ class storyPage extends Component {
             localStorage.clear()
         </div>
     )
+
+    // Get target id, filter story collection by id, set state to resulting story.
+    // 
+    switchToSelectedStory = (e) => {
+        e.stopPropagation();
+        console.log(this.state.storyCollection);
+        const storyToLoad = e.target.getAttribute("data-id"); // this probably will return undefined, I don't think I've found a way to store the data properly yet.
+        const selectedStory = this.state.storyCollection.filter(story => {
+            if (story.id === storyToLoad) {
+                return true
+            }
+        });
+        console.log(storyToLoad, selectedStory);
+        this.setState((oldState) => {
+            return {
+                ...oldState, display: {
+                    ...oldState.display,
+                    introMessages: false,
+                },
+                storyCollection: [...oldState.storyCollection],
+                story: {
+                    selected: selectedStory[0]
+                }
+            }
+        })
+    }
 
     introMessages = {
         first: (
@@ -125,7 +153,6 @@ class storyPage extends Component {
                         {this.state.display.introMessages ? this.introMessages.first : null}
                         {this.state.display.introMessages ? this.introMessages.second : null}
                         {this.state.display.introMessages ? this.introMessages.third : null}
-
                     </div>
                     <div className={`${classes.ButtonBox} ${classes.intro}`}>
                         {/* {this.testButton} */}
