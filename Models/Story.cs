@@ -20,13 +20,37 @@ namespace webSage.Models
         [BsonElement("description")]
         public string Description { get; set; }
         [BsonElement("scenes")]
-        public List<Scene> Scenes { get; set; }
-        public Story(string title, string text, string description, List<Scene> scenes)
+        private object _setScenes;
+        public object Scenes 
         {
+             get 
+             {
+                 return this._setScenes;
+             }
+             set {
+                 _setScenes = value;
+             }
+        }
+             
+        public Story(string title, string text, string description, object scenes)
+        {
+            
             Title = title;
             Text = text;
             Description = description;
             Scenes = scenes;
         }
+
+        // static void Main(List<Scene> scenes)
+        // {
+        //     // var scenes = new {
+
+        //     // };
+        //     int counter = 0;
+        //     foreach (Scene scene in scenes)
+        //     {
+
+        // }
+        // }
     }
 }

@@ -28,9 +28,13 @@ class storyPage extends Component {
 
     }
 
-    componentDidMount() {
-        let retrievedStories = localStorage.getItem('storyInfoLoaded') ? JSON.parse(localStorage.getItem('stories')) : this.getAllStories()
-        retrievedStories.forEach(story => {
+
+    // so I've been tinkering in here thinking I had broken my api consumption but actually I broke my models in my backend. gonna have to update them to the new specifications!
+     addStoriesToState = storyArray => {
+         console.log(storyArray);
+        localStorage.setItem('stories', JSON.stringify(storyArray));
+        localStorage.setItem('storyInfoLoaded', 'true');
+        storyArray.forEach(story => {
             this.setState((oldState) => {
                 const updatedArray = [...oldState.buttonTitleAndDesc]
                 updatedArray.push({ title: story.title, description: story.description, id: story.id })
@@ -41,8 +45,17 @@ class storyPage extends Component {
                 }
             })
         })
-        localStorage.setItem('stories', JSON.stringify(retrievedStories));
-        localStorage.setItem('storyInfoLoaded', 'true');
+    }
+
+    componentDidMount() {
+        let retrievedStories;
+        if (localStorage.getItem('storyInfoLoaded')) {
+            retrievedStories = JSON.parse(localStorage.getItem('stories'));
+            this.addStoriesToState(retrievedStories);
+        } else {
+            retrievedStories = this.getAllStories()
+            retrievedStories.then(res => {this.addStoriesToState(res)})
+        }
         this.setState((oldState) => {
             return {
                 ...oldState,
@@ -112,6 +125,8 @@ class storyPage extends Component {
                 ...oldState, display: {
                     ...oldState.display,
                     introMessages: false,
+                    storyButtons: false,
+                    optionButtons: []
                 },
                 storyCollection: [...oldState.storyCollection],
                 story: {
