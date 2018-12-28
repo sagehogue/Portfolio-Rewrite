@@ -14,4 +14,5 @@
 
 .closed {
     transform: translateY(-20rem);
+    opacity: 0;
 }

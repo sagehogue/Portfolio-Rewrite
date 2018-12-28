@@ -30,10 +30,9 @@ class storyPage extends Component {
 
 
     // so I've been tinkering in here thinking I had broken my api consumption but actually I broke my models in my backend. gonna have to update them to the new specifications!
-     addStoriesToState = storyArray => {
-         console.log(storyArray);
+    addStoriesToState = storyArray => {
         localStorage.setItem('stories', JSON.stringify(storyArray));
-        localStorage.setItem('storyInfoLoaded', 'true');
+        // localStorage.setItem('storyInfoLoaded', 'true');
         storyArray.forEach(story => {
             this.setState((oldState) => {
                 const updatedArray = [...oldState.buttonTitleAndDesc]
@@ -53,10 +52,20 @@ class storyPage extends Component {
             retrievedStories = JSON.parse(localStorage.getItem('stories'));
             this.addStoriesToState(retrievedStories);
         } else {
-            retrievedStories = this.getAllStories()
-            retrievedStories.then(res => {this.addStoriesToState(res)})
+            retrievedStories = this.getAllStories().then((res) => {
+                return res.json();
+            }).then((data) => {
+                this.addStoriesToState(data)
+                return data;
+            }).then((data => {
+                this.setInitialState(data)
+            }))
         }
+    }
+    
+    setInitialState(retrievedStories) {
         this.setState((oldState) => {
+                console.log(retrievedStories)
             return {
                 ...oldState,
                 display: { ...oldState.display },
