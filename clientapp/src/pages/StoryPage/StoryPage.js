@@ -110,9 +110,36 @@ class storyPage extends Component {
 
     // this handles clicks on the option buttons.
     optionHandler = (e) => {
-        const nextSceneTitle = e.target.getAttribute("data-associatedscene");
-        const nextScene = this.state.story.selected.scenes[nextSceneTitle];
-        console.log(nextScene);
+        const nextSceneLocator = e.target.getAttribute("data-associatedscene");
+        const nextScene = this.state.story.selected.scenes[nextSceneLocator];
+        this.updateStateToNextScene(nextScene, nextSceneLocator);
+    }
+
+    updateStateToNextScene = async (scene, identifier) => {
+        this.setState((oldState) => {
+            return {
+                ...oldState, display: {
+                    ...oldState.display,
+                    introMessages: false,
+                    storyButtons: false,
+                    optionButtons: [...Object.values(scene.options).map((optionKeyValArray, index) => {
+                        return <StoryButton title={optionKeyValArray.label} description={optionKeyValArray.text} associatedScene={optionKeyValArray.associatedScene} key={index} option clickHandler={this.optionHandler} />
+                    })],
+                    scene: (
+                        <div className={`${classes.sceneModal} ${classes.textModal}`}>
+                            <TextModal title={scene.title}>
+                                <p>{scene.text}</p>
+                            </TextModal>
+                        </div>
+                    )
+                },
+                storyCollection: [...oldState.storyCollection],
+                story: {...oldState.story,
+                    selected: oldState.story.selected,
+                    currentScene: { ...scene, scene: identifier },
+                }
+            }
+         })
     }
 
     switchToSelectedStory = (e) => {
