@@ -25,6 +25,13 @@
     flex-grow: 1;
 }
 
+.Option {
+    font-size: 2rem;
+    background-color: var(--story-btn-color);
+    padding: 3rem 5rem;
+    flex-basis: 33%;
+}
+
 .StoryButton hr {
     font-weight: 700;
     margin: .5rem 1rem 1rem 1rem;

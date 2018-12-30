@@ -34,7 +34,8 @@ namespace webSage.Controllers
         // GET: api/<controller>
         [HttpGet]
         public IMongoQueryable<Story> Get()
-        { 
+        {
+            // Guess I'm just putting filtering logic in my front-end.. for now. Obviously a lazy solution and bad for performance..
             var StoryList = RetrieveCollection().AsQueryable(); // AsQueryable makes it respond to these Linq queries
             var query = StoryList.Where(story => story.Title == "test")
                 .Select(story => story);
@@ -54,7 +55,7 @@ namespace webSage.Controllers
             var filter = Builders<Story>.Filter.Eq("_id", ObjectId.Parse(id));
             var result = collection.Find(filter).FirstOrDefault();
             return result;
-            
+
         }
 
         // Okay, so can use db id as identifier but will have to create a security layer before anyone else has access.
@@ -122,7 +123,7 @@ namespace webSage.Controllers
             return client.GetDatabase(SelectedDb);
         }
 
-        private IMongoCollection<Story> RetrieveCollection(string specified="Stories")
+        private IMongoCollection<Story> RetrieveCollection(string specified = "Stories")
         {
             var db = GetDbReference();
             var collection = db.GetCollection<Story>(specified);

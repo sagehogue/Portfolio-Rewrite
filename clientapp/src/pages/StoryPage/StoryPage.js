@@ -8,8 +8,11 @@ import StoryButton from '../../components/Story/StoryButton/StoryButton';
 
 import classes from './StoryPage.module.css';
 
-
 // Def need to code in some authentication!!!
+// I should probably refactor my code so I have some functions that set the state of the scene, and another that uses that data to generate ui features.
+
+// TODOS
+// Refactor scene updating logic - function should take a scene object and normalize state based off of that. should return a promise that can be consumed by another function which will render the HTML based off of the new and updated state!
 
 class storyPage extends Component {
     state = {
@@ -21,33 +24,15 @@ class storyPage extends Component {
         },
         // Initial repository of story data. Used to generate more specific groups of data.
         storyCollection: [],
-        // Actually includes ID as well. For initial rendering of story buttons.
-        buttonTitleAndDesc: [],
         // true after componentDidMount, next update triggers button rendering
         shouldGenerateStoryButtons: false,
 
     }
 
-
-    // so I've been tinkering in here thinking I had broken my api consumption but actually I broke my models in my backend. gonna have to update them to the new specifications!
-    addStoriesToState = storyArray => {
-        localStorage.setItem('stories', JSON.stringify(storyArray));
-        // localStorage.setItem('storyInfoLoaded', 'true');
-        storyArray.forEach(story => {
-            this.setState((oldState) => {
-                const updatedArray = [...oldState.buttonTitleAndDesc]
-                updatedArray.push({ title: story.title, description: story.description, id: story.id })
-                return {
-                    ...oldState,
-                    display: { ...oldState.display },
-                    buttonTitleAndDesc: updatedArray,
-                }
-            })
-        })
-    }
-
     componentDidMount() {
         let retrievedStories;
+        // currently never runs -- it's always else {} that runs.
+        // "why is this here?", you may ask. well, maybe I want to do some caching later. ;)
         if (localStorage.getItem('storyInfoLoaded')) {
             retrievedStories = JSON.parse(localStorage.getItem('stories'));
             this.addStoriesToState(retrievedStories);
@@ -58,14 +43,41 @@ class storyPage extends Component {
                 this.addStoriesToState(data)
                 return data;
             }).then((data => {
-                this.setInitialState(data)
+                this.setInitialState(data);
             }))
         }
     }
-    
+
+    componentDidUpdate() {
+        if (this.state.shouldGenerateStoryButtons) {
+            this.generateStoryButtons()
+        }
+    }
+
+    generateStoryButtons() {
+        // Make array of storybutton components, returning null if story.scenes has no data.
+        const storyButtons = this.state.storyCollection.map((story) => {
+            if (story.scenes) {
+                return <StoryButton key={story.id} id={story.id} title={story.title} description={story.description} clickHandler={this.switchToSelectedStory} />
+            } else {
+                return null;
+            }
+        })
+        // Updates state, shouldGenerateStoryButtons made false to avoid getting stuck in loop
+        this.setState((oldState) => {
+            return {
+                ...oldState,
+                display: {
+                    ...oldState.display,
+                    storyButtons: storyButtons
+                }, shouldGenerateStoryButtons: false,
+                storyCollection: [...oldState.storyCollection],
+            }
+        })
+    }
+
     setInitialState(retrievedStories) {
         this.setState((oldState) => {
-                console.log(retrievedStories)
             return {
                 ...oldState,
                 display: { ...oldState.display },
@@ -75,24 +87,18 @@ class storyPage extends Component {
         })
     }
 
-    componentDidUpdate() {
-        if (this.state.shouldGenerateStoryButtons) {
-            const storyButtons = this.state.buttonTitleAndDesc.map((story) => {
-                // Make storybutton components
-                return <StoryButton key={story.id} id={story.id} title={story.title} description={story.description} clickHandler={this.switchToSelectedStory} />
-            })
+    addStoriesToState = storyArray => {
+        localStorage.setItem('stories', JSON.stringify(storyArray));
+        // localStorage.setItem('storyInfoLoaded', 'true');
+        storyArray.forEach(story => {
             this.setState((oldState) => {
-                const newState = {
+                return {
                     ...oldState,
-                    display: {
-                        ...oldState.display,
-                        storyButtons: storyButtons
-                    }, shouldGenerateStoryButtons: false,
+                    display: { ...oldState.display },
                     storyCollection: [...oldState.storyCollection],
                 }
-                return newState;
             })
-        }
+        })
     }
 
     async getAllStories() {
@@ -102,6 +108,49 @@ class storyPage extends Component {
         })
     }
 
+    // this handles clicks on the option buttons.
+    optionHandler = (e) => {
+        const nextSceneTitle = e.target.getAttribute("data-associatedscene");
+        const nextScene = this.state.story.selected.scenes[nextSceneTitle];
+        console.log(nextScene);
+    }
+
+    switchToSelectedStory = (e) => {
+        e.stopPropagation();
+        const storyToLoad = e.target.getAttribute("data-id"); // this probably will return undefined, I don't think I've found a way to store the data properly yet.
+        const selectedStory = this.state.storyCollection.filter(story => {
+            if (story.id === storyToLoad) {
+                return true
+            }
+        });
+        this.setState((oldState) => {
+            return {
+                ...oldState, display: {
+                    ...oldState.display,
+                    introMessages: false,
+                    storyButtons: false,
+                    optionButtons: [...Object.values(selectedStory[0].scenes.first.options).map((optionKeyValArray, index) => {
+                        return <StoryButton title={optionKeyValArray.label} description={optionKeyValArray.text} associatedScene={optionKeyValArray.associatedScene} key={index} option clickHandler={this.optionHandler} />
+                    })],
+                    scene: (
+                        <div className={`${classes.sceneModal} ${classes.textModal}`}>
+                            <TextModal title={selectedStory[0].scenes.first.title}>
+                                <p>{selectedStory[0].scenes.first.text}</p>
+                            </TextModal>
+                        </div>
+                    )
+                },
+                storyCollection: [...oldState.storyCollection],
+                story: {
+                    selected: selectedStory[0],
+                    currentScene: { ...selectedStory[0].scenes.first, scene: "first" },
+                    sceneOptions: Object.values(selectedStory[0].scenes.first.options)
+                }
+            }
+        })
+    }
+
+    // Object holding different API pathway reference attributes.
     apiPaths = {
         // gets all test data
         everything: "https://localhost:5001/api/story",
@@ -109,6 +158,8 @@ class storyPage extends Component {
         // storyTitles: ".../api/story/titles"
         // requestStory: ".../api/story/{requestedstory}"
     }
+
+    // This is for easily clearing local storage.
     testButton = (
         <div className={classes.testButton} onClick={() => {
             localStorage.clear()
@@ -117,34 +168,7 @@ class storyPage extends Component {
         </div>
     )
 
-    // Get target id, filter story collection by id, set state to resulting story.
-    // 
-    switchToSelectedStory = (e) => {
-        e.stopPropagation();
-        console.log(this.state.storyCollection);
-        const storyToLoad = e.target.getAttribute("data-id"); // this probably will return undefined, I don't think I've found a way to store the data properly yet.
-        const selectedStory = this.state.storyCollection.filter(story => {
-            if (story.id === storyToLoad) {
-                return true
-            }
-        });
-        console.log(storyToLoad, selectedStory);
-        this.setState((oldState) => {
-            return {
-                ...oldState, display: {
-                    ...oldState.display,
-                    introMessages: false,
-                    storyButtons: false,
-                    optionButtons: []
-                },
-                storyCollection: [...oldState.storyCollection],
-                story: {
-                    selected: selectedStory[0]
-                }
-            }
-        })
-    }
-
+    // Some JSX I wanted to get out of the render method. 
     introMessages = {
         first: (
             <div className={`${classes.introModal} ${classes.textModal} ${classes.firstIntro} ${this.state.display.introMessages ? '' : classes.Hide}`}>
@@ -177,10 +201,12 @@ class storyPage extends Component {
                         {this.state.display.introMessages ? this.introMessages.first : null}
                         {this.state.display.introMessages ? this.introMessages.second : null}
                         {this.state.display.introMessages ? this.introMessages.third : null}
+                        {this.state.display.scene}
                     </div>
                     <div className={`${classes.ButtonBox} ${classes.intro}`}>
                         {/* {this.testButton} */}
                         {this.state.display.storyButtons}
+                        {this.state.display.optionButtons ? this.state.display.optionButtons : null}
                     </div>
                 </div>
             </PageModal>
