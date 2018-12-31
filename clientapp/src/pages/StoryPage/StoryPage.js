@@ -20,7 +20,13 @@ class storyPage extends Component {
         display: {
             introMessages: true,
             buttonBox: false,
-            storyButtons: []
+            storyButtons: [],
+            shouldGenerateStoryButtons: false,
+        },
+        story: {
+            selected: null,
+            currentScene: null,
+            isEndScene: false,
         },
         // Initial repository of story data. Used to generate more specific groups of data.
         storyCollection: [],
@@ -117,6 +123,9 @@ class storyPage extends Component {
 
     updateStateToNextScene = async (scene, identifier) => {
         this.setState((oldState) => {
+            let isEndScene;
+            console.log(scene.options.first)
+            scene.options.first === undefined ? isEndScene = true : isEndScene = false;
             return {
                 ...oldState, display: {
                     ...oldState.display,
@@ -134,12 +143,14 @@ class storyPage extends Component {
                     )
                 },
                 storyCollection: [...oldState.storyCollection],
-                story: {...oldState.story,
+                story: {
+                    ...oldState.story,
                     selected: oldState.story.selected,
                     currentScene: { ...scene, scene: identifier },
+                    isEndScene: isEndScene,
                 }
             }
-         })
+        })
     }
 
     switchToSelectedStory = (e) => {
@@ -177,6 +188,10 @@ class storyPage extends Component {
         })
     }
 
+    selectStoryHandler = (e) => {
+        console.log("story loops!")
+    }
+
     // Object holding different API pathway reference attributes.
     apiPaths = {
         // gets all test data
@@ -193,6 +208,10 @@ class storyPage extends Component {
         }}>
             localStorage.clear()
         </div>
+    )
+
+    selectAnotherStoryButton = (
+        <StoryButton title="Select Another Story?"  option clickHandler={this.selectStoryHandler} />
     )
 
     // Some JSX I wanted to get out of the render method. 
@@ -234,6 +253,7 @@ class storyPage extends Component {
                         {/* {this.testButton} */}
                         {this.state.display.storyButtons}
                         {this.state.display.optionButtons ? this.state.display.optionButtons : null}
+                        {this.state.story.isEndScene? this.selectAnotherStoryButton : null}
                     </div>
                 </div>
             </PageModal>
