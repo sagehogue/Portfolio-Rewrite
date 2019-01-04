@@ -9,21 +9,6 @@ using MongoDB.Driver.Linq;
 using webSage.Models;
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
-// I think I can use the below snippet as inspiration - return weakly typed objects to be serialized. 
-//public object Get()
-//{
-//    return new
-//    {
-//        Name = "Alice",
-//        Age = 23,
-//        Pets = new List<string> { "Fido", "Polly", "Spot" }
-//    };
-//}
-
-
-
-
-
 namespace webSage.Controllers
 {
 
@@ -48,7 +33,7 @@ namespace webSage.Controllers
         [HttpGet("{id}")]
         public Story GetOne(string id)
         {
-            IMongoDatabase db = GetDbReference();
+            IMongoDatabase db = GetDbReference("atlas");
 
             var collection = db.GetCollection<Story>("Stories");
             var StoryList = RetrieveCollection(); // Rather than using that Linq stuff, this just uses Mongo driver I believe
@@ -100,7 +85,7 @@ namespace webSage.Controllers
         [HttpPut("{id}")]
         public void Put(int id, [FromBody]string value)
         {
-            IMongoDatabase db = GetDbReference();
+            IMongoDatabase db = GetDbReference("atlas");
         }
 
 
@@ -109,23 +94,48 @@ namespace webSage.Controllers
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
-            IMongoDatabase db = GetDbReference();
-            var collection = db.GetCollection<Story>("Stories");
-            var StoryList = collection.AsQueryable();
+            //IMongoDatabase db = GetDbReference();
+            //var collection = db.GetCollection<Story>("Stories");
+            //var StoryList = collection.AsQueryable();
         }
 
 
 
 
-        private IMongoDatabase GetDbReference(string SelectedDb = "Test", string connectionString = "mongodb://localhost:27017")
+        private IMongoDatabase GetDbReference(string useAtlasOrLocal)
         {
-            var client = new MongoClient(connectionString);
-            return client.GetDatabase(SelectedDb);
+            var connectionStrings = new
+            {
+                mongoLocal = "mongodb://localhost:27017",
+                // so it connects if I directly put the connection string in here. the proper way to do this is using environment variables tho, I think, so I need to figure that out. I also need to figure out how to access my data once I've connected because now I'm getting some weird encoding error.
+                mongoAtlas = "",
+                // mongoAtlas = Environment.GetEnvironmentVariable("MONGO_CONNECT_STRING", EnvironmentVariableTarget.User),
+            };
+            var DbNames = new
+            {
+                mongoLocal = "Test",
+                mongoAtlas = "webSage"
+            };
+            if (useAtlasOrLocal == "local")
+            {
+                string connectionString = connectionStrings.mongoLocal;
+                string SelectedDb = DbNames.mongoLocal;
+                var client = new MongoClient(connectionString);
+                return client.GetDatabase(SelectedDb);
+            } else {
+                Console.WriteLine("...");
+                Console.WriteLine(connectionStrings.mongoAtlas);
+                Console.WriteLine("...");
+                string connectionString = connectionStrings.mongoAtlas;
+                string SelectedDb = DbNames.mongoAtlas;
+                var client = new MongoClient(connectionString);
+                return client.GetDatabase(SelectedDb);
+            }
         }
 
         private IMongoCollection<Story> RetrieveCollection(string specified = "Stories")
         {
-            var db = GetDbReference();
+            var db = GetDbReference("atlas");
             var collection = db.GetCollection<Story>(specified);
             return collection;
         }
