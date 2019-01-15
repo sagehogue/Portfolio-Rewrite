@@ -1,11 +1,12 @@
 :root {
-    --modal-font-size: 3rem;
+    --modal-font-size: 1.75rem;
     --modal-font-weight: 650;
     --modal-title-weight: 900;
-    --modal-title-size: 3.5rem;
+    --modal-title-size: 2rem;
     --translate-left: -150%;
     --translate-right: 150%;
     --text-modal-bg-col: rgb(216, 222, 228);
+    --button-size: 2rem;
 }
 
 /* TODOS
@@ -20,21 +21,21 @@ Current Issue: a lot of this styling needs to be moved to the splash page I thin
     padding: 1.5rem 3rem;
     background-color: var(--text-modal-bg-col);
     color: rgb(104, 99, 99);
-    font-size: var(--modal-font-size);
+    font-size: var(--button-size);
     border-radius: 15px;
     font-weight:  var(--modal-font-weight);
     transition: all .5s;
-    width: 75%;
+    width: 90%;
     display: inline-block;
 }
 
 .TextModal div {
-    margin: 3rem 0;
+    margin: .5rem 0;
 }
 
 .TextModal > h3 {
     text-align: center;
-    font-size: var(--modal-font-size);
+    font-size: var(--modal-title-size);
     font-weight: var(--modal-title-weight);
     margin: 0;
 }
@@ -114,4 +115,24 @@ Current Issue: a lot of this styling needs to be moved to the splash page I thin
 
 .largeWidth {
     max-width: 85%;
+}
+@media (min-width: 600px) {
+    /* .TextModal {
+        font-size: calc(var(--button-size) * 1.2)
+    } */
+    .TextModal > p {
+        font-size: calc(var(--modal-font-size) * 1.2)
+    }
+    .TextModal > h3 {
+        font-size: calc(var(--modal-title-size) * 1.5); /*was 3.5rems */
+    }
+    .TextModal div {
+        margin: 2rem 0;
+        text-align: center;
+        font-size: calc(var(--button-size) * 1);
+    }
+}
+
+@media (min-width: 450px) {
+
 }

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import classes from './AboutPage.module.css';
+// import classes from './AboutPage.module.css';
 
 class aboutPage extends Component {
     state = {}

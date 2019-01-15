@@ -110,6 +110,7 @@ class storyPage extends Component {
     async getAllStories() {
         return new Promise((res, rej) => {
             const allStories = fetch(this.apiPaths.everything);
+            fetch(this.apiPaths.firebase).then((res) => console.log(res));
             res(allStories);
         })
     }
@@ -159,7 +160,7 @@ class storyPage extends Component {
         const selectedStory = this.state.storyCollection.filter(story => {
             if (story.id === storyToLoad) {
                 return true
-            }
+            } else return false;
         });
         this.setState((oldState) => {
             return {
@@ -196,6 +197,7 @@ class storyPage extends Component {
     apiPaths = {
         // gets all test data
         everything: "https://localhost:5001/api/story",
+        firebase: "https://websage-mph.firebaseio.com/",
         // TODOS:
         // storyTitles: ".../api/story/titles"
         // requestStory: ".../api/story/{requestedstory}"

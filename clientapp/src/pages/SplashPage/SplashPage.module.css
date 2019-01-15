@@ -78,7 +78,7 @@
 .textModal {
     transition: all 1s;
     display: inline-block;
-    margin: 3rem 0rem;
+    margin: 1.5rem 0rem;
 }
 
 .ToCenter {
@@ -125,3 +125,5 @@
 .SpaceFromBottom {
     margin-bottom: 20rem;
 }
+
+@media (min-width: 450px) {}

@@ -1,14 +1,33 @@
 .avatar {
     display: block;
-    font-size: 10rem;
     transition: color .25s;
+    font-size: 5rem;
+    min-height: 8.5rem;
     /* position: absolute;
     left: 0;
     top: -16rem; */
-
+    
     /* transform: translateY(-100%) */
 }
 
 .typing {
     color: cornflowerblue;
+}
+
+@media (min-width: 450px) {
+    .avatar {
+        font-size: 10rem;
+
+    }
+}
+@media (min-width: 425px) {
+    .avatar {
+        font-size: 7rem;
+    }
+}
+
+@media (min-width: 600px) {
+    .avatar {
+        min-height: 11rem;
+    }
 }

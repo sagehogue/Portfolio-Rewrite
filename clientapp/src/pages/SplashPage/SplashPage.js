@@ -117,11 +117,12 @@ class SplashPage extends Component {
                         to <span className={`${classes.fontCol2}`}>my website</span>
                         <span className={classes.period}>.</span>
                     </h3>
+                    <hr />
                     <p>To learn more, click a button below.</p>
                 </TextModal>
             </div>),
             third: (<div className={`${classes.textModal} ${classes.ToCenter} ${this.state.display.third ? null : classes.Hide} ${classes.SpaceFromBottom}`}>
-                <TextModal hide={true}>
+                <TextModal hide holdsButtons>
                     <div className={classes.flexContainer}>
                         <Link to="/story">
                             <div className={classes.Link}>Vistelse</div>

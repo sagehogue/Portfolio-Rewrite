@@ -1,3 +1,9 @@
+:root {
+    --active-link-col: orange;
+    --desktop-menu-bg-col: transparent;
+    --nav-link-col: lightblue;
+}
+
 .NavMenu {
     grid-column: 8 / 12;
     grid-row: 1 / 2;
@@ -5,9 +11,27 @@
     display: flex;
     flex-direction: row-reverse;
     justify-content: space-between;
-    /* overflow: hidden; */
+}
+
+.DesktopMenu {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    grid-column: 2 / 11;
+    grid-row: 1 / 2;
+    background-color: var(--desktop-menu-bg-col);
+    height: 75%;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+.NavMenu a, .NavMenu a:visited, .DesktopMenu a, .DesktopMenu a:visited {
+    text-decoration: none;
+    color: var(--nav-link-col);
+}
+.NavMenu a.active, .DesktopMenu a.active {
+    color: var(--active-link-col);
 }
 
 .closed {
-    
+
 }

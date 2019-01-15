@@ -36,12 +36,15 @@
     width: 100%;
 }
 
-.xButton:hover > div, .xButton > div:hover {
+.xButton > div {
     background-color: red;
 }
 
+.xButton:hover > div, .xButton > div:hover {
+    
+}
+
 .xButton div {
-    background-color: rgba(2, 2, 2, .9);
     transition: all .7s;
     width: 5rem;
     height: .8rem;

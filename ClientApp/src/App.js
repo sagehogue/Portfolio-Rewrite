@@ -1,7 +1,4 @@
 import React, { Component } from 'react';
-// import { Route } from 'react-router';
-import Layout from './containers/Layout/Layout';
-import NavMenu from './components/NavMenu/NavMenu';
 import PageContainer from './containers/PageContainer/PageContainer';
 
 //  Save below for react-router testing

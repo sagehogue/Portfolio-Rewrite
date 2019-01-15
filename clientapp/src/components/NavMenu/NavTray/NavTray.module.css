@@ -1,18 +1,29 @@
 .NavTray {
     transition: all .5s;
-    padding: 3rem 5rem;
-    background-color: darkslategrey;
+    padding: 1.5rem 2.5rem;
+    background-color: peachpuff;
     display: flex;
     flex-direction: row-reverse;
     z-index: 50;
-    margin-right: 5rem;
+    margin-right: 1.5rem;
 }
 
-.NavTray a {
+.NavTray a, .NavTray a.active {
     text-decoration: none;
+}
+
+.NavTray a.active {
+    color: orange;
 }
 
 .closed {
     transform: translateY(-20rem);
     opacity: 0;
+}
+
+@media (min-width: 500px) {
+    .NavTray {
+        padding: 3rem 5rem;
+        margin-right: 5rem;
+    }
 }

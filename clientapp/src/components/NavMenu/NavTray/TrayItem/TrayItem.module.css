@@ -1,5 +1,5 @@
 :root {
-    --tray-item-font-size: 3rem;
+    --tray-item-font-size: 1.5rem;
     --tray-item-font-weight: 700;
 }
 
@@ -9,11 +9,33 @@
     border-radius: 1rem;
     padding: 1rem;
     background-color: lemonchiffon;
-    margin: 1.5rem;
-    transition: all .2s;
+    margin: .5rem;
+    transition: all .4s;
+    text-decoration: none;
 }
 
 .TrayItem:hover {
     transform: translateY(-5px);
-    box-shadow: 2px 2px 1px 1px;
+    /* box-shadow: 1px 3px 1px 1px black; */
+    background-color: lemonchiffon;
+}
+
+.active {
+    
+    color: red;
+}
+
+@media (min-width: 600px) {
+    .TrayItem {
+        font-size: calc(var(--tray-item-font-size) * 1.3);
+        margin-bottom: 1.5rem;
+        background-color: transparent;
+    }
+    .TrayItem.active {
+        background-color: lemonchiffon;
+        color: red;
+    }
+    /* .TrayItem:active {
+        background-color: lemonchiffon;
+    } */
 }

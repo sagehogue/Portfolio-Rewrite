@@ -19,9 +19,9 @@ namespace webSage.Models
         public string Text { get; set; }
         [BsonElement("description")]
         public string Description { get; set; }
-        [BsonElement("scenes")]
         private object _setScenes;
-        public object Scenes 
+        [BsonElement("scenes")]
+        public object Scenes
         {
              get 
              {

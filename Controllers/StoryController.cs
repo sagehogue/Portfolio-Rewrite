@@ -18,40 +18,39 @@ namespace webSage.Controllers
         // Retrieves all stories!
         // GET: api/<controller>
         [HttpGet]
-        public IMongoQueryable<Story> Get()
+        // public IMongoQueryable<Story> Get
+        public object Get()
         {
-            // Guess I'm just putting filtering logic in my front-end.. for now. Obviously a lazy solution and bad for performance..
-            var StoryList = RetrieveCollection().AsQueryable(); // AsQueryable makes it respond to these Linq queries
-            var query = StoryList.Where(story => story.Title == "test")
+            // var StoryList = RetrieveCollection();
+            var StoryList = RetrieveCollection();
+            // AsQueryable makes it respond to these Linq queries
+            var query = StoryList.AsQueryable().Where(story => story.Title == "test")
                 .Select(story => story);
-            Console.WriteLine(query);
-            return query;
+
+            var filter = Builders<Story>.Filter.Empty;
+            var result = StoryList.Find(filter).ToList();
+            // .ToList();
+            Console.WriteLine(result);
+            return result;
         }
 
-        // Fetches <Story> by ID
-        // GET: api/Story/{id}
+        // GET: api/Story/{id} -- Fetches <Story> by ID
         [HttpGet("{id}")]
         public Story GetOne(string id)
         {
             IMongoDatabase db = GetDbReference("atlas");
 
             var collection = db.GetCollection<Story>("Stories");
-            var StoryList = RetrieveCollection(); // Rather than using that Linq stuff, this just uses Mongo driver I believe
+            var StoryList = RetrieveCollection();
+            // Rather than using that Linq stuff, this just uses Mongo driver I believe
+
+
             var filter = Builders<Story>.Filter.Eq("_id", ObjectId.Parse(id));
             var result = collection.Find(filter).FirstOrDefault();
             return result;
 
         }
 
-        // Okay, so can use db id as identifier but will have to create a security layer before anyone else has access.
-        // or else I have total api exposure D:
-        // 
-
-
-
-        // POST api/<controller>
-        // So what I need in here is to add something that does a little... deduction.
-        // I want my requests to have a 'type' field that I can use to decide whether to save a scene/story/option.
         [HttpPost]
         public string Post([FromBody]string value)
         {
@@ -108,7 +107,7 @@ namespace webSage.Controllers
             {
                 mongoLocal = "mongodb://localhost:27017",
                 // so it connects if I directly put the connection string in here. the proper way to do this is using environment variables tho, I think, so I need to figure that out. I also need to figure out how to access my data once I've connected because now I'm getting some weird encoding error.
-                mongoAtlas = "",
+                mongoAtlas = "placeholder", // replace this with string
                 // mongoAtlas = Environment.GetEnvironmentVariable("MONGO_CONNECT_STRING", EnvironmentVariableTarget.User),
             };
             var DbNames = new
@@ -122,10 +121,9 @@ namespace webSage.Controllers
                 string SelectedDb = DbNames.mongoLocal;
                 var client = new MongoClient(connectionString);
                 return client.GetDatabase(SelectedDb);
-            } else {
-                Console.WriteLine("...");
-                Console.WriteLine(connectionStrings.mongoAtlas);
-                Console.WriteLine("...");
+            }
+            else
+            {
                 string connectionString = connectionStrings.mongoAtlas;
                 string SelectedDb = DbNames.mongoAtlas;
                 var client = new MongoClient(connectionString);

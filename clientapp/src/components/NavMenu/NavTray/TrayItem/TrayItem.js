@@ -4,7 +4,7 @@ import classes from './TrayItem.module.css';
 
 const trayItem = (props) => {
     return (
-        <div className={classes.TrayItem}>
+        <div onClick={props.clickHandler} className={classes.TrayItem}>
             {props.children}
         </div>
     )

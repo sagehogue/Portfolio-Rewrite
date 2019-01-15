@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 
 import NavButton from './NavButton/NavButton';
 import NavTray from './NavTray/NavTray';
@@ -9,9 +9,45 @@ import Backdrop from '../Backdrop/Backdrop';
 import classes from './NavMenu.module.css';
 
 class NavMenu extends Component {
-    state = {
-        menuIsClosed: true,
-        activePage: "splash",
+    // state = {
+    //     menuIsClosed: true,
+    //     // activePage: "splash",
+    //     width: window.innerWidth,
+    // }
+
+    componentWillMount() {
+        console.log('mounted menu')
+        window.addEventListener('resize', this.handleWindowSizeChange);
+        this.setState({
+            menuIsClosed: true,
+            // activePage: "splash",
+            width: window.innerWidth,
+        })
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener('resize', this.handleWindowSizeChange);
+    }
+
+    handleWindowSizeChange = () => {
+        this.setState((oldState) => {
+            return {
+                ...oldState,
+                width: window.innerWidth
+            }
+        });
+    };
+
+    handlePageChange = (e) => {
+        // e.preventDefault();
+        console.log(e.target)
+        const pageClicked = e.target.innerText;
+        this.setState((oldState) => {
+            return {
+                ...oldState,
+                activePage: pageClicked,
+            }
+        })
     }
 
     toggleMenu = () => {
@@ -19,20 +55,28 @@ class NavMenu extends Component {
     }
 
     render() {
-        return (
+
+        return this.state.width < 600 ? (
             <div className={classes.NavMenu}>
                 <NavButton
                     menuClosed={this.state.menuIsClosed}
                     toggleMenuHandler={this.toggleMenu} />
                 <NavTray menuClosed={this.state.menuIsClosed}>
-                    <Link to="/"><TrayItem>Home</TrayItem></Link>
-                    <Link to="/story"><TrayItem>Vistelse</TrayItem></Link>
-                    <Link to="/about"><TrayItem>About</TrayItem></Link>
-                    <Link to="/resume"><TrayItem>Resume</TrayItem></Link>
+                    <NavLink exact to="/" activeClassName={classes.active}><TrayItem clickHandler={this.handlePageChange}>Home</TrayItem></NavLink>
+                    <NavLink to="/story" activeClassName={classes.active}><TrayItem clickHandler={this.handlePageChange}>Vistelse</TrayItem></NavLink>
+                    {/* <Link to="/about"><TrayItem>About</TrayItem></Link> */}
+                    <NavLink to="/resume" activeClassName={classes.active}><TrayItem clickHandler={this.handlePageChange}>Resume</TrayItem></NavLink>
                 </NavTray>
-                <Backdrop isDisabled={this.state.menuIsClosed} menuHandler={this.toggleMenu}/>
+                <Backdrop isDisabled={this.state.menuIsClosed} menuHandler={this.toggleMenu} />
             </div>
-        )
+        ) : (
+                <div className={classes.DesktopMenu}>
+                    <NavLink exact to="/" activeClassName={classes.active}><TrayItem clickHandler={this.handlePageChange}>Home</TrayItem></NavLink>
+                    <NavLink to="/story" activeClassName={classes.active}><TrayItem clickHandler={this.handlePageChange}>Vistelse</TrayItem></NavLink>
+                    {/* <Link to="/about"><TrayItem>About</TrayItem></Link> */}
+                    <NavLink to="/resume" activeClassName={classes.active}><TrayItem clickHandler={this.handlePageChange}>Resume</TrayItem></NavLink>
+                </div>
+            );
     }
 }
 

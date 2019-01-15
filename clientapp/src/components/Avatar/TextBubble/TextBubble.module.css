@@ -5,10 +5,10 @@ root {
 .bubble {
     background-color: aliceblue;
     display: inline-flex;
-    padding: 2rem 6rem;
+    padding: 1.5rem 4rem;
     border-radius: 2rem;
     position: relative;
-    margin-left: 4rem;
+    margin-left: 2rem;
     transform: translateY(-2rem);
 }
 
@@ -42,4 +42,11 @@ root {
 .bubble .animating {
     transform: scale(2);
     background-color: cornflowerblue;
+}
+
+@media (min-width: 450px) {
+    .bubble {
+        padding: 2rem 6rem;
+        margin-left: 4rem;
+    }
 }
