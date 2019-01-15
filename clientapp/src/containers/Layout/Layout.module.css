@@ -1,7 +1,18 @@
+:root {
+    --grad-col-1: rgba(119, 136, 153, 0.2);
+    --grad-col-2: rgba(119, 136, 153, 0.75);
+}
+
 .Layout {
     display: grid;
     grid-template-columns: repeat(11, 1fr);
     grid-template-rows: repeat(11, 1fr);
     max-height: 100vh;
-    background-color: lightslategray
+    /* background-color: lightslategray */
+    background-image: linear-gradient(
+        to bottom,
+        var(--grad-col-1), 
+        var(--grad-col-2) 
+        ), url(./portland-1948152_1920.jpg);
+    background-size: cover;
 }

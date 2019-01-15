@@ -7,7 +7,7 @@
     font-size: var(--tray-item-font-size);
     font-weight: var(--tray-item-font-weight);
     border-radius: 1rem;
-    padding: 1rem;
+    padding: .5rem;
     background-color: lemonchiffon;
     margin: .5rem;
     transition: all .4s;
@@ -17,7 +17,7 @@
 .TrayItem:hover {
     transform: translateY(-5px);
     /* box-shadow: 1px 3px 1px 1px black; */
-    background-color: lemonchiffon;
+    background-color: rgba(119, 136, 153, 0.781);
 }
 
 .active {
@@ -32,7 +32,7 @@
         background-color: transparent;
     }
     .TrayItem.active {
-        background-color: lemonchiffon;
+        background-color: lightslategrey;
         color: red;
     }
     /* .TrayItem:active {
