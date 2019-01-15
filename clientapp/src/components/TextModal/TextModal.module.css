@@ -51,8 +51,8 @@ Current Issue: a lot of this styling needs to be moved to the splash page I thin
 }
 
 .TextModal.hover {
-    transform: translateY(-1rem);
-    box-shadow: 1rem 2rem 5px 1px rgba(3, 3, 3, .5);
+    /* transform: translateY(-1rem); */
+    box-shadow: .5rem 1rem 5px 1px rgba(3, 3, 3, .5);
 }
 
 .TextModal.hover:active {
@@ -127,12 +127,14 @@ Current Issue: a lot of this styling needs to be moved to the splash page I thin
         font-size: calc(var(--modal-title-size) * 1.5); /*was 3.5rems */
     }
     .TextModal div {
-        margin: 2rem 0;
+        /* margin: 2rem 0; */
         text-align: center;
         font-size: calc(var(--button-size) * 1);
+        font-size: calc(var(--modal-font-size) * 1)
     }
 }
 
-@media (min-width: 450px) {
+@media (min-width: 600px) {
 
 }
+

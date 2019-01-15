@@ -22,12 +22,14 @@
 }
 
 .fontCol2 {
-   color: var(--type-col-2);
+    color: var(--type-col-2);
 }
 
 .period {}
 
-.sage {color: var(--type-col-2)}
+.sage {
+    color: var(--type-col-2)
+}
 
 @keyframes slide-in-to-right {
     from {
@@ -69,6 +71,7 @@
     display: flex;
     flex-flow: row wrap;
     justify-content: center;
+    
 }
 
 .flexContainer a {
@@ -79,6 +82,10 @@
     transition: all 1s;
     display: inline-block;
     margin: 1.5rem 0rem;
+}
+
+.textModal:last-child {
+    width: 100%;
 }
 
 .ToCenter {
@@ -126,4 +133,20 @@
     margin-bottom: 20rem;
 }
 
-@media (min-width: 450px) {}
+@media (min-width: 600px) {
+    .flexContainer {
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: space-between;
+    }
+}
+
+@media (min-width: 1100px) {
+    .textModal:nth-child(1), .textModal:nth-child(2) {
+        width: 90%;
+    }
+
+    .Hide {
+        transform: translate(-200rem) !important
+    }
+}
