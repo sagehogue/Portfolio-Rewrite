@@ -15,4 +15,5 @@
         var(--grad-col-2) 
         ), url(./portland-1948152_1920.jpg);
     background-size: cover;
+    min-height: 100vh;
 }

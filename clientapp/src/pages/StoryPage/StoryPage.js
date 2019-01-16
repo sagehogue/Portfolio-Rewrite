@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import axios from '../../axios-orders';
+
 import PageModal from '../../components/PageModal/PageModal';
 import TextModal from '../../components/TextModal/TextModal';
 import StoryButton from '../../components/Story/StoryButton/StoryButton';
@@ -29,7 +31,7 @@ class storyPage extends Component {
             isEndScene: false,
         },
         // Initial repository of story data. Used to generate more specific groups of data.
-        storyCollection: [],
+        storyCollection: [], // generates arrays of JSX
         // true after componentDidMount, next update triggers button rendering
         shouldGenerateStoryButtons: false,
 
@@ -44,10 +46,11 @@ class storyPage extends Component {
             this.addStoriesToState(retrievedStories);
         } else {
             retrievedStories = this.getAllStories().then((res) => {
-                return res.json();
+                return res;
             }).then((data) => {
-                this.addStoriesToState(data)
-                return data;
+                const storyArray = Object.values(data[0]).map(val => val);
+                this.addStoriesToState(storyArray)
+                return storyArray;
             }).then((data => {
                 this.setInitialState(data);
             }))
@@ -62,9 +65,10 @@ class storyPage extends Component {
 
     generateStoryButtons() {
         // Make array of storybutton components, returning null if story.scenes has no data.
-        const storyButtons = this.state.storyCollection.map((story) => {
+        const storyButtons = this.state.storyCollection.map((story, index) => {
             if (story.scenes) {
-                return <StoryButton key={story.id} id={story.id} title={story.title} description={story.description} clickHandler={this.switchToSelectedStory} />
+                console.log(index);
+                return <StoryButton key={story["_id"] + index} id={story.title} title={story.title} description={story.description} clickHandler={this.switchToSelectedStory} />
             } else {
                 return null;
             }
@@ -93,7 +97,14 @@ class storyPage extends Component {
         })
     }
 
-    addStoriesToState = storyArray => {
+    addStoriesToState = storyInput => {
+        let storyArray;
+        if (!Array.isArray(storyInput)) {
+            storyArray = [storyArray];
+        } else {
+            storyArray = storyInput;
+            // storyArray = Object.values(storyInput[0]).map(val => val);
+        }
         localStorage.setItem('stories', JSON.stringify(storyArray));
         // localStorage.setItem('storyInfoLoaded', 'true');
         storyArray.forEach(story => {
@@ -109,9 +120,10 @@ class storyPage extends Component {
 
     async getAllStories() {
         return new Promise((res, rej) => {
-            const allStories = fetch(this.apiPaths.everything);
-            fetch(this.apiPaths.firebase).then((res) => console.log(res));
-            res(allStories);
+            const allStories = axios.get(this.apiPaths.test).then((res) => {
+                console.log(JSON.parse(res.request.response));
+                return [JSON.parse(res.request.response)]
+            }).then(response => res(response));
         })
     }
 
@@ -125,16 +137,23 @@ class storyPage extends Component {
     updateStateToNextScene = async (scene, identifier) => {
         this.setState((oldState) => {
             let isEndScene;
-            console.log(scene.options.first)
-            scene.options.first === undefined ? isEndScene = true : isEndScene = false;
+            // console.log(scene.options.first)
+            console.log(scene);
+            scene.options === undefined ? isEndScene = true : isEndScene = false;
+            let nextOptionButtons;
+            if (isEndScene) {
+                nextOptionButtons = []
+            } else {
+                nextOptionButtons = [...Object.values(scene.options).map((optionKeyValArray, index) => {
+                    return <StoryButton title={optionKeyValArray.label} description={optionKeyValArray.text} associatedScene={optionKeyValArray.associatedScene} key={index} option clickHandler={this.optionHandler} />
+                })]
+            }
             return {
                 ...oldState, display: {
                     ...oldState.display,
                     introMessages: false,
                     storyButtons: false,
-                    optionButtons: [...Object.values(scene.options).map((optionKeyValArray, index) => {
-                        return <StoryButton title={optionKeyValArray.label} description={optionKeyValArray.text} associatedScene={optionKeyValArray.associatedScene} key={index} option clickHandler={this.optionHandler} />
-                    })],
+                    optionButtons: nextOptionButtons,
                     scene: (
                         <div className={`${classes.sceneModal} ${classes.textModal}`}>
                             <TextModal title={scene.title}>
@@ -158,7 +177,7 @@ class storyPage extends Component {
         e.stopPropagation();
         const storyToLoad = e.target.getAttribute("data-id"); // this probably will return undefined, I don't think I've found a way to store the data properly yet.
         const selectedStory = this.state.storyCollection.filter(story => {
-            if (story.id === storyToLoad) {
+            if (story.title === storyToLoad) {
                 return true
             } else return false;
         });
@@ -198,6 +217,7 @@ class storyPage extends Component {
         // gets all test data
         everything: "https://localhost:5001/api/story",
         firebase: "https://websage-mph.firebaseio.com/",
+        test: 'https://websage-mph.firebaseio.com/stories.json',
         // TODOS:
         // storyTitles: ".../api/story/titles"
         // requestStory: ".../api/story/{requestedstory}"
@@ -242,6 +262,8 @@ class storyPage extends Component {
     }
 
     render() {
+        let buttonBoxClasses = [classes.ButtonBox];
+        buttonBoxClasses.push(this.state.display.introMessages === true ? classes.intro : '');
         return (
             <PageModal className={"story"} onScreen={this.state.modalInView}>
                 <div className={`${classes.pageWrapper}`}>
@@ -251,8 +273,7 @@ class storyPage extends Component {
                         {this.state.display.introMessages ? this.introMessages.third : null}
                         {this.state.display.scene}
                     </div>
-                    <div className={`${classes.ButtonBox} ${classes.intro}`}>
-                        {/* {this.testButton} */}
+                    <div className={buttonBoxClasses.join(' ')}>
                         {this.state.display.storyButtons}
                         {this.state.display.optionButtons ? this.state.display.optionButtons : null}
                         {this.state.story.isEndScene? this.selectAnotherStoryButton : null}

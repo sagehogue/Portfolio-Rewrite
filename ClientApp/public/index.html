@@ -21,18 +21,13 @@
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
     <title>webSage</title>
-  </head>
-  <body>
-    <noscript>
-      You need to enable JavaScript to run this app.
-    </noscript>
-    <div id="root"></div>
-  </body>
-<!-- Firebase App is always required and must be first -->
+    <!-- Firebase App is always required and must be first -->
 <script src="https://www.gstatic.com/firebasejs/5.7.2/firebase-app.js"></script>
 <!-- Add additional services that you want to use -->
 <script src="https://www.gstatic.com/firebasejs/5.7.2/firebase-auth.js"></script>
 <script src="https://www.gstatic.com/firebasejs/5.7.2/firebase-database.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.7.2/firebase-firestore.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.7.2/firebase-functions.js"></script>
   <script>
   // Initialize Firebase
   var config = {
@@ -45,4 +40,11 @@
   };
   firebase.initializeApp(config);
 </script>
+  </head>
+  <body>
+    <noscript>
+      You need to enable JavaScript to run this app.
+    </noscript>
+    <div id="root"></div>
+  </body>
 </html>
