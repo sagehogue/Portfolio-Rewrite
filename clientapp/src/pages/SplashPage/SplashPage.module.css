@@ -150,3 +150,26 @@
         transform: translate(-200rem) !important
     }
 }
+
+@media (max-width: 360px) {
+    .Link {
+        padding: .5rem 1rem;
+    }
+
+    .textModal {
+        margin: .75rem 0rem;
+        
+    }
+
+    .textModal p {
+        font-size: 1.6rem;
+    }
+
+    .textModal h3 {
+        font-size: 1.75rem;
+    }
+
+    .flexContainer div {
+        font-size: 1.75rem;
+    }
+}

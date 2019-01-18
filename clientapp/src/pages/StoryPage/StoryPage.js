@@ -39,17 +39,19 @@ class storyPage extends Component {
 
     componentDidMount() {
         let retrievedStories;
-        // currently never runs -- it's always else {} that runs.
-        // "why is this here?", you may ask. well, maybe I want to do some caching later. ;)
         if (localStorage.getItem('storyInfoLoaded')) {
+            console.log('You got cached stories!');
             retrievedStories = JSON.parse(localStorage.getItem('stories'));
             this.addStoriesToState(retrievedStories);
+            this.setInitialState(retrievedStories)
         } else {
             retrievedStories = this.getAllStories().then((res) => {
                 return res;
             }).then((data) => {
                 const storyArray = Object.values(data[0]).map(val => val);
                 this.addStoriesToState(storyArray)
+                localStorage.setItem("stories", JSON.stringify(storyArray));
+                localStorage.setItem("storyInfoLoaded", "true");
                 return storyArray;
             }).then((data => {
                 this.setInitialState(data);
@@ -209,7 +211,24 @@ class storyPage extends Component {
     }
 
     selectStoryHandler = (e) => {
-        console.log("story loops!")
+        console.log("story loops!");
+        this.setState((oldState) => {
+            return {
+                ...oldState,
+                shouldGenerateStoryButtons: true,
+                story: {
+                    selected: null,
+                    currentScene: null,
+                    isEndScene: false,
+                },
+                display: {
+                    introMessages: true,
+                    buttonBox: false,
+                    storyButtons: [],
+                    shouldGenerateStoryButtons: false,
+                },
+            };
+        })
     }
 
     // Object holding different API pathway reference attributes.
@@ -233,7 +252,7 @@ class storyPage extends Component {
     )
 
     selectAnotherStoryButton = (
-        <StoryButton title="Select Another Story?"  option clickHandler={this.selectStoryHandler} />
+        <StoryButton title="Select Another Story?" option clickHandler={this.selectStoryHandler} />
     )
 
     // Some JSX I wanted to get out of the render method. 
@@ -276,7 +295,7 @@ class storyPage extends Component {
                     <div className={buttonBoxClasses.join(' ')}>
                         {this.state.display.storyButtons}
                         {this.state.display.optionButtons ? this.state.display.optionButtons : null}
-                        {this.state.story.isEndScene? this.selectAnotherStoryButton : null}
+                        {this.state.story.isEndScene ? this.selectAnotherStoryButton : null}
                     </div>
                 </div>
             </PageModal>

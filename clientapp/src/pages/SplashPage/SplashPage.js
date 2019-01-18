@@ -28,7 +28,7 @@ class SplashPage extends Component {
             .then(response =>
                 this.loadMessage("second")
                 // .then(response => this.pause(500))
-            ).then(response => this.typeForAWhile(2500))
+            ).then(response => this.typeForAWhile(1000))
             .then(response => this.loadMessage("third"));
     }
 

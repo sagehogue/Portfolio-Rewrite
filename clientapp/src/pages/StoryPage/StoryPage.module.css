@@ -3,6 +3,7 @@
 }
 
 /* Wraps message container and text container */
+
 .pageWrapper {
     width: 100%;
     height: 100%;
@@ -13,6 +14,7 @@
 }
 
 /* Wraps messages */
+
 .messageWrapper {
     grid-column: 1 / -1;
     grid-row: 1 / 7;
@@ -23,11 +25,13 @@
 }
 
 /* Wraps buttons */
+
 .ButtonBox {
     /* position: absolute; */
     display: flex;
     align-items: center;
-    grid-row: 4 / 7;
+    justify-content: space-around;
+    grid-row: 5 / -1;
     grid-column: 1 / 6;
     margin-top: 2.5rem;
     border: solid medium var(--btn-box-border-col);
@@ -39,18 +43,25 @@
     flex-flow: row wrap;
 }
 
+.ButtonBox div {
+    margin: 1rem 2rem;
+}
+
 .ButtonBox::-webkit-scrollbar {
     width: 0px;
-    background: transparent; /* make scrollbar transparent */
+    background: transparent;
+    /* make scrollbar transparent */
 }
 
 /* Styling for initial display of story buttons */
+
 .ButtonBox.intro {
     grid-row: 7 / 10;
     grid-column: 1 / 6;
 }
 
 /* Styling first paragraph in the story page intro */
+
 .firstIntro {
     margin-top: 1.5rem;
     grid-column: 1 / 6;
@@ -58,18 +69,21 @@
 }
 
 /* Styling second paragraph in the story page intro */
+
 .secondIntro {
     grid-column: 1 / 6;
     grid-row: 3 / 5;
 }
 
 /* Styling third paragraph in the story page intro */
+
 .thirdIntro {
     grid-column: 1 / 6;
     grid-row: 5 / 7;
 }
 
 /* Styling specific to introductory messages */
+
 .introModal {
     text-align: center;
     max-width: 85%;
@@ -115,10 +129,10 @@
 }
 
 /* Utilities */
+
 .addSpaceBottom {
     margin-bottom: 3rem
 }
-
 
 @media (min-width: 600px) {
     .messageWrapper {
@@ -140,5 +154,18 @@
     }
     .introModal div {
         padding: 1rem 1rem;
+    }
+}
+
+@media (max-width: 360px) {
+    .introModal {
+        /* margin: .5rem; */
+    }
+    .introModal div {
+        margin: .5rem;
+        padding: .75rem 1.5rem;
+    }
+    .ButtonBox {
+        margin: 0;
     }
 }
