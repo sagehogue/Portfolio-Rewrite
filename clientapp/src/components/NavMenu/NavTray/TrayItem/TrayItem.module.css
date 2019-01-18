@@ -8,7 +8,8 @@
     font-weight: var(--tray-item-font-weight);
     border-radius: 1rem;
     padding: .5rem;
-    background-color: lemonchiffon;
+    background-color: transparent;
+    border: solid medium rgba(245,255,250,.84);
     margin: .5rem;
     transition: all .4s;
     text-decoration: none;

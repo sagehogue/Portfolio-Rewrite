@@ -13,13 +13,21 @@ const PageModal = (props) => {
         case "story":
             classList.push(classes.story);
             break;
+        case "portfolio":
+            classList.push(classes.portfolio);
+            break;
+        case "contact":
+            classList.push(classes.contact);
+            break;
         default:
             classList.push(classes.splash);
             break;
     }
     return (
-        <div className={classList.join(' ')}>
-            {props.children}
+        <div className={classes.scrollbarHider}>
+            <div className={classList.join(' ')}>
+                {props.children}
+            </div>
         </div>
     )
 }

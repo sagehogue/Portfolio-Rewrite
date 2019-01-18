@@ -127,25 +127,27 @@ class SplashPage extends Component {
                         <Link to="/story">
                             <div className={classes.Link}>Vistelse</div>
                         </Link>
-                        <Link to="/details">
-                            <div className={classes.Link}>Website Details</div>
+                        <Link to="/contact">
+                            <div className={classes.Link}>Contact Me</div>
                         </Link>
-                        <Link to="/resume">
-                            <div className={classes.Link}>Resume</div>
+                        <Link to="/portfolio">
+                            <div className={classes.Link}>Portfolio</div>
                         </Link>
                     </div>
                 </TextModal>
             </div>)
         }
         return (
-            <PageModal displayed={"splash"}>
-                <div className={`${classes.ToLeft} ${classes.Avatar}`}>
-                    <Avatar isTyping={this.state.typing} />
-                </div>
-                {messages.first}
-                {messages.second}
-                {messages.third}
-            </PageModal>
+            // <div className={classes.wrapper}>
+                <PageModal displayed={"splash"}>
+                    <div className={`${classes.ToLeft} ${classes.Avatar}`}>
+                        <Avatar isTyping={this.state.typing} />
+                    </div>
+                    {messages.first}
+                    {messages.second}
+                    {messages.third}
+                </PageModal>
+            // </div>
         )
     }
 }

@@ -6,7 +6,6 @@
     /* position: absolute;
     left: 0;
     top: -16rem; */
-    
     /* transform: translateY(-100%) */
 }
 
@@ -14,20 +13,20 @@
     color: cornflowerblue;
 }
 
-@media (min-width: 450px) {
-    .avatar {
-        font-size: 10rem;
-
-    }
-}
 @media (min-width: 425px) {
     .avatar {
-        font-size: 7rem;
+        font-size: 5rem;
+    }
+}
+
+@media (min-width: 450px) {
+    .avatar {
+        font-size: 6rem;
     }
 }
 
 @media (min-width: 600px) {
     .avatar {
-        min-height: 11rem;
+        min-height: 9.5rem;
     }
 }

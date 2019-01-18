@@ -81,7 +81,7 @@
 .textModal {
     transition: all 1s;
     display: inline-block;
-    margin: 1.5rem 0rem;
+    margin: .5rem 0rem;
 }
 
 .textModal:last-child {
@@ -91,6 +91,15 @@
 .ToCenter {
     text-align: center;
     align-self: center;
+}
+
+.wrapper {
+    grid-row: 1 / 12;
+    grid-column: 2 / 11;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    
 }
 
 .ToLeft {
@@ -130,7 +139,7 @@
 }
 
 .SpaceFromBottom {
-    margin-bottom: 20rem;
+    /* margin-bottom: 20rem; */
 }
 
 @media (min-width: 600px) {
@@ -152,6 +161,7 @@
 }
 
 @media (max-width: 360px) {
+    
     .Link {
         padding: .5rem 1rem;
     }

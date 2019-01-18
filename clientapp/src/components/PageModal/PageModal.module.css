@@ -7,40 +7,53 @@
 }
 
 .PageModal {
-    overflow: hidden;
+    overflow-y: scroll;
+    overflow-x: hidden;
     z-index: 10;
-    grid-row: 1 / 12;
-    grid-column: 2 / 11;
+    /* grid-row: 1 / 11;
+    grid-column: 2 / 11; */
     background-color: var(--modal-bg-col);
     border-radius: .5rem;
     box-shadow: 1rem 2rem 5px 1px rgba(3, 3, 3, .5);
-    margin-top: 2rem;
-    margin-bottom: 2rem;
+    /* margin-top: 2rem;
+    margin-bottom: 2rem; */
     align-items: flex-start;
     /* overflow: hidden; */
+    padding-right: 17px; /* Increase/decrease this value for cross-browser compatibility */
+    box-sizing: content-box; /* So the width will be 100% + 17px */
+}
+
+.scrollbarHider {
+    grid-row: 2 / 11;
+    grid-column: 2 / 11;
+    overflow: hidden;
 }
 
 .splash {
     display: flex;
     flex-direction: column;
-    
+    width: 100%;
+    height: 100%;
+    overflow-y: scroll;
 }
 
 .text {
     font-family: lato;
 }
 
+.scrollbarHider {
+    
+}
+
 @media screen and (min-width: 1000px) {
-    .PageModal {
-        grid-column: 2 / 11;
-        grid-row: 1 / 12;
+    .scrollbarHider {
         box-shadow: -.5rem .5rem rgba(3, 3, 3, .5);
-
     }
 }
 
-@media screen and (min-width: 450px) {
-    .PageModal {
-        margin-top: 7rem;
+/* @media screen and (min-width: 450px) {
+    .scrollbarHider {
+        grid-column: 2 / 11;
+        grid-row: 2 / 11;
     }
-}
+} */
