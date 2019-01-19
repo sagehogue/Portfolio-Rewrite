@@ -42,12 +42,12 @@
 }
 
 .scrollbarHider {
-    
+    border-radius: 5px;
+    box-shadow: -.5rem .5rem rgba(3, 3, 3, .5);
 }
 
 @media screen and (min-width: 1000px) {
     .scrollbarHider {
-        box-shadow: -.5rem .5rem rgba(3, 3, 3, .5);
     }
 }
 

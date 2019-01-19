@@ -9,10 +9,14 @@ class PortfolioPage extends Component {
 
     }
 
+    componentDidMount() {
+    }
+
     render() {
+        // console.log(PDFObject);
         return (
             <PageModal displayed={"splash"}>
-                <div>PortfolioPage</div>
+                <div id="hello">PortfolioPage</div>
             </PageModal>
         )
     }

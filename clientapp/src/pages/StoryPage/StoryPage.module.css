@@ -1,5 +1,6 @@
 :root {
     --btn-box-bg-col: cyan;
+    --box-shadow-nothover: rgba(3, 3, 3, .15);
 }
 
 /* Wraps message container and text container */
@@ -23,8 +24,8 @@
     align-items: center;
     overflow-y: scroll;
     box-sizing: content-box;
-    padding-right: 15px;
-    /* font-size: 3rem; */
+    padding-right: 18px;
+    text-align: center;
     margin-bottom: 1rem;
     width: 100%;
 }
@@ -47,6 +48,12 @@
     max-height: 40rem;
     flex-flow: row wrap;
     padding-bottom: 1rem;
+}
+
+.ButtonBox:hover div:not(:hover) {
+    transform: scale(.95);
+    opacity: .5;
+    box-shadow: 1px 3px 2px 1px var(--box-shadow-nothover); 
 }
 
 .ButtonBox div {
