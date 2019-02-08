@@ -127,9 +127,11 @@ class SplashPage extends Component {
                         <Link to="/story">
                             <div className={classes.Link}>Vistelse</div>
                         </Link>
-                        <Link to="/contact">
+                        <a href="mailto:inquiries.sagehogue@gmail.com?subject=Hey Sage, I would like to ask you something..">
+                            {/* <Link to="/contact"> */}
                             <div className={classes.Link}>Contact Me</div>
-                        </Link>
+                            {/* </Link> */}
+                        </a>
                         <Link to="/portfolio">
                             <div className={classes.Link}>Portfolio</div>
                         </Link>
@@ -139,14 +141,14 @@ class SplashPage extends Component {
         }
         return (
             // <div className={classes.wrapper}>
-                <PageModal displayed={"splash"}>
-                    <div className={`${classes.ToLeft} ${classes.Avatar}`}>
-                        <Avatar isTyping={this.state.typing} />
-                    </div>
-                    {messages.first}
-                    {messages.second}
-                    {messages.third}
-                </PageModal>
+            <PageModal displayed={"splash"}>
+                <div className={`${classes.ToLeft} ${classes.Avatar}`}>
+                    <Avatar isTyping={this.state.typing} />
+                </div>
+                {messages.first}
+                {messages.second}
+                {messages.third}
+            </PageModal>
             // </div>
         )
     }

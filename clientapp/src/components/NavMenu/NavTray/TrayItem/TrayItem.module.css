@@ -21,6 +21,11 @@
     background-color: rgba(119, 136, 153, 0.781);
 }
 
+/* .TrayItem:hover:not(.active) {
+    
+
+} */
+
 .active {
     
     color: red;

@@ -1,0 +1,30 @@
+.Item {
+    box-sizing: border-box;
+    display: inline-block;
+    min-width: 20%;
+    
+    /* padding: 1rem; */
+    background-color: cornsilk;
+    margin: 1rem;
+    position: relative;
+    transition: all .5s;
+}
+
+.ClosedItem {
+    max-width: 33%;
+    overflow: hidden;
+    max-height: 1px;
+    padding-top: 2rem;
+    background-color: transparent;
+}
+
+.FullItem {
+    padding: 2rem;
+    background-color: sandybrown;
+    z-index: 100;
+    min-width: 60%;
+    max-width: 60%;
+    align-self: center;
+    /* justify-self: center; 
+    margin: 0 20%; */
+}

@@ -34,6 +34,10 @@
     color: var(--active-link-col);
 }
 
+.DesktopMenu a:hover:not(.active) {
+    color: rgba(245, 255, 250, 1);
+}
+
 .closed {
 
 }

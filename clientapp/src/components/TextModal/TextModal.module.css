@@ -51,14 +51,14 @@ Current Issue: a lot of this styling needs to be moved to the splash page I thin
 }
 
 .TextModal.hover {
-    /* transform: translateY(-1rem); */
-    box-shadow: .5rem 1rem 5px 1px rgba(3, 3, 3, .5);
+    /* box-shadow: .5rem 1rem 5px 1px rgba(3, 3, 3, .5); */
+    box-shadow: .25rem .5rem 2.5px 1px rgba(3, 3, 3, .5);
 }
 
-.TextModal.hover:active {
+/* .TextModal.hover:active {
     transform: translateY(0);
-    box-shadow: .5rem 1rem 2px 1px rgba(3, 3, 3, .9);
-}
+    box-shadow: .5rem 1rem 2px 1px rgba(3, 3, 3, .5);
+} */
 
 .TextModal.hover p, .TextModal.hover h3 {
     color: cornflowerblue;
