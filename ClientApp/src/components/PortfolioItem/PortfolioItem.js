@@ -29,6 +29,7 @@ class PortfolioItem extends Component {
 
     transformToFullView = () => {
         // JSX for full image display
+        this.props.stateHandler();
         this.setState((oldState) => {
             return {
                 ...oldState,
@@ -39,31 +40,28 @@ class PortfolioItem extends Component {
         })
     }
 
-    closedView = (
-        <div className={[classes.Item, classes.ClosedItem].join(' ')} onClick={this.transformToFullView}>
-            <PortfolioLabel label={this.props.label} />
-            <ContentCard>
-                {this.props.children}
-            </ContentCard>
-        </div>
-    );
-
-    openView = (
-        <>
-            <div className={[classes.Item, classes.FullItem].join(' ')}>
-                <PortfolioLabel label={this.props.label} />
-                <ContentCard>
-                    {this.props.children}
-                </ContentCard>
-            </div>
-
-        </>
-    );
-
     render() {
+        let classList = [classes.Item];
+        classList.push(this.state.closed ? classes.ClosedItem : classes.FullItem);
+        switch (this.props.position) {
+            case 1:
+            classList.push(classes.First);
+            break;
+            case 2:
+            classList.push(classes.Second);
+            break;
+            case 3:
+            classList.push(classes.Third);
+            break;
+        }
         return (
             <>
-                {this.state.closed ? this.closedView : this.openView}
+                <div className={classList.join(' ')} onClick={this.state.closed? this.transformToFullView : null}>
+                    <PortfolioLabel label={this.props.label} inactive={this.state.closed} />
+                    <ContentCard>
+                        {this.props.children}
+                    </ContentCard>
+                </div>
                 <Backdrop menuHandler={this.toggleMenu} isDisabled={this.state.menuIsClosed} />
             </>
         )

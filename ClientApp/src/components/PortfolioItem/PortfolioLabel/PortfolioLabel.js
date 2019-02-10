@@ -3,8 +3,11 @@ import React from 'react';
 import classes from './PortfolioLabel.module.css';
 
 const PortfolioLabel = (props) => {
-    return <div className={classes.Label}>
+    let classList = [classes.Label];
+    classList.push(props.inactive? null : classes.Active);
+    return <div className={classList.join(' ')}>
         {props.label}
+        <hr />
     </div>
 }
 
