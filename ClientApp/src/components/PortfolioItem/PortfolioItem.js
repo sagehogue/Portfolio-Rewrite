@@ -53,16 +53,22 @@ class PortfolioItem extends Component {
             case 3:
             classList.push(classes.Third);
             break;
+            case 4: 
+            classList.push(classes.Fourth)
+            case 5: 
+            classList.push(classes.Fifth)
+            case 6: 
+            classList.push(classes.Sixth)
         }
         return (
             <>
                 <div className={classList.join(' ')} onClick={this.state.closed? this.transformToFullView : null}>
                     <PortfolioLabel label={this.props.label} inactive={this.state.closed} />
-                    <ContentCard>
+                    <ContentCard Active={!this.state.closed}>
                         {this.props.children}
                     </ContentCard>
                 </div>
-                <Backdrop menuHandler={this.toggleMenu} isDisabled={this.state.menuIsClosed} />
+                <Backdrop menuHandler={this.toggleMenu} isDisabled={this.state.menuIsClosed} portfolioItem/>
             </>
         )
         return

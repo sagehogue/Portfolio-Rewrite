@@ -1,4 +1,7 @@
 .Card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
     font-family: 'Helvetica';
     padding: 1rem 2rem;
     /* background-color: rgba(149, 162, 177, 0.616); */
@@ -6,4 +9,29 @@
     text-align: center;
     border-radius: 5px;
     height: 100%;
+    /* overflow-y: scroll; */
+    transition: all .5s;
+}
+
+.Card h3 {
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+.Card p, .Card li {
+    margin-top: 1rem;
+    text-align: left;
+    font-weight: 500;
+    font-size: 1.7rem;
+    line-height: 2rem;
+}
+
+.Card section {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.Active {
+    background-color: rgba(245, 255, 250, 1);
 }

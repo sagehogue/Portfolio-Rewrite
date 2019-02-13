@@ -17,3 +17,9 @@
     left: 50%;
     /* right: 50%; */
 }
+
+
+/* Over 50 makes it cover the nav menu -- desired behavior for portfolioitem */
+.HigherZVal {
+    z-index: 55;
+}
