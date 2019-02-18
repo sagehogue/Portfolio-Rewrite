@@ -40,7 +40,6 @@ class storyPage extends Component {
     componentDidMount() {
         let retrievedStories;
         if (localStorage.getItem('storyInfoLoaded')) {
-            console.log('You got cached stories!');
             retrievedStories = JSON.parse(localStorage.getItem('stories'));
             this.addStoriesToState(retrievedStories);
             this.setInitialState(retrievedStories)
@@ -69,7 +68,6 @@ class storyPage extends Component {
         // Make array of storybutton components, returning null if story.scenes has no data.
         const storyButtons = this.state.storyCollection.map((story, index) => {
             if (story.scenes) {
-                console.log(index);
                 return <StoryButton key={story["_id"] + index} id={story.title} title={story.title} description={story.description} clickHandler={this.switchToSelectedStory} />
             } else {
                 return null;
@@ -122,8 +120,9 @@ class storyPage extends Component {
 
     async getAllStories() {
         return new Promise((res, rej) => {
-            const allStories = axios.get(this.apiPaths.test).then((res) => {
-                console.log(JSON.parse(res.request.response));
+            // const allStories = 
+            axios.get(this.apiPaths.test).then((res) => {
+                // console.log(JSON.parse(res.request.response));
                 return [JSON.parse(res.request.response)]
             }).then(response => res(response));
         })
@@ -140,7 +139,6 @@ class storyPage extends Component {
         this.setState((oldState) => {
             let isEndScene;
             // console.log(scene.options.first)
-            console.log(scene);
             scene.options === undefined ? isEndScene = true : isEndScene = false;
             let nextOptionButtons;
             if (isEndScene) {
@@ -211,7 +209,6 @@ class storyPage extends Component {
     }
 
     selectStoryHandler = (e) => {
-        console.log("story loops!");
         this.setState((oldState) => {
             return {
                 ...oldState,

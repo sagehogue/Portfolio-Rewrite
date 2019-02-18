@@ -7,7 +7,7 @@ import NavMenu from '../../components/NavMenu/NavMenu';
 import PageModal from '../../components/PageModal/PageModal';
 // import ContactForm from '../../components/ContactForm/ContactForm';
 
-import AboutPage from '../../pages/AboutPage/AboutPage';
+// import AboutPage from '../../pages/AboutPage/AboutPage';
 import PortfolioPage from '../../pages/PortfolioPage/PortfolioPage';
 import SplashPage from '../../pages/SplashPage/SplashPage';
 import StoryPage from '../../pages/StoryPage/StoryPage';

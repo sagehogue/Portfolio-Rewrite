@@ -21,7 +21,8 @@ class SplashPage extends Component {
 
         // This seems to sort of jankily work. I think the timeouts are broken. 
 
-        const run = this.typeForAWhile(1500)
+        // const run = 
+        this.typeForAWhile(1500)
             .then(response => this.loadMessage("first"))
             // .then(response => this.pause(500))
             .then(response => this.typeForAWhile(2000))
@@ -68,7 +69,7 @@ class SplashPage extends Component {
                 const newState = {
                     ...oldState,
                 }
-                console.log(MsgToDisplay)
+                // console.log(MsgToDisplay)
                 newState.display[MsgToDisplay] = true;
                 return newState
             })

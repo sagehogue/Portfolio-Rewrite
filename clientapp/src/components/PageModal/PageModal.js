@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import classes from './PageModal.module.css';
 
 // This should probably be a dumb component.

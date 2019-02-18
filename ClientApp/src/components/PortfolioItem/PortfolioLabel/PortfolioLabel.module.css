@@ -1,5 +1,5 @@
 .Label {
-    transition: all .5s;
+    transition: color 1s, opacity .1s; 
     background-color: transparent; /* This is so the label doesn't change color */
     font-family: 'Lobster';
     text-align: center;
@@ -23,6 +23,10 @@
     max-width: 50%;
     margin: auto;
 }
+.Invisible {
+    opacity: 0;
+}
+
 /* Styles for label when associated portfolioitem has been selected d*/
 .Active {
     color: orange;
@@ -30,6 +34,8 @@
     font-size: 3.5rem;
     font-weight: 900;
     transform: translateY(-3rem);
+    /* This is to override the class that makes opacity 0, as it is applied to all elements, including those which are active. A sign that I should refactor later. */
+    opacity: 1 !important;
 }
 
 @media screen and (min-width: 600px) {

@@ -35,10 +35,9 @@ class TextModal extends Component {
     }
 
     render() {
-        let classArray = [];
-        classArray.push(classes.TextModal);
-        this.state.isHovered ? classArray.push(classes.hover) : classArray = classArray;
-        this.props.hideModal ? classArray.push(classes.hide) : classArray = classArray;
+        let classArray = [classes.TextModal];
+        classArray.push(this.state.isHovered ? classes.hover : '');
+        classArray.push(this.props.hideModal ? classes.hide : '');
         return (
             <>
                 <div className={classArray.join(' ')}

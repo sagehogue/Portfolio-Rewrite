@@ -18,6 +18,7 @@ class PortfolioItem extends Component {
     }
 
     toggleMenu = () => {
+        this.props.appearLabel();
         this.setState((oldState) => {
             return {
                 ...oldState,
@@ -54,16 +55,22 @@ class PortfolioItem extends Component {
             classList.push(classes.Third);
             break;
             case 4: 
-            classList.push(classes.Fourth)
+            classList.push(classes.Fourth);
+            break;
             case 5: 
-            classList.push(classes.Fifth)
+            classList.push(classes.Fifth);
+            break;
             case 6: 
-            classList.push(classes.Sixth)
+            classList.push(classes.Sixth);
+            break;
+            default: 
+            classList.push('UNASSIGNED_POSITION');
+            break;
         }
         return (
             <>
                 <div className={classList.join(' ')} onClick={this.state.closed? this.transformToFullView : null}>
-                    <PortfolioLabel label={this.props.label} inactive={this.state.closed} />
+                    <PortfolioLabel label={this.props.label} inactive={this.state.closed} labelIsInvisible={this.props.fadeLabel}/>
                     <ContentCard Active={!this.state.closed}>
                         {this.props.children}
                     </ContentCard>
@@ -71,7 +78,6 @@ class PortfolioItem extends Component {
                 <Backdrop menuHandler={this.toggleMenu} isDisabled={this.state.menuIsClosed} portfolioItem/>
             </>
         )
-        return
     }
 }
 

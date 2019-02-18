@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 import NavButton from './NavButton/NavButton';
 import NavTray from './NavTray/NavTray';
@@ -16,7 +16,6 @@ class NavMenu extends Component {
     // }
 
     componentWillMount() {
-        console.log('mounted menu')
         window.addEventListener('resize', this.handleWindowSizeChange);
         this.setState({
             menuIsClosed: true,
@@ -40,7 +39,7 @@ class NavMenu extends Component {
 
     handlePageChange = (e) => {
         // e.preventDefault();
-        console.log(e.target)
+        // console.log(e.target)
         const pageClicked = e.target.innerText;
         this.setState((oldState) => {
             return {
