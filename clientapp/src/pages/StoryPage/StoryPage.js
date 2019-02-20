@@ -41,10 +41,12 @@ class storyPage extends Component {
         let retrievedStories;
         if (localStorage.getItem('storyInfoLoaded')) {
             retrievedStories = JSON.parse(localStorage.getItem('stories'));
+            console.log(retrievedStories)
             this.addStoriesToState(retrievedStories);
             this.setInitialState(retrievedStories)
         } else {
             retrievedStories = this.getAllStories().then((res) => {
+                console.log(res)
                 return res;
             }).then((data) => {
                 const storyArray = Object.values(data[0]).map(val => val);
@@ -139,6 +141,7 @@ class storyPage extends Component {
         this.setState((oldState) => {
             let isEndScene;
             // console.log(scene.options.first)
+            try {
             scene.options === undefined ? isEndScene = true : isEndScene = false;
             let nextOptionButtons;
             if (isEndScene) {
@@ -157,7 +160,9 @@ class storyPage extends Component {
                     scene: (
                         <div className={`${classes.sceneModal} ${classes.textModal}`}>
                             <TextModal title={scene.title}>
-                                <p>{scene.text}</p>
+                            {Array.isArray(scene.text)? scene.text.map((textLine, key) => {return <p className={classes.multiLine} key={key}>{textLine}</p>}) : scene.text}
+                            {/* <p>{Array.isArray(scene.text)? scene.text.join('\n') : scene.text}</p> */}
+                                {/* <p>{scene.text}</p> */}
                             </TextModal>
                         </div>
                     )
@@ -170,6 +175,10 @@ class storyPage extends Component {
                     isEndScene: isEndScene,
                 }
             }
+        }
+        catch(error) {
+            console.log("Scene likely not implemented.\n" + error);
+        }
         })
     }
 
@@ -193,7 +202,10 @@ class storyPage extends Component {
                     scene: (
                         <div className={`${classes.sceneModal} ${classes.textModal}`}>
                             <TextModal title={selectedStory[0].scenes.first.title}>
-                                <p>{selectedStory[0].scenes.first.text}</p>
+                            
+                            {Array.isArray(selectedStory[0].scenes.first.text)? selectedStory[0].scenes.first.text.map((textLine, key) => {return <p className={classes.multiLine} key={key}>{textLine}</p>}) : selectedStory[0].scenes.first.text}
+                            {/* <p>{Array.isArray(selectedStory[0].scenes.first.text)? selectedStory[0].scenes.first.text.join('\n') : selectedStory[0].scenes.first.text}</p> */}
+                                {/* <p>{selectedStory[0].scenes.first.`text}</p> */}
                             </TextModal>
                         </div>
                     )

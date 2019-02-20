@@ -150,6 +150,12 @@
     z-index: 10;
 }
 
+.multiLine {
+    /* display: block; */
+    white-space: pre-wrap;
+    margin: 2px;
+}
+
 /* Utilities */
 
 .addSpaceBottom {

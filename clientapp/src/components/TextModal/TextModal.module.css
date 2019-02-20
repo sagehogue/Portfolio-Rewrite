@@ -60,7 +60,7 @@ Current Issue: a lot of this styling needs to be moved to the splash page I thin
     box-shadow: .5rem 1rem 2px 1px rgba(3, 3, 3, .5);
 } */
 
-.TextModal.hover p, .TextModal.hover h3 {
+.TextModal.hover h3 {
     color: cornflowerblue;
 }
 .TextModal hr {
