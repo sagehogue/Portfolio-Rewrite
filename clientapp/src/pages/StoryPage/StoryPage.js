@@ -142,43 +142,43 @@ class storyPage extends Component {
             let isEndScene;
             // console.log(scene.options.first)
             try {
-            scene.options === undefined ? isEndScene = true : isEndScene = false;
-            let nextOptionButtons;
-            if (isEndScene) {
-                nextOptionButtons = []
-            } else {
-                nextOptionButtons = [...Object.values(scene.options).map((optionKeyValArray, index) => {
-                    return <StoryButton title={optionKeyValArray.label} description={optionKeyValArray.text} associatedScene={optionKeyValArray.associatedScene} key={index} option clickHandler={this.optionHandler} />
-                })]
-            }
-            return {
-                ...oldState, display: {
-                    ...oldState.display,
-                    introMessages: false,
-                    storyButtons: false,
-                    optionButtons: nextOptionButtons,
-                    scene: (
-                        <div className={`${classes.sceneModal} ${classes.textModal}`}>
-                            <TextModal title={scene.title}>
-                            {Array.isArray(scene.text)? scene.text.map((textLine, key) => {return <p className={classes.multiLine} key={key}>{textLine}</p>}) : scene.text}
-                            {/* <p>{Array.isArray(scene.text)? scene.text.join('\n') : scene.text}</p> */}
-                                {/* <p>{scene.text}</p> */}
-                            </TextModal>
-                        </div>
-                    )
-                },
-                storyCollection: [...oldState.storyCollection],
-                story: {
-                    ...oldState.story,
-                    selected: oldState.story.selected,
-                    currentScene: { ...scene, scene: identifier },
-                    isEndScene: isEndScene,
+                scene.options === undefined ? isEndScene = true : isEndScene = false;
+                let nextOptionButtons;
+                if (isEndScene) {
+                    nextOptionButtons = []
+                } else {
+                    nextOptionButtons = [...Object.values(scene.options).map((optionKeyValArray, index) => {
+                        return <StoryButton title={optionKeyValArray.label} description={optionKeyValArray.text} associatedScene={optionKeyValArray.associatedScene} key={index} option clickHandler={this.optionHandler} />
+                    })]
+                }
+                return {
+                    ...oldState, display: {
+                        ...oldState.display,
+                        introMessages: false,
+                        storyButtons: false,
+                        optionButtons: nextOptionButtons,
+                        scene: (
+                            <div className={`${classes.sceneModal} ${classes.textModal}`}>
+                                <TextModal title={scene.title}>
+                                    {Array.isArray(scene.text) ? scene.text.map((textLine, key) => { return <p className={classes.multiLine} key={key}>{textLine}</p> }) : scene.text}
+                                    {/* <p>{Array.isArray(scene.text)? scene.text.join('\n') : scene.text}</p> */}
+                                    {/* <p>{scene.text}</p> */}
+                                </TextModal>
+                            </div>
+                        )
+                    },
+                    storyCollection: [...oldState.storyCollection],
+                    story: {
+                        ...oldState.story,
+                        selected: oldState.story.selected,
+                        currentScene: { ...scene, scene: identifier },
+                        isEndScene: isEndScene,
+                    }
                 }
             }
-        }
-        catch(error) {
-            console.log("Scene likely not implemented.\n" + error);
-        }
+            catch (error) {
+                console.log("Scene likely not implemented.\n" + error);
+            }
         })
     }
 
@@ -202,9 +202,9 @@ class storyPage extends Component {
                     scene: (
                         <div className={`${classes.sceneModal} ${classes.textModal}`}>
                             <TextModal title={selectedStory[0].scenes.first.title}>
-                            
-                            {Array.isArray(selectedStory[0].scenes.first.text)? selectedStory[0].scenes.first.text.map((textLine, key) => {return <p className={classes.multiLine} key={key}>{textLine}</p>}) : selectedStory[0].scenes.first.text}
-                            {/* <p>{Array.isArray(selectedStory[0].scenes.first.text)? selectedStory[0].scenes.first.text.join('\n') : selectedStory[0].scenes.first.text}</p> */}
+
+                                {Array.isArray(selectedStory[0].scenes.first.text) ? selectedStory[0].scenes.first.text.map((textLine, key) => { return <p className={classes.multiLine} key={key}>{textLine}</p> }) : selectedStory[0].scenes.first.text}
+                                {/* <p>{Array.isArray(selectedStory[0].scenes.first.text)? selectedStory[0].scenes.first.text.join('\n') : selectedStory[0].scenes.first.text}</p> */}
                                 {/* <p>{selectedStory[0].scenes.first.`text}</p> */}
                             </TextModal>
                         </div>

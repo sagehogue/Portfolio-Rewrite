@@ -178,6 +178,9 @@
         grid-row: 6 / 10;
         grid-column: 1 / 6;
     }
+    .ButtonBox {
+        margin-top: 6rem;
+    }
 }
 
 @media (min-width: 1000px) {
