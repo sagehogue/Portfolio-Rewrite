@@ -8,6 +8,12 @@
     grid-template-rows: repeat(5, 1fr);
 }
 
+.Greeting {
+    font-size: 2rem;
+    font-weight: 700;
+    align-self: flex-start;
+}
+
 /* .FlexWrapper {
     display: flex;
     flex-direction: row;
