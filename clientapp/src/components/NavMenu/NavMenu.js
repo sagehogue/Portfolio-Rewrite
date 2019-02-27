@@ -61,19 +61,37 @@ class NavMenu extends Component {
                     menuClosed={this.state.menuIsClosed}
                     toggleMenuHandler={this.toggleMenu} />
                 <NavTray menuClosed={this.state.menuIsClosed}>
-                    <NavLink to="/story" activeClassName={classes.active}><TrayItem clickHandler={this.handlePageChange}>Vistelse</TrayItem></NavLink>
-                    <NavLink exact to="/" activeClassName={classes.active}><TrayItem clickHandler={this.handlePageChange}>Home</TrayItem></NavLink>
+                    <NavLink exact to="/" activeClassName={classes.active}>
+                        <TrayItem clickHandler={this.handlePageChange}>Home</TrayItem>
+                    </NavLink>
+
+                    <NavLink to="/story" activeClassName={classes.active}>
+                        <TrayItem clickHandler={this.handlePageChange}>Vistelse</TrayItem>
+                    </NavLink>
+                    <NavLink to="/about" activeClassName={classes.active}>
+                        <TrayItem clickHandler={this.handlePageChange}>About</TrayItem>
+                    </NavLink>
                     {/* <Link to="/about"><TrayItem>About</TrayItem></Link> */}
-                    <NavLink to="/portfolio" activeClassName={classes.active}><TrayItem clickHandler={this.handlePageChange}>Portfolio</TrayItem></NavLink>
+                    <NavLink to="/portfolio" activeClassName={classes.active}>
+                        <TrayItem clickHandler={this.handlePageChange}>Portfolio</TrayItem>
+                    </NavLink>
                 </NavTray>
                 <Backdrop isDisabled={this.state.menuIsClosed} menuHandler={this.toggleMenu} />
             </div>
         ) : (
                 <div className={classes.DesktopMenu}>
-                    <NavLink to="/story" activeClassName={classes.active}><TrayItem clickHandler={this.handlePageChange}>Vistelse</TrayItem></NavLink>
-                    <NavLink exact to="/" activeClassName={classes.active}><TrayItem clickHandler={this.handlePageChange}>Home</TrayItem></NavLink>
-                    {/* <Link to="/about"><TrayItem>About</TrayItem></Link> */}
-                    <NavLink to="/portfolio" activeClassName={classes.active}><TrayItem clickHandler={this.handlePageChange}>Portfolio</TrayItem></NavLink>
+                    <NavLink exact to="/" activeClassName={classes.active}>
+                        <TrayItem clickHandler={this.handlePageChange}>Home</TrayItem>
+                    </NavLink>
+                    <NavLink to="/story" activeClassName={classes.active}>
+                        <TrayItem clickHandler={this.handlePageChange}>Vistelse</TrayItem>
+                    </NavLink>
+                    <NavLink to="/about" activeClassName={classes.active}>
+                        <TrayItem clickHandler={this.handlePageChange}>About</TrayItem>
+                    </NavLink>
+                    <NavLink to="/portfolio" activeClassName={classes.active}>
+                        <TrayItem clickHandler={this.handlePageChange}>Portfolio</TrayItem
+                        ></NavLink>
                 </div>
             );
     }

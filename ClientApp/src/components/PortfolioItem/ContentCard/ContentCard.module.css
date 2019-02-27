@@ -1,16 +1,61 @@
+:root {
+    --card-color: lightblue;
+}
+
 .Card {
+    transform: translateY(3rem);
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
     font-family: 'Helvetica';
     padding: 1rem 2rem;
     /* background-color: rgba(149, 162, 177, 0.616); */
-    background-color: rgba(245,255,250,.84);
+    background-color: rgba(245, 255, 250, .84);
     text-align: center;
     border-radius: 5px;
-    height: 100%;
+    min-height: 100%;
+    opacity: 0;
+    margin-top: 0;
     /* overflow-y: scroll; */
-    transition: all .5s;
+    /* transform: translateX(50%); */
+    transition: opacity .7s ease-in, transform 1s;
+    /* transition: transform .1s; */
+    position: relative;
+}
+
+.Active,
+.Preview {
+    opacity: 1;
+    transform: translateX(0) translateY(1rem);
+    transition: all .7s;
+}
+
+.Preview {
+    background-color: var(--card-color);
+    /* position: relative; */
+}
+
+.Active {
+    margin-top: 0;
+    background-color: rgba(245, 255, 250, 1);
+}
+
+.Arrow {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0;
+    border: 10px solid transparent;
+    border-bottom-color: var(--card-color);
+    transition: all .5s ease-in;
+    top: -1.7rem;
+}
+
+.Preview .Arrow {
+    
+    opacity: 1;
 }
 
 .Card h3 {
@@ -18,7 +63,8 @@
     font-weight: 700;
 }
 
-.Card p, .Card li {
+.Card p,
+.Card li {
     margin-top: 1rem;
     text-align: left;
     font-weight: 500;
@@ -30,8 +76,4 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-}
-
-.Active {
-    background-color: rgba(245, 255, 250, 1);
 }

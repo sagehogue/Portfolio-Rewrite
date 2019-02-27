@@ -42,21 +42,21 @@ class PortfolioPage extends Component {
             <PageModal displayed={"portfolio"}>
                 <div className={wrapperClassList.join(' ')}>
                     <PortfolioItem label="About Me" position={1} stateHandler={this.displayItem} fadeLabel={this.state.anItemIsActive} appearLabel={this.displayLabels}>
-                        
-                            <section className={classes.Greeting}>
-                                <span>Thanks for taking the time to check my page out!</span>
-                            </section>
-                            <section>
+
+                        <section className={classes.Greeting}>
+                            <span>Thanks for taking the time to check my page out!</span>
+                        </section>
+                        <section>
 
                             <p>
-                                I'm a Portland local, a powerlifter, a comedy fan, a music fanatic, I love craft beer and work in a brewery, and I have a lifelong interest in computers and technology.
+                                I'm a Portland local, 
 
                             </p>
                             <p>
-                                Though you are probably viewing this page because you are curious about my web development skills, I have a wide ranging array of interests and values. 
+                                Though you are probably viewing this page because you are curious about my web development skills, I have a wide ranging array of interests and values.
                             </p>
-                            </section>
-                       
+                        </section>
+
                     </PortfolioItem>
                     <PortfolioItem label="This Website" position={2} stateHandler={this.displayItem} fadeLabel={this.state.anItemIsActive} appearLabel={this.displayLabels}>
                         <section>
@@ -101,14 +101,14 @@ class PortfolioPage extends Component {
                             <p>
 
                             </p>
-                            </section>
-                            <section>
+                        </section>
+                        <section>
                             <h3>End the drug war</h3>
                             <p>
 
                             </p>
-                            </section>
-                            <section>
+                        </section>
+                        <section>
                             <h3>Youth Outreach</h3>
                             <p>
                                 I remember the painful, vulnerable days of my youth. I had to get through it alone, and knowing how painful that was, I hope to use my experience and skills to give back to the world, hopefully leaving it a better place than I found it.

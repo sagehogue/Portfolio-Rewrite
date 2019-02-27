@@ -19,6 +19,9 @@ const PageModal = (props) => {
         case "contact":
             classList.push(classes.contact);
             break;
+        case "about":
+            classList.push(classes.about);
+            break;
         default:
             classList.push(classes.splash);
             break;

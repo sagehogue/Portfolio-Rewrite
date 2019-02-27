@@ -25,12 +25,14 @@
 .ClosedItem {
     /* max-width: 33%; */
     overflow: hidden;
-    max-height: 1px;
+    max-height: 5rem;
     background-color: transparent;
+    /* transform: translateY(-100rem); */
 }
 
 .ClosedItem:hover {
-    max-height: 10rem;
+    max-height: 25rem;
+    /* transform: translateY(0); */
 }
 
 .First {
@@ -66,25 +68,16 @@
     width: 95%;
     height: 95%;
     border-radius: 5px;
-    /* padding-top: 2rem; */
-    /* grid-row: 1 / 6 !important;
-    grid-column: 1 / 6 !important; */
     z-index: 100;
-    /* min-width: 50%; */
-    /* margin: auto; */
-    /* transform: scaleX(1.5) scaleY(3); */
-    /* position: absolute; */
     margin-left: auto;
     margin-right: auto;
-    /* left: 33%; */
-    /* right: 0; */
-    /* top: 0; */
-    /* max-width: 60%; */
-    /* max-height: 100%; */
-    /* position: absolute; */
-    /* top: 25%;
-    left: 25%;
-    right: 25%; */
+}
+
+.Experiment.FullItem {
+    /* position: relative; */
+    /* left: 50%;
+    transform: translateX(-50%);
+    margin: 0; */
 }
 
 /* .FullItem span, .FullItem hr {

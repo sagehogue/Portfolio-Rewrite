@@ -5,12 +5,15 @@
     border: solid medium rgba(245,255,250,.84);
     border-top: none;
     display: flex;
+    flex-shrink: 1;
+    width: 70%;
     border-radius: 3px;
-    flex-direction: row-reverse;
+    /* flex-direction: row-reverse; */
+    /* flex-wrap: wrap; */
     /* justify-content: space-around; */
     align-items: center;
     z-index: 50;
-    margin-right: 1.5rem;
+    /* margin-left: 1.5rem; */
 }
 
 .NavTray a, .NavTray a.active {
@@ -28,14 +31,14 @@
 
 @media (min-width: 500px) {
     .NavTray {
-        padding: 3rem 5rem;
+        padding: 1rem 2rem;
         margin-right: 5rem;
     }
 }
 
 @media (max-width: 350px) {
     .NavTray {
-        padding: .5rem 1rem;
+        padding: .25rem .5rem;
     margin-right: 1rem;
     }
 }

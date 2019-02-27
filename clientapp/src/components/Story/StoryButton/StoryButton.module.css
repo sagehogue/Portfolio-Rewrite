@@ -28,7 +28,7 @@
 
 .StoryButton:hover {
     box-shadow: 0 1rem 5px .5rem var(--box-shadow-hover); 
-    transform: translateY(-5px) scale(1.05);
+    transform: translateY(-5px) scale(1.02);
 }
 
 
