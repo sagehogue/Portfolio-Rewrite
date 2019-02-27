@@ -84,7 +84,7 @@ class PortfolioItem extends Component {
                 classList.push(classes.Sixth);
                 break;
             default:
-                classList.push('UNASSIGNED_POSITION');
+                classList.push('UNASSIGNED_POSITION', classes.Unassigned);
                 break;
         }
         return (

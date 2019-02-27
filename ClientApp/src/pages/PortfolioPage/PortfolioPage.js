@@ -41,7 +41,7 @@ class PortfolioPage extends Component {
         return (
             <PageModal displayed={"portfolio"}>
                 <div className={wrapperClassList.join(' ')}>
-                    <PortfolioItem label="About Me" position={1} stateHandler={this.displayItem} fadeLabel={this.state.anItemIsActive} appearLabel={this.displayLabels}>
+                    {/* <PortfolioItem label="About Me" position={1} stateHandler={this.displayItem} fadeLabel={this.state.anItemIsActive} appearLabel={this.displayLabels}>
 
                         <section className={classes.Greeting}>
                             <span>Thanks for taking the time to check my page out!</span>
@@ -57,7 +57,7 @@ class PortfolioPage extends Component {
                             </p>
                         </section>
 
-                    </PortfolioItem>
+                    </PortfolioItem> */}
                     <PortfolioItem label="This Website" position={2} stateHandler={this.displayItem} fadeLabel={this.state.anItemIsActive} appearLabel={this.displayLabels}>
                         <section>
                             <h3>Construction Details</h3>

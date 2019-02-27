@@ -73,11 +73,12 @@
     margin-right: auto;
 }
 
+.Experiment {
+    min-width: 33%;
+}
+
 .Experiment.FullItem {
-    /* position: relative; */
-    /* left: 50%;
-    transform: translateX(-50%);
-    margin: 0; */
+    min-width: 20rem;
 }
 
 /* .FullItem span, .FullItem hr {
@@ -130,5 +131,10 @@
     .FullItem {
         grid-row: 1 / 6;
         grid-column: 2 / 5;
+    }
+    .Experiment.FullItem {
+        grid-row: 1 / -1;
+        grid-column: 1 / -1;
+        
     }
 }

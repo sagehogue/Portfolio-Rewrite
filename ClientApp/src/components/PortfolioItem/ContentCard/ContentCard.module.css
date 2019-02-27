@@ -1,13 +1,19 @@
 :root {
     --card-color: lightblue;
+    --card-font-color: rgba(5, 5, 5, .8);
+    --card-font-weight: 600;
+    --card-font-family: 'Helvetica';
+    --card-font-size: 1.5rem;
+    --card-line-height: 2.5rem;
 }
 
 .Card {
+    color: var(--card-font-color);
     transform: translateY(3rem);
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
-    font-family: 'Helvetica';
+    font-family: var(--card-font-family);
     padding: 1rem 2rem;
     /* background-color: rgba(149, 162, 177, 0.616); */
     background-color: rgba(245, 255, 250, .84);
@@ -54,7 +60,6 @@
 }
 
 .Preview .Arrow {
-    
     opacity: 1;
 }
 
@@ -67,9 +72,9 @@
 .Card li {
     margin-top: 1rem;
     text-align: left;
-    font-weight: 500;
-    font-size: 1.7rem;
-    line-height: 2rem;
+    font-weight: var(--card-font-weight);
+    font-size: var(--card-font-size);
+    line-height: var(--card-line-height);
 }
 
 .Card section {
