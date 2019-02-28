@@ -32,7 +32,7 @@ class aboutPage extends Component {
     }
     render() {
         return (
-            <PageModal displayed="about">
+            <PageModal displayed="about" noscroll>
                 <div className={this.state.anItemIsActive ? classes.displaySingleContainer : classes.flexContainer}>
 
                     <PortfolioItem label="Story"
@@ -47,7 +47,25 @@ class aboutPage extends Component {
                         fadeLabel={this.state.anItemIsActive}
                         appearLabel={this.displayLabels}
                         experiment>
+                        <section>
+                            <h3>Education Reform</h3>
+                            <p>
 
+                            </p>
+                        </section>
+                        <section>
+                            <h3>End the drug war</h3>
+                            <p>
+
+                            </p>
+                        </section>
+                        <section>
+                            <h3>Youth Outreach</h3>
+                            <p>
+                                I remember the painful, vulnerable days of my youth. I had to get through it alone, and knowing how painful that was, I hope to use my experience and skills to give back to the world, hopefully leaving it a better place than I found it.
+
+                            </p>
+                        </section>
                     </PortfolioItem>
                     <PortfolioItem label="Interests"
                         stateHandler={this.displayItem}
@@ -58,12 +76,15 @@ class aboutPage extends Component {
                     </PortfolioItem>
                 </div>
                 <div className={classes.Banner}>
-                    <span className={classes.firstTypography}>
+                    <div className={classes.bannerStripe} />
+                    <span className={[classes.firstTypography, classes.bannerTypography].join(' ')}>
                         Thanks for taking an interest!
                         </span>
-                    <span className={classes.secondTypography}>
-                        Click any of the categories to see the full image.
+                    <div className={classes.bannerStripe} />
+                    <span className={[classes.secondTypography, classes.bannerTypography].join(' ')}>
+                        Click any of the categories and scroll to see the full text.
                         </span>
+                    <div className={classes.bannerStripe} />
                 </div>
             </PageModal>
         )

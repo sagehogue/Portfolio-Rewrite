@@ -1,7 +1,6 @@
 import React from 'react';
 import classes from './PageModal.module.css';
 
-// This should probably be a dumb component.
 
 const PageModal = (props) => {
     let classList = [];
@@ -26,13 +25,23 @@ const PageModal = (props) => {
             classList.push(classes.splash);
             break;
     }
-    return (
+    let noScrollClasses = [...classList, classes.noScroll];
+
+    const scroll = (
         <div className={classes.scrollbarHider}>
             <div className={classList.join(' ')}>
                 {props.children}
             </div>
         </div>
     )
+
+    const noscroll = (
+        <div className={noScrollClasses.join(' ')}>
+            {props.children}
+        </div>
+    )
+
+    return props.noscroll ? noscroll : scroll;
 }
 
 

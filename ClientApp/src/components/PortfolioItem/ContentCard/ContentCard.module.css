@@ -7,26 +7,69 @@
     --card-line-height: 2.5rem;
 }
 
+/* Main styles used for the 'preview' AKA hover effect */
+
 .Card {
     color: var(--card-font-color);
     transform: translateY(3rem);
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
+    z-index: -1;
     font-family: var(--card-font-family);
     padding: 1rem 2rem;
     /* background-color: rgba(149, 162, 177, 0.616); */
     background-color: rgba(245, 255, 250, .84);
     text-align: center;
     border-radius: 5px;
-    min-height: 100%;
+    max-height: 20rem;
     opacity: 0;
     margin-top: 0;
-    /* overflow-y: scroll; */
+    word-wrap: break-word;
     /* transform: translateX(50%); */
-    transition: opacity .7s ease-in, transform 1s;
+    transition: opacity .5s ease-in, transform 1s;
     /* transition: transform .1s; */
     position: relative;
+    line-height: calc(var(--card-line-height) * .5);
+}
+
+.Card p {
+    font-size: calc(var(--card-font-size) * .8);
+    margin-top: 5px;
+}
+
+.Card h3 {
+    line-height: 1rem;
+    margin: .5rem 0;
+    font-size: 1.1rem;
+    font-weight: 700;
+}
+
+.Preview {
+    background-color: var(--card-color);
+    max-height: 250px;
+    /* position: relative; */
+    padding: 1rem 2rem;
+    min-width: 10rem;
+    z-index: 25;
+}
+
+/* Styles used for the 'active' card, or the big version that opens on click */
+
+.Active {
+    margin-top: 0;
+    background-color: rgba(245, 255, 250, 1);
+    line-height: var(--card-line-height);
+    min-height: 95%;
+}
+
+.Active p,
+.Active li {
+    padding-right: 15px;
+    margin-top: 1rem;
+    text-align: left;
+    font-weight: var(--card-font-weight);
+    font-size: var(--card-font-size);
+    line-height: var(--card-line-height);
 }
 
 .Active,
@@ -36,49 +79,59 @@
     transition: all .7s;
 }
 
-.Preview {
-    background-color: var(--card-color);
-    /* position: relative; */
+.Card section {
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
-.Active {
-    margin-top: 0;
-    background-color: rgba(245, 255, 250, 1);
+.Active section {
+    box-sizing: content-box;
+    height: 100%;
+    width: 100%;
+    padding-right: 17px;
+    /* overflow-y: scroll; */
+    /* overflow: hidden; */
 }
+
+/* The arrow on the top of the preview box */
 
 .Arrow {
-    width: 20px;
-    height: 20px;
+    width: 0px;
+    height: 0px;
+    z-index: 200;
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
     opacity: 0;
-    border: 10px solid transparent;
+    border: 15px solid transparent;
     border-bottom-color: var(--card-color);
     transition: all .5s ease-in;
-    top: -1.7rem;
+    top: -2.5rem;
+    /* padding: 500rem; */
+}
+.spaceEvenly {
+    justify-content: space-evenly;
+}
+
+.scrollWrapperOuter {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+.scrollWrapperInner {
+    overflow-y: scroll;
+    box-sizing: content-box;
+    padding-right: 17px;
+    width: 100%;
+    max-height: 60rem;
+}
+
+.Preview .scrollWrapperInner {
+    overflow: hidden;
 }
 
 .Preview .Arrow {
     opacity: 1;
-}
-
-.Card h3 {
-    font-size: 2rem;
-    font-weight: 700;
-}
-
-.Card p,
-.Card li {
-    margin-top: 1rem;
-    text-align: left;
-    font-weight: var(--card-font-weight);
-    font-size: var(--card-font-size);
-    line-height: var(--card-line-height);
-}
-
-.Card section {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
 }

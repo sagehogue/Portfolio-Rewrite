@@ -99,7 +99,7 @@ class PortfolioItem extends Component {
                         labelIsInvisible={this.props.fadeLabel} />
 
                     <ContentCard Active={!this.state.closed}
-                        Previewed={this.state.previewLabel}>
+                        Previewed={this.state.previewLabel} scrollable={this.props.scrollable}>
                         {this.props.children}
                     </ContentCard>
                 </div>

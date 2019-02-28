@@ -34,9 +34,9 @@
 }
 
 .about {
-width: 100%;
-height: 100%;
-overflow-y: scroll;
+    width: 100%;
+    height: 100%;
+    overflow-y: scroll;
 }
 
 .scrollbarHider {
@@ -56,14 +56,29 @@ overflow-y: scroll;
     /* overflow: auto; */
 }
 
+.noScroll {
+    grid-row: 2 / 11;
+    grid-column: 2 / 11;
+    border-radius: 1rem;
+    box-shadow: -.5rem .5rem rgba(3, 3, 3, .5);
+    overflow: hidden;
+    padding: 0px;
+}
+
 @media screen and (min-width: 600px) {
     .scrollbarHider {
+        grid-row: 2 / 10;
+    }
+    .noScroll {
         grid-row: 2 / 10;
     }
 }
 
 @media screen and (min-width: 1000px) {
     .scrollbarHider {
+        grid-column: 3 / 10;
+    }
+    .noScroll {
         grid-column: 3 / 10;
     }
 }

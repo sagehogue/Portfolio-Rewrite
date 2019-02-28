@@ -31,7 +31,7 @@
 .Active {
     color: orange;
     background-color: transparent;
-    font-size: 3.5rem;
+    font-size: 3.2rem;
     font-weight: 900;
     transform: translateY(-3rem);
     /* This is to override the class that makes opacity 0, as it is applied to all elements, including those which are active. A sign that I should refactor later. */
