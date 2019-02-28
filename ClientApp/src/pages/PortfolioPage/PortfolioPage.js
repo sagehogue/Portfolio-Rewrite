@@ -58,7 +58,7 @@ class PortfolioPage extends Component {
                         </section>
 
                     </PortfolioItem> */}
-                    <PortfolioItem label="This Website" position={1} stateHandler={this.displayItem} fadeLabel={this.state.anItemIsActive} appearLabel={this.displayLabels}noscroll>
+                    <PortfolioItem label="This Website" position={1} stateHandler={this.displayItem} fadeLabel={this.state.anItemIsActive} appearLabel={this.displayLabels}scrollable>
                         <section>
                             <h3>Construction Details</h3>
                             <p>I originally started this website to provide direction for my learning during code school and to serve as a visual repository for my projects. I initially built it with a vanilla JavaScript front-end and a python backend powered by Django. I was very much learning everything as I went, and so the resulting product was ugly and of poor quality.
@@ -81,7 +81,7 @@ class PortfolioPage extends Component {
                             <p></p>
                         </section>
                     </PortfolioItem>
-                    <PortfolioItem label="Projects" position={2} stateHandler={this.displayItem} fadeLabel={this.state.anItemIsActive} appearLabel={this.displayLabels}>
+                    <PortfolioItem label="Projects" position={2} stateHandler={this.displayItem} fadeLabel={this.state.anItemIsActive} appearLabel={this.displayLabels} scrollable>
                         <section>
                             <h3>i did all this stuff at code school</h3>
                             <p>angry dice</p>
@@ -90,7 +90,7 @@ class PortfolioPage extends Component {
                             <p>django stuff</p>
                         </section>
                     </PortfolioItem>
-                    <PortfolioItem label="Volunteer Work" position={3} stateHandler={this.displayItem} fadeLabel={this.state.anItemIsActive} appearLabel={this.displayLabels}>
+                    <PortfolioItem label="Volunteer Work" position={3} stateHandler={this.displayItem} fadeLabel={this.state.anItemIsActive} appearLabel={this.displayLabels}scrollable>
                         <section>
                             <p>Women's Crisis Center IT work</p>
                         </section>

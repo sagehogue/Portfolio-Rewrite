@@ -21,7 +21,7 @@
     background-color: rgba(245, 255, 250, .84);
     text-align: center;
     border-radius: 5px;
-    max-height: 20rem;
+    max-height: 8rem;
     opacity: 0;
     margin-top: 0;
     word-wrap: break-word;
@@ -46,10 +46,10 @@
 
 .Preview {
     background-color: var(--card-color);
-    max-height: 250px;
+    max-height: 8rem;
     /* position: relative; */
-    padding: 1rem 2rem;
-    min-width: 10rem;
+    padding: .5rem 1rem;
+    min-width: 15rem;
     z-index: 25;
 }
 
@@ -84,10 +84,12 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    margin-bottom: .5rem;
 }
 
 .Active section {
     box-sizing: content-box;
+    margin-bottom: 1rem;
     height: 100%;
     width: 100%;
     padding-right: 17px;
@@ -134,4 +136,33 @@
 
 .Preview .Arrow {
     opacity: 1;
+}
+
+@media screen and (max-height: 600px) {
+    .scrollWrapperInner {
+        max-height: 300px;
+    }
+}
+
+@media screen and (min-height: 600px) {
+    .scrollWrapperInner {
+        max-height: 400px;
+    }
+}
+@media screen and (min-height: 800px) {
+    .scrollWrapperInner {
+        max-height: 550px;
+    }
+}
+
+@media screen and (min-height: 1000px) {
+    .scrollWrapperInner {
+        max-height: 700px;
+    }
+}
+
+@media screen and (min-height: 1500px) {
+    .scrollWrapperInner {
+        max-height: 1075px;
+    }
 }

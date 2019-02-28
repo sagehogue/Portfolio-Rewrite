@@ -16,11 +16,11 @@
     margin-left: auto; 
     margin-right: auto;
     /* width: 10rem; Need a specific value to work */
-    width: 100%; 
+  
 }
 
 .Label hr {
-    max-width: 50%;
+    max-width: 100%;
     margin: auto;
 }
 .Invisible {
@@ -29,20 +29,25 @@
 
 /* Styles for label when associated portfolioitem has been selected d*/
 .Active {
+
+    z-index: 30;
     color: orange;
     background-color: transparent;
-    font-size: 3.2rem;
+    font-size: 3rem;
     font-weight: 900;
-    transform: translateY(-3rem);
+    transform: translateY(-3.3rem);
     /* This is to override the class that makes opacity 0, as it is applied to all elements, including those which are active. A sign that I should refactor later. */
     opacity: 1 !important;
+   max-width: 100%;
 }
 
 @media screen and (min-width: 600px) {
-
 }
 
 @media screen and (min-width: 950px) {
+    /* .Active {
+        max-width: 50%;
+    } */
     .Label {
         width: 75%;
     }

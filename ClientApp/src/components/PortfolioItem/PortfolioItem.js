@@ -63,6 +63,7 @@ class PortfolioItem extends Component {
         let classList = [classes.Item,
         this.props.experiment ? classes.Experiment : ''
         ];
+        classList.push(this.props.nooverflow ? classes.noOverflow : '')
         classList.push(this.state.closed ? classes.ClosedItem : classes.FullItem);
         switch (this.props.position) {
             case 1:
