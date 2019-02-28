@@ -14,6 +14,22 @@
     align-self: flex-start;
 }
 
+.firstBanner {
+    z-index: -1;
+    clip-path: polygon(0% 0%, 100% 0%, 100% 50%, 0% 60%);
+    background-color: lightblue;
+    grid-row: 1 / 4;
+    grid-column: 1 / -1;
+}
+
+.secondBanner {
+    clip-path: polygon(0% 40%, 100% 30%, 100% 100%, 0% 100%);
+    z-index: -1;
+    background-color: orange;
+    grid-row: 3 / 6;
+    grid-column: 1 / -1;
+}
+
 /* .FlexWrapper {
     display: flex;
     flex-direction: row;

@@ -25,11 +25,12 @@
     opacity: 0;
     margin-top: 0;
     word-wrap: break-word;
-    /* transform: translateX(50%); */
     transition: opacity .5s ease-in, transform 1s;
-    /* transition: transform .1s; */
     position: relative;
     line-height: calc(var(--card-line-height) * .5);
+    padding: .5rem 1rem;
+    min-width: 15rem;
+    transform: translateX(0) translateY(1rem);
 }
 
 .Card p {
@@ -44,12 +45,30 @@
     font-weight: 700;
 }
 
+.scrollWrapperOuter {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.scrollWrapperInner {
+    overflow: hidden;
+    /* overflow-y: scroll; */
+    box-sizing: content-box;
+    padding-right: 17px;
+    width: 100%;
+    max-height: 60rem;
+}
+
+
+.Active .scrollWrapperInner {
+    overflow-y: scroll;
+}
+
 .Preview {
     background-color: var(--card-color);
-    max-height: 8rem;
+    /* max-height: 8rem; */
     /* position: relative; */
-    padding: .5rem 1rem;
-    min-width: 15rem;
     z-index: 25;
 }
 
@@ -62,6 +81,12 @@
     min-height: 95%;
 }
 
+.Active,
+.Preview {
+    opacity: 1;
+    transition: all .7s;
+}
+
 .Active p,
 .Active li {
     padding-right: 15px;
@@ -70,13 +95,6 @@
     font-weight: var(--card-font-weight);
     font-size: var(--card-font-size);
     line-height: var(--card-line-height);
-}
-
-.Active,
-.Preview {
-    opacity: 1;
-    transform: translateX(0) translateY(1rem);
-    transition: all .7s;
 }
 
 .Card section {
@@ -113,29 +131,13 @@
     top: -2.5rem;
     /* padding: 500rem; */
 }
-.spaceEvenly {
-    justify-content: space-evenly;
-}
-
-.scrollWrapperOuter {
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-}
-.scrollWrapperInner {
-    overflow-y: scroll;
-    box-sizing: content-box;
-    padding-right: 17px;
-    width: 100%;
-    max-height: 60rem;
-}
-
-.Preview .scrollWrapperInner {
-    overflow: hidden;
-}
 
 .Preview .Arrow {
     opacity: 1;
+}
+
+.spaceEvenly {
+    justify-content: space-evenly;
 }
 
 @media screen and (max-height: 600px) {
@@ -146,9 +148,10 @@
 
 @media screen and (min-height: 600px) {
     .scrollWrapperInner {
-        max-height: 400px;
+        max-height: 425px;
     }
 }
+
 @media screen and (min-height: 800px) {
     .scrollWrapperInner {
         max-height: 550px;

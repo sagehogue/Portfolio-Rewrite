@@ -14,22 +14,21 @@
 .Item {
     box-sizing: border-box;
     display: inline-block;
-    min-width: 20%;
     background-color: cornsilk;
     position: relative;
     transition: all .5s;
-    max-width: 100%;
     padding-top: 2.7rem;
+    /* max-width: 100%;
+    min-width: 100%;
+    min-height: 100%; */
 }
 
 .ClosedItem {
-    /* z-index: 0; */
-    max-height: 5rem;
+    /* max-height: 5rem; */
     background-color: transparent;
-}
-
-.ClosedItem:hover {
     max-height: 25rem;
+    max-width: 25rem;
+    min-width: 13rem;
 }
 
 .First {
@@ -60,57 +59,25 @@
 .FullItem {
     grid-row: 1 / -1;
     grid-column: 1 / -1;
-    transform: translateY(2.5rem);
     background-color: transparent;
-    width: 95%;
-    height: 95%;
     border-radius: 5px;
     z-index: 100;
+    width: 95%;
+    height: 95%;
     margin-left: auto;
     margin-right: auto;
     min-width: 20rem;
     padding-top: 0;
-    /* margin-top: auto; */
-    /* margin-top: 10rem; */
+    transform: translateY(2.5rem);
 }
 
 .Experiment {
     min-width: 33%;
 }
 
-.Experiment.FullItem {
-    
-}
-
 .noOverflow {
     overflow: hidden;
 }
-
-/* .FullItem span, .FullItem hr {
-    font-size: 2rem;
-} */
-
-/*
-.First {
-    /* margin-top: 1rem;
-    grid-row: 1 / 2;
-    grid-column: 2 / 5;
-}
-
-.Second {
-    grid-row: 2 / 3;
-    grid-column: 2 / 5;
-}
-
-.Third {
-    grid-row: 3 / 4;
-    grid-column: 2 / 5;
-}
-
-.Fourth {
-    grid-row: 4 / 5;
-    grid-column: 2 / 5;
-} */
 
 @media screen and (min-width: 600px) {
     .First {

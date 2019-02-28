@@ -41,6 +41,8 @@ class PortfolioPage extends Component {
         return (
             <PageModal displayed={"portfolio"} noscroll>
                 <div className={wrapperClassList.join(' ')}>
+                <div className={classes.firstBanner} />
+                <div className={classes.secondBanner} />
                     {/* <PortfolioItem label="About Me" position={1} stateHandler={this.displayItem} fadeLabel={this.state.anItemIsActive} appearLabel={this.displayLabels}>
 
                         <section className={classes.Greeting}>

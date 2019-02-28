@@ -1,6 +1,7 @@
 .Label {
     transition: color 1s, opacity .1s; 
     background-color: transparent; /* This is so the label doesn't change color */
+    min-width: 100%;
     font-family: 'Lobster';
     text-align: center;
     font-weight: 700;
@@ -12,10 +13,8 @@
     right: 0; 
     top: 0;
     font-size: 1.5rem;
-    /* top: -1rem; */
     margin-left: auto; 
     margin-right: auto;
-    /* width: 10rem; Need a specific value to work */
   
 }
 
