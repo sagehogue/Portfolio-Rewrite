@@ -25,12 +25,16 @@
     opacity: 0;
     margin-top: 0;
     word-wrap: break-word;
-    transition: opacity .5s ease-in, transform 1s;
+    transition: all .5s ease-in;
     position: relative;
     line-height: calc(var(--card-line-height) * .5);
     padding: .5rem 1rem;
     min-width: 15rem;
     transform: translateX(0) translateY(1rem);
+}
+
+.Preview {
+    transition: all .5s ease-in;
 }
 
 .Card p {
@@ -95,6 +99,10 @@
     font-weight: var(--card-font-weight);
     font-size: var(--card-font-size);
     line-height: var(--card-line-height);
+    background-color: rgba(247, 141, 99, 0.48);
+    padding: 3rem;
+    clip-path: polygon(50% 0%, 83% 12%, 100% 43%, 94% 78%, 68% 100%, 32% 100%, 6% 78%, 0% 43%, 17% 12%);
+    border-radius: 5px;
 }
 
 .Card section {
@@ -126,7 +134,7 @@
     transform: translateX(-50%);
     opacity: 0;
     border: 15px solid transparent;
-    border-bottom-color: var(--card-color);
+    
     transition: all .5s ease-in;
     top: -2.5rem;
     /* padding: 500rem; */
@@ -134,6 +142,7 @@
 
 .Preview .Arrow {
     opacity: 1;
+    border-bottom-color: var(--card-color);
 }
 
 .spaceEvenly {
@@ -148,7 +157,7 @@
 
 @media screen and (min-height: 600px) {
     .scrollWrapperInner {
-        max-height: 425px;
+        max-height: 400px;
     }
 }
 
