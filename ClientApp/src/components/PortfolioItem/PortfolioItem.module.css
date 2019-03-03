@@ -105,8 +105,9 @@
         grid-column: 2 / 5;
     }
     .Experiment.FullItem {
-        grid-row: 1 / -1;
-        grid-column: 1 / -1;
+        grid-row: 1 / 11 !important;
+        grid-column: 1 / 11 !important;
+        z-index: 100;
         
     }
 }

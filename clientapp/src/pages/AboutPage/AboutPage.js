@@ -54,6 +54,7 @@ class aboutPage extends Component {
                         appearLabel={this.displayLabels}
                         experiment scrollable>
                         <section>
+                            <h3>Under Construction...</h3>
                             <h3>Education Reform</h3>
                             <p>
                                 As time and culture progress forward, modern society has less and less use for the dutiful worker. Our national educational system has yet to shake the antiquated goal of drone production, resulting in massive amounts of squanded creativity and human capital.
@@ -79,8 +80,9 @@ class aboutPage extends Component {
                         appearLabel={this.displayLabels}
                         experiment scrollable>
                         <section>
-                            <h3>A True Renaissance Man</h3>
+                            <h3>Under Construction...</h3>
                             <p>Powerlifter, a comedy fan, a music fanatic, I love craft beer and work in a brewery, and I have a lifelong interest in computers and technology.</p>
+
                         </section>
                     </PortfolioItem>
                 </div>

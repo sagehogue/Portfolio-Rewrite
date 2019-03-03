@@ -1,5 +1,5 @@
 :root {
-    --card-color: lightblue;
+    --card-color: rgb(114, 216, 250);
     --card-font-color: rgba(5, 5, 5, .8);
     --card-font-weight: 600;
     --card-font-family: 'Helvetica';
@@ -33,10 +33,6 @@
     transform: translateX(0) translateY(1rem);
 }
 
-.Preview {
-    transition: all .5s ease-in;
-}
-
 .Card p {
     font-size: calc(var(--card-font-size) * .8);
     margin-top: 5px;
@@ -65,6 +61,7 @@
 }
 
 
+
 .Active .scrollWrapperInner {
     overflow-y: scroll;
 }
@@ -74,6 +71,15 @@
     /* max-height: 8rem; */
     /* position: relative; */
     z-index: 25;
+    transition: all .5s ease-in;
+}
+
+.Card h3 {
+    font-weight: 800;
+}
+
+.Card p {
+    font-weight: 600;
 }
 
 /* Styles used for the 'active' card, or the big version that opens on click */
@@ -90,7 +96,9 @@
     opacity: 1;
     transition: all .7s;
 }
-
+.Active h3 {
+    text-align: center;
+}
 .Active p,
 .Active li {
     padding-right: 15px;
@@ -99,10 +107,15 @@
     font-weight: var(--card-font-weight);
     font-size: var(--card-font-size);
     line-height: var(--card-line-height);
-    background-color: rgba(247, 141, 99, 0.48);
-    padding: 3rem;
-    clip-path: polygon(50% 0%, 83% 12%, 100% 43%, 94% 78%, 68% 100%, 32% 100%, 6% 78%, 0% 43%, 17% 12%);
+    max-width: 95%;
+    padding: 1rem;
     border-radius: 5px;
+    transform: translateX(25px);
+}
+
+.Active p {
+    background-color: rgba(101, 195, 226, 0.336);
+
 }
 
 .Card section {
@@ -158,6 +171,12 @@
 @media screen and (min-height: 600px) {
     .scrollWrapperInner {
         max-height: 400px;
+    }
+}
+
+@media screen and (min-height: 700px) {
+    .scrollWrapperInner {
+        max-height: 475px;
     }
 }
 

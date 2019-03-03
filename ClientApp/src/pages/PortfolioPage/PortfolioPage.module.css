@@ -17,16 +17,16 @@
 .firstBanner {
     z-index: -1;
     clip-path: polygon(0% 0%, 100% 0%, 100% 50%, 0% 60%);
-    background-color: lightblue;
-    grid-row: 1 / 4;
+    background-color: rgba(155, 195, 238, 0.945);
+    grid-row: 1 / -1;
     grid-column: 1 / -1;
 }
 
 .secondBanner {
-    clip-path: polygon(0% 40%, 100% 30%, 100% 100%, 0% 100%);
-    z-index: -1;
-    background-color: orange;
-    grid-row: 3 / 6;
+    clip-path: polygon(0% 55%, 100% 45%, 100% 100%, 0% 100%);
+    z-index: 0;
+    background-color: rgb(235, 168, 44);
+    grid-row: 1 / -1;
     grid-column: 1 / -1;
 }
 
