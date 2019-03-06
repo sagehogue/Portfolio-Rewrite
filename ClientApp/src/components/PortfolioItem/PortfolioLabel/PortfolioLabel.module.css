@@ -28,7 +28,7 @@
 
 /* Styles for label when associated portfolioitem has been selected d*/
 .Active {
-
+    pointer-events: none;
     z-index: 30;
     color: orange;
     background-color: transparent;
