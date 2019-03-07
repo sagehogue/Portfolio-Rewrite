@@ -1,10 +1,14 @@
 :root {
+    --theme-col-light-1: rgba(245, 255, 250, 1);
     --card-color: rgb(114, 216, 250);
+    /* --card-bg-color: rgba(179, 191, 184, 1); */
+    --card-bg-color: var(--theme-col-light-1);
+    --card-p-bg-col: transparent;
     --card-font-color: rgba(5, 5, 5, .8);
     --card-font-weight: 600;
-    --card-font-family: 'Helvetica';
-    --card-font-size: 1.5rem;
-    --card-line-height: 2.5rem;
+    --card-font-family: 'League Spartan';
+    --card-font-size: 1.8rem;
+    --card-line-height: 3rem;
 }
 
 /* Main styles used for the 'preview' AKA hover effect */
@@ -17,8 +21,8 @@
     z-index: -1;
     font-family: var(--card-font-family);
     padding: 1rem 2rem;
-    /* background-color: rgba(149, 162, 177, 0.616); */
-    background-color: rgba(245, 255, 250, .84);
+    /* background-color: ; */
+    background-color: var(--card-bg-color);
     text-align: center;
     border-radius: 5px;
     max-height: 8rem;
@@ -39,9 +43,10 @@
 }
 
 .Card h3 {
+    font-family: "Playfair Display";
     line-height: 1rem;
-    margin: .5rem 0;
-    font-size: 1.1rem;
+    margin: 1rem 0;
+    font-size: 2rem;
     font-weight: 700;
 }
 
@@ -60,14 +65,12 @@
     max-height: 60rem;
 }
 
-
-
 .Active .scrollWrapperInner {
     overflow-y: scroll;
 }
 
 .Preview {
-    background-color: var(--card-color);
+    /* background-color: var(--card-color); */
     /* max-height: 8rem; */
     /* position: relative; */
     z-index: 25;
@@ -86,7 +89,7 @@
 
 .Active {
     margin-top: 0;
-    background-color: rgba(245, 255, 250, 1);
+    background-color: var(--card-bg-color);
     line-height: var(--card-line-height);
     min-height: 95%;
 }
@@ -96,12 +99,14 @@
     opacity: 1;
     transition: all .7s;
 }
+
 .Active h3 {
     text-align: center;
 }
+
 .Active p,
 .Active li {
-    padding-right: 15px;
+    /* padding-right: 15px; */
     margin-top: 1rem;
     text-align: left;
     font-weight: var(--card-font-weight);
@@ -110,12 +115,12 @@
     max-width: 95%;
     padding: 1rem;
     border-radius: 5px;
-    transform: translateX(25px);
+    transform: translateX(10px);
 }
 
 .Active p {
-    background-color: rgba(101, 195, 226, 0.336);
-
+    /* background-color: rgba(101, 195, 226, 0.336); */
+    background-color: var(--card-p-bg-col);
 }
 
 .Card section {
@@ -147,15 +152,13 @@
     transform: translateX(-50%);
     opacity: 0;
     border: 15px solid transparent;
-    
     transition: all .5s ease-in;
     top: -2.5rem;
-    /* padding: 500rem; */
 }
 
 .Preview .Arrow {
     opacity: 1;
-    border-bottom-color: var(--card-color);
+    border-bottom-color: var(--card-bg-color);
 }
 
 .spaceEvenly {
@@ -177,6 +180,14 @@
 @media screen and (min-height: 700px) {
     .scrollWrapperInner {
         max-height: 475px;
+    }
+}
+
+@media screen and (min-width: 700px) {
+    .Active p,
+    .Active li {
+        padding-right: 15px;
+        transform: translateX(25px);
     }
 }
 

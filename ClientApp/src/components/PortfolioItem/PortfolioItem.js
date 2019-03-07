@@ -14,10 +14,6 @@ class PortfolioItem extends Component {
         previewLabel: false,
     }
 
-    transformToPreview = () => {
-        // I can probably do this in css actually
-    }
-
     toggleMenu = () => {
         this.props.appearLabel();
         this.setState((oldState) => {
