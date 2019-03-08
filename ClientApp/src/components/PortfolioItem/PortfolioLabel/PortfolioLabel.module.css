@@ -1,3 +1,8 @@
+:root {
+    --theme-faint-blue: rgba(208, 230, 205, 0.973);
+    --theme-light-typo-color: #f5fffad7;
+}
+
 .Label {
     transition: color 1s, opacity .1s; 
     background-color: transparent; /* This is so the label doesn't change color */
@@ -49,5 +54,9 @@
     } */
     .Label {
         width: 75%;
+        font-size: 1.9rem;
+        font-weight: 1000;
+        /* color: #D0E6CD; */
+        color: #f5fffad7;
     }
 }

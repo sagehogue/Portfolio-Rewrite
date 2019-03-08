@@ -4,7 +4,6 @@
     display: flex;
     flex-direction: row;
     justify-content: space-around;
-    
 }
 
 .displaySingleContainer {
@@ -16,11 +15,10 @@
 }
 
 .Banner {
-    z-index: 0;
+    z-index: 1;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
-    
     min-width: 500px;
     /* min-width: 1100px; */
     font-weight: 600;
@@ -29,10 +27,10 @@
     position: relative;
     top: -90%;
     /* transform: rotate(-20deg) translateX(-15%) translateY(-10%); */
-    
 }
 
 .bannerTypography {
+    margin-top: 1rem;
     transform: translateX(-15%);
     text-align: center;
     /* background-color: cornsilk; */
@@ -49,8 +47,11 @@
     clip-path: polygon(80% 0%, 100% 20%, 0 100%, 0% 70%);
     min-width: 20rem;
     min-height: 10rem;
-    background-color: teal;
-    transform: translateX(-15%);
+    /* background-color: teal; */
+    transform: translateX(-15%) rotate(-5deg);
+    background-color: #5F6062;
+    box-shadow: 0 0 1rem 2rem #5F6062;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 80 80' width='80' height='80'%3E%3Cpath fill='%23be97c6' fill-opacity='0.4' d='M14 16H9v-2h5V9.87a4 4 0 1 1 2 0V14h5v2h-5v15.95A10 10 0 0 0 23.66 27l-3.46-2 8.2-2.2-2.9 5a12 12 0 0 1-21 0l-2.89-5 8.2 2.2-3.47 2A10 10 0 0 0 14 31.95V16zm40 40h-5v-2h5v-4.13a4 4 0 1 1 2 0V54h5v2h-5v15.95A10 10 0 0 0 63.66 67l-3.47-2 8.2-2.2-2.88 5a12 12 0 0 1-21.02 0l-2.88-5 8.2 2.2-3.47 2A10 10 0 0 0 54 71.95V56zm-39 6a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm40-40a2 2 0 1 1 0-4 2 2 0 0 1 0 4zM15 8a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm40 40a2 2 0 1 0 0-4 2 2 0 0 0 0 4z'%3E%3C/path%3E%3C/svg%3E");
 }
 
 @media screen and (min-width: 380px) {
@@ -58,7 +59,6 @@
         clip-path: polygon(100% 0%, 100% 50%, 5% 100%, 0% 50%);
         min-width: 50rem;
         min-height: 10rem;
-        background-color: teal;
     }
     .bannerTypography {
         text-align: center;
@@ -74,7 +74,6 @@
         clip-path: polygon(100% 0%, 100% 50%, 5% 100%, 0% 50%);
         min-width: 75rem;
         min-height: 10rem;
-        background-color: teal;
     }
     /* .bannerTypography {
       
@@ -86,35 +85,32 @@
         clip-path: polygon(100% 0%, 100% 50%, 5% 100%, 0% 50%);
         min-width: 75rem;
         min-height: 10rem;
-        background-color: teal;
     }
     .bannerTypography {
-        transform: translateX(20%) rotate(-5deg);
+        transform: translateX(20%) rotate(-3deg);
         max-width: 400px;
     }
 }
 
 @media screen and (min-width: 750px) {
     .bannerStripe {
-        clip-path: polygon(100% 0%, 100% 50%, 5% 100%, 0% 50%);
+        clip-path: polygon(100% 0%, 100% 80%, 5% 100%, 0% 20%);
         min-width: 200%;
-        min-height: 11rem;
-        background-color: teal;
+        min-height: 10rem;
     }
     .bannerTypography {
         text-align: center;
         max-width: 50rem;
         padding: 1rem;
-        font-size: 2.5rem;
-        transform: translateX(25%) rotate(-3deg);
+        font-size: 3rem;
+        transform: translateX(25%) rotate(-1deg);
+        min-height: 10rem;
     }
 }
+
 @media screen and (min-width: 1200px) {
     .bannerTypography {
-        text-align: center;
-        max-width: 50rem;
-        padding: 1rem;
-        font-size: 2.5rem;
+        /* text-align: center; */
         transform: translateX(40%) rotate(-3deg);
     }
 }

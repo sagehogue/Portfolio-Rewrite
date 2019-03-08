@@ -18,7 +18,7 @@
     transform: translateY(3rem);
     display: flex;
     flex-direction: column;
-    z-index: -1;
+    z-index: 2;
     font-family: var(--card-font-family);
     padding: 1rem 2rem;
     /* background-color: ; */
@@ -29,7 +29,7 @@
     opacity: 0;
     margin-top: 0;
     word-wrap: break-word;
-    transition: all .5s ease-in;
+    transition: opacity .5s ease-in, transform .5s ease-in;
     position: relative;
     line-height: calc(var(--card-line-height) * .5);
     padding: .5rem 1rem;
@@ -43,10 +43,11 @@
 }
 
 .Card h3 {
+    /* color: transparent; */
     font-family: "Playfair Display";
-    line-height: 1rem;
+    line-height: 2rem;
     margin: 1rem 0;
-    font-size: 2rem;
+    font-size: 1.5rem;
     font-weight: 700;
 }
 
@@ -92,6 +93,7 @@
     background-color: var(--card-bg-color);
     line-height: var(--card-line-height);
     min-height: 95%;
+    transition: all .1s;
 }
 
 .Active,
