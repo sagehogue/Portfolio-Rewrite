@@ -90,11 +90,11 @@ class aboutPage extends Component {
 
                     <div className={classes.bannerStripe} />
                     <span className={[classes.firstTypography, classes.bannerTypography].join(' ')}>
-                        Thanks for taking an interest!
+                        Thanks for taking an <span className={classes.yellowFont}>interest!</span>
                         </span>
                     <div className={classes.bannerStripe} />
                     <span className={[classes.secondTypography, classes.bannerTypography].join(' ')}>
-                        Click any of the categories and scroll to see the full text.
+                    <span className={classes.yellowFont}>Click </span>any of the <span className={classes.yellowFont}>categories </span>  and <span className={classes.yellowFont}>scroll</span> to see the full text.
                         </span>
                     <div className={classes.bannerStripe} />
                     <div className={classes.bannerStripe} />

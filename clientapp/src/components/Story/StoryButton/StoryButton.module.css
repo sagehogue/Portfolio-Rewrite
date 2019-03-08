@@ -12,10 +12,8 @@
 
 .StoryButton {
     display: flex;
-    border: solid, var(--story-border-color), medium;
     padding: 1rem 2rem;
     border-radius: 5px;
-    box-shadow: 3px 5px 5px 2px var(--box-shadow-black); 
     text-align: center;
     display: flex;
     flex-direction: column;
@@ -23,6 +21,14 @@
     transition: all .3s;
     flex-shrink: 1;
     flex-grow: 1;
+
+    padding: 1rem 2rem;
+    border-radius: 3px;
+    border: .5rem solid var(--link-border-col);
+    background-color: var(--link-bg-col);
+    transition: all .3s;
+    color: var(--link-text-col);
+    box-shadow: 0 .75rem 2px 2px var(--box-shadow-black);
 }
 
 
@@ -39,7 +45,6 @@
 }
 .Option {
     font-size: 2rem;
-    background-color: var(--story-btn-color);
     padding: 3rem 5rem;
     flex-basis: 33%;
 }
@@ -52,15 +57,16 @@
 
 .Story {
     font-size: 2.5rem;
-    background-color: var(--story-btn-color);
+    /* background-color: #; */
     padding: 3rem 5rem;
     flex-basis: 33%;
+    max-height: 75%;
+    max-width: 75%;
 }
 
 @media (min-width: 600px) {
     .Option {
         font-size: 1.75rem;
-        background-color: var(--story-btn-color);
         padding: 2rem 3rem;
         max-width: 75%;
         /* flex-basis: 1; */

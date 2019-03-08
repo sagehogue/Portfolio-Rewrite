@@ -1,3 +1,11 @@
+:root {
+    --theme-light-green: #D0E6CD;
+    --theme-yellow: #E3B76F;
+    --theme-light-grey: #7C7C7E;
+    --theme-dark-grey: #544D56;
+    --theme-green: #7EB97C;
+}
+
 .flexContainer {
     width: 100%;
     height: 100%;
@@ -41,6 +49,12 @@
     font-size: 2.5rem;
     /* transform: translateX(15%); */
     transform: translateX(15%) rotate(-8deg);
+    color: var(--theme-green);
+}
+
+.yellowFont {
+    font-size: 3rem;
+    color: var(--theme-yellow);
 }
 
 .bannerStripe {
@@ -102,15 +116,18 @@
         text-align: center;
         max-width: 50rem;
         padding: 1rem;
-        font-size: 3rem;
+        font-size: 3.5rem;
         transform: translateX(25%) rotate(-1deg);
         min-height: 10rem;
+    }
+    .yellowFont {
+        font-size: 3.9rem;
     }
 }
 
 @media screen and (min-width: 1200px) {
     .bannerTypography {
         /* text-align: center; */
-        transform: translateX(40%) rotate(-3deg);
+        transform: translateX(50%) rotate(-3deg);
     }
 }

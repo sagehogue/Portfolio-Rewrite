@@ -1,10 +1,12 @@
 :root {
-    --link-bg-col: rgba(135, 171, 238, 0.658);
-    --link-border-col: rgba(245, 255, 250, 1);
-    --modal-bg-col: rgba(245, 255, 250, 1);
-    --link-text-col: cornflowerblue;
-    --type-col-1: cornflowerblue;
-    --type-col-2: rgba(143, 5, 143, 0.61);
+    --link-bg-col: rgba(245, 255, 250, 1);
+    --link-border-col: #544D56;
+    /* --modal-bg-col: rgba(245, 255, 250, 1); */
+    --link-text-col: var(--link-border-col);
+    /* --type-col-1: cornflowerblue;
+    --type-col-2: rgba(143, 5, 143, 0.61); */
+    --type-col-1: var(--theme-yellow);
+    --type-col-2: var(--theme-green);
 }
 
 * {
@@ -50,21 +52,23 @@
 
 .Link {
     padding: 1rem 2rem;
-    border-radius: 5px;
-    border: .5rem outset var(--link-bg-col);
-    background-color: var(--modal-bg-col);
-    transition: all .5s;
+    border-radius: 3px;
+    border: .5rem outset var(--link-border-col);
+    background-color: var(--link-bg-col);
+    transition: all .3s;
     color: var(--link-text-col);
+    box-shadow: 0 .75rem 2px 2px;
 }
 
 .Link:hover {
-    transform: translateY(-.5rem);
-    box-shadow: .5rem 1rem 2.5px 1px rgba(3, 3, 3, .5);
+    transform: translateY(-2px);
+    box-shadow: 0 1.5rem 1.3rem .5rem rgba(3, 3, 3, .6);
 }
 
 .Link:hover:active {
-    transform: translateY(0);
+    transform: translateY(1px);
     box-shadow: 2px 2px 1px 1px rgba(3, 3, 3, .9);
+    box-shadow: 0 .5rem .25rem .25rem;
 }
 
 .flexContainer {

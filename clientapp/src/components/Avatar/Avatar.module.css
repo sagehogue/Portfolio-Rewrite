@@ -1,4 +1,5 @@
 .avatar {
+    color: #7C7C7E;
     display: block;
     transition: color .25s;
     font-size: 5rem;
@@ -10,7 +11,7 @@
 }
 
 .typing {
-    color: cornflowerblue;
+    color: var(--theme-light-green);
 }
 
 @media (min-width: 425px) {

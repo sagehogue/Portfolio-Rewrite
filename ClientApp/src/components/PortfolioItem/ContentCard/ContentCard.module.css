@@ -14,7 +14,8 @@
 /* Main styles used for the 'preview' AKA hover effect */
 
 .Card {
-    color: var(--card-font-color);
+    color: transparent;
+    background-color: transparent;
     transform: translateY(3rem);
     display: flex;
     flex-direction: column;
@@ -22,7 +23,6 @@
     font-family: var(--card-font-family);
     padding: 1rem 2rem;
     /* background-color: ; */
-    background-color: var(--card-bg-color);
     text-align: center;
     border-radius: 5px;
     max-height: 8rem;
@@ -71,6 +71,8 @@
 }
 
 .Preview {
+    color: var(--card-font-color);
+    background-color: var(--card-bg-color);
     /* background-color: var(--card-color); */
     /* max-height: 8rem; */
     /* position: relative; */
@@ -89,17 +91,19 @@
 /* Styles used for the 'active' card, or the big version that opens on click */
 
 .Active {
-    margin-top: 0;
+    color: var(--card-font-color);
     background-color: var(--card-bg-color);
+    margin-top: 0;
+    /* background-color: var(--theme-light-grey); */
     line-height: var(--card-line-height);
     min-height: 95%;
-    transition: all .1s;
+    transition: all 1s;
 }
 
 .Active,
 .Preview {
     opacity: 1;
-    transition: all .7s;
+    /* transition: all .7s; */
 }
 
 .Active h3 {

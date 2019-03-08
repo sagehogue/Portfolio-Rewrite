@@ -19,7 +19,7 @@ Current Issue: a lot of this styling needs to be moved to the splash page I thin
     z-index: 5;
     transition: all .5s;
     padding: 1.5rem 3rem;
-    background-color: var(--text-modal-bg-col);
+    background-color: var(--card-bg-color);
     color: rgb(104, 99, 99);
     font-size: var(--button-size);
     border-radius: 15px;

@@ -21,7 +21,9 @@
     grid-row: 1 / -1;
     grid-column: 1 / -1; */
 }
-
+.yellowFont {
+    color: var(--theme-yellow);
+}
 .secondBanner {
     /* clip-path: polygon(0% 55%, 100% 45%, 100% 100%, 0% 100%);
      */

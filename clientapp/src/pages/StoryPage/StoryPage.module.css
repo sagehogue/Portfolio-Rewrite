@@ -26,7 +26,7 @@
     box-sizing: content-box;
     padding-right: 18px;
     text-align: center;
-    margin-bottom: 1rem;
+    padding-bottom: 1rem;
     width: 100%;
 }
 
@@ -38,8 +38,8 @@
     align-items: center;
     justify-content: space-around;
     grid-row: 7 / -1;
-    grid-column: 1 / 6;
-    margin-top: 2.5rem;
+    grid-column: 1 / -1;
+    /* padding-top: 2.5rem; */
     border: solid medium var(--btn-box-border-col);
     overflow-y: scroll;
     /* overflow-x: scroll; */
@@ -47,7 +47,7 @@
     flex-shrink: 1;
     max-height: 40rem;
     flex-flow: row wrap;
-    padding-bottom: 1rem;
+    /* padding-bottom: 1rem; */
 }
 
 .ButtonBox:hover div:not(:hover) {
@@ -76,7 +76,7 @@
 /* Styling first paragraph in the story page intro */
 
 .firstIntro {
-    margin-top: 1.5rem;
+    /* padding-top: 1.5rem; */
     grid-column: 1 / 6;
     grid-row: 1 / 3;
 }
@@ -112,7 +112,6 @@
 }
 
 .introModal p {
-    /* font-size: 2.5rem; */
     font-family: "papyrus";
     font-weight: 1000;
 }
@@ -165,21 +164,21 @@
 @media (min-width: 600px) {
     .messageWrapper {
         grid-column: 1 / -1;
-        grid-row: 1 / 6;
+        grid-row: 1 / 7;
     }
     .introModal p {
         font-size: 2.5rem;
     }
     .ButtonBox {
-        grid-row: 5 / -1;
+        grid-row: 7 / -1;
         overflow: hidden;
     }
     .ButtonBox.intro {
-        grid-row: 6 / 10;
+        grid-row: 7 / -1;
         grid-column: 1 / 6;
     }
     .ButtonBox {
-        margin-top: 6rem;
+        /* padding-top: 6rem; */
     }
 }
 

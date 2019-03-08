@@ -41,7 +41,7 @@ root {
 
 .bubble .animating {
     transform: scale(2);
-    background-color: cornflowerblue;
+    background-color: var(--theme-light-green);
 }
 
 @media (min-width: 450px) {
