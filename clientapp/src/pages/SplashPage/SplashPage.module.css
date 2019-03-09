@@ -14,6 +14,10 @@
     margin: 0;
 }
 
+.fontCol2 {
+
+}
+
 .greeting {
     animation-duration: 2s;
     animation-name: slide-in-to-right;
@@ -27,11 +31,7 @@
     color: var(--type-col-2);
 }
 
-.period {}
 
-.sage {
-    color: var(--type-col-2)
-}
 
 @keyframes slide-in-to-right {
     from {

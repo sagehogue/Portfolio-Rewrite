@@ -99,11 +99,12 @@ class SplashPage extends Component {
                     <TextModal hide={true}>
                         <h3>
                             <span className={`${classes.greeting} ${classes.fontCol1}`}>
-                                Hi
-            </span><span className={classes.period}>. </span>
-                            I'm <span className={`${classes.sage} ${classes.fontCol2}`}>
-                                Sage
-            </span><span className={classes.period}>.</span>
+                                Hi,
+            </span>
+                            <span className={`${classes.greeting} ${classes.fontCol1}`}> I'm </span>
+                            <span className={`${classes.sage} ${classes.fontCol2}`}>
+                                Sage.
+            </span>
                         </h3>
                         <hr></hr>
                         <p>I'm a PDX-based web developer and tech enthusiast.</p>
@@ -114,9 +115,8 @@ class SplashPage extends Component {
                 <TextModal hide={false}>
                     <h3>
                         <span className={`${classes.fontCol1}`}>
-                            Welcome </span>
-                        to <span className={`${classes.fontCol2}`}>my website</span>
-                        <span className={classes.period}>.</span>
+                            Welcome to </span>
+                        <span className={`${classes.fontCol2}`}>my website.</span>
                     </h3>
                     <hr />
                     <p>To learn more, click a button below.</p>

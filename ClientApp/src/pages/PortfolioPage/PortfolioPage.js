@@ -41,8 +41,8 @@ class PortfolioPage extends Component {
         return (
             <PageModal displayed={"portfolio"} noscroll>
                 <div className={wrapperClassList.join(' ')}>
-                <div className={classes.firstBanner} />
-                <div className={classes.secondBanner} />
+                    <div className={classes.firstBanner} />
+                    <div className={classes.secondBanner} />
                     {/* <PortfolioItem label="About Me" position={1} stateHandler={this.displayItem} fadeLabel={this.state.anItemIsActive} appearLabel={this.displayLabels}>
 
                         <section className={classes.Greeting}>
@@ -60,7 +60,7 @@ class PortfolioPage extends Component {
                         </section>
 
                     </PortfolioItem> */}
-                    <PortfolioItem label="This Website" position={1} stateHandler={this.displayItem} fadeLabel={this.state.anItemIsActive} appearLabel={this.displayLabels}scrollable experiment>
+                    <PortfolioItem label="This Website" position={1} stateHandler={this.displayItem} fadeLabel={this.state.anItemIsActive} appearLabel={this.displayLabels} scrollable experiment>
                         <section>
                             <h3>Construction Details</h3>
                             <p>I originally started this website to provide direction for my learning during code school and to serve as a visual repository for my projects. I initially built it with a vanilla JavaScript front-end and a python backend powered by Django. I was very much learning everything as I went, and so the resulting product was ugly and of poor quality.
@@ -92,10 +92,19 @@ class PortfolioPage extends Component {
                             <p>django stuff</p> */}
                         </section>
                     </PortfolioItem>
-                    <PortfolioItem label="Volunteer Work" position={3} stateHandler={this.displayItem} fadeLabel={this.state.anItemIsActive} appearLabel={this.displayLabels}scrollable experiment>
+                    <PortfolioItem label="Skills" position={3} stateHandler={this.displayItem} fadeLabel={this.state.anItemIsActive} appearLabel={this.displayLabels} scrollable experiment>
                         <section>
-                        <h3>Under Construction...</h3>
-                            <p>Women's Crisis Center IT work</p>
+                            <h3>Under Construction...</h3>
+                            <h3>Web Development</h3>
+                            <ul>
+                                <li>HTML5</li>
+                                <li>CSS3, SASS</li>
+                                <li>JavaScript, ES6</li>
+                                <li>React.js, react-router</li>
+                                <li>Some experience writing APIs and conducting back-end operations in Python 3, C# 7.0</li>
+                                <li>MongoDB/SQLite/Firebase - Basic database querying/write operations</li>
+                                <li>Hosting for static sites and apps</li>
+                            </ul>
                         </section>
                     </PortfolioItem>
                     {/* <PortfolioItem label="My Mission" position={4} stateHandler={this.displayItem} fadeLabel={this.state.anItemIsActive} appearLabel={this.displayLabels}>
