@@ -18,22 +18,21 @@ class SplashPage extends Component {
     }
 
     componentDidMount() {
-
-        // This seems to sort of jankily work. I think the timeouts are broken. 
-
-        // const run = 
-        this.typeForAWhile(1500)
+        this.typeForAWhile(1500, true)
             .then(response => this.loadMessage("first"))
             // .then(response => this.pause(500))
-            .then(response => this.typeForAWhile(2000))
+            .then(response => this.typeForAWhile(1200))
             .then(response =>
                 this.loadMessage("second")
                 // .then(response => this.pause(500))
-            ).then(response => this.typeForAWhile(1000))
+            ).then(response => this.typeForAWhile(900))
             .then(response => this.loadMessage("third"));
     }
 
-    typeForAWhile(typeDuration = 2000) {
+    typeForAWhile(typeDuration = 2000, shouldScrollPage) {
+        if (shouldScrollPage) {
+            this.scrollPageModal();
+        }
         return new Promise((res, rej) => {
             this.setState((oldState) => {
                 return {
@@ -62,6 +61,9 @@ class SplashPage extends Component {
             }
         })
     }
+
+    pageModalRef = React.createRef();
+    scrollPageModal = () => window.scrollTo(0, this.pageModalRef.current.offsetTop)
 
     loadMessage(MsgToDisplay, duration = 1000) {
         return new Promise((res, rej) => {
@@ -96,19 +98,15 @@ class SplashPage extends Component {
         const messages = {
             first: (
                 <div className={`${classes.textModal} ${classes.ToCenter} ${this.state.display.first ? null : classes.Hide}`} >
-                    <TextModal hide={true}>
+                    <TextModal hide ref={this.pageModalRef}>
                         <h3>
                             <span className={`${classes.greeting} ${classes.fontCol1}`}>
-                                Hi,
-            </span>
-                            <span className={`${classes.greeting} ${classes.fontCol1}`}> I'm </span>
-                            <span className={`${classes.sage} ${classes.fontCol2}`}>
-                                Sage.
-            </span>
+                                Hi, I'm
+                            </span>
+                            <span className={`${classes.sage} ${classes.fontCol2}`}> Sage. </span>
                         </h3>
                         <hr></hr>
-                        <p>I'm a PDX-based web developer and tech enthusiast.</p>
-
+                        <p>I'm a Portland local, a web developer, a tech enthusiast, and a dreamer.</p>
                     </TextModal>
                 </div>),
             second: (<div className={`${classes.textModal} ${classes.ToCenter} ${this.state.display.second ? null : classes.Hide}`}>

@@ -74,12 +74,12 @@ background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/s
 }
 
 @media screen and (min-width: 600px) {
-    .scrollbarHider {
+    /* .scrollbarHider {
         grid-row: 2 / 10;
     }
     .noScroll {
         grid-row: 2 / 10;
-    }
+    } */
 }
 
 @media screen and (min-width: 1000px) {

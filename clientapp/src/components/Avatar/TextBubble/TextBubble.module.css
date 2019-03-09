@@ -50,3 +50,11 @@ root {
         margin-left: 4rem;
     }
 }
+
+@media (max-width: 350px) {
+    .bubble {
+        padding: 1.5rem 3rem;
+        margin-left: 1.5rem;
+    }
+}
+

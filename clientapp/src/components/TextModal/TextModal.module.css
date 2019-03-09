@@ -18,7 +18,7 @@ Current Issue: a lot of this styling needs to be moved to the splash page I thin
     position: relative;
     z-index: 5;
     transition: all .5s;
-    padding: 1.5rem 3rem;
+    padding: .75rem 1.5rem;
     background-color: var(--card-bg-color);
     color: rgb(104, 99, 99);
     font-size: var(--button-size);

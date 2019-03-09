@@ -59,7 +59,6 @@ class storyPage extends Component {
             }))
         }
     }
-
     componentDidUpdate() {
         if (this.state.shouldGenerateStoryButtons) {
             this.generateStoryButtons()
@@ -246,44 +245,35 @@ class storyPage extends Component {
         everything: "https://localhost:5001/api/story",
         firebase: "https://websage-mph.firebaseio.com/",
         test: 'https://websage-mph.firebaseio.com/stories.json',
-        // TODOS:
-        // storyTitles: ".../api/story/titles"
-        // requestStory: ".../api/story/{requestedstory}"
     }
 
-    // This is for easily clearing local storage.
-    testButton = (
-        <div className={classes.testButton} onClick={() => {
-            localStorage.clear()
-        }}>
-            localStorage.clear()
-        </div>
-    )
 
     selectAnotherStoryButton = (
         <StoryButton title="Select Another Story?" option clickHandler={this.selectStoryHandler} />
     )
-
     // Some JSX I wanted to get out of the render method. 
     introMessages = {
         first: (
             <div className={`${classes.introModal} ${classes.textModal} ${classes.firstIntro} ${this.state.display.introMessages ? '' : classes.Hide}`}>
                 <TextModal>
-                    <p>Welcome to the story page.</p>
+                    <h3>Welcome to <span className={classes.textEmphasis}>Vistelse!</span></h3>
+                    <p>Vistelse is the Swedish word for sojourn, but more importantly, it's the name of this 'choose your own adventure' app.</p>
                 </TextModal>
             </div>
         ),
         second: (
             <div className={`${classes.introModal} ${classes.textModal} ${this.state.display.introMessages ? '' : classes.Hide} ${classes.secondIntro}`}>
                 <TextModal>
-                    <p>This is a 'choose your own adventure' experience.</p>
+                    <p>Right now I only have one story, but I'm capable of holding a lot more. Check back soon!</p>
                 </TextModal>
             </div>
         ),
         third: (
             <div className={`${classes.introModal} ${classes.textModal} ${this.state.display.introMessages ? '' : classes.Hide} ${classes.thirdIntro} `}>
                 <TextModal>
-                    <p>To begin, select a prompt.</p>
+                    <p >
+                        Select your <i className={classes.Papyrus}>experience.</i>
+                    </p>
                 </TextModal>
             </div>
         )
@@ -293,12 +283,14 @@ class storyPage extends Component {
         let buttonBoxClasses = [classes.ButtonBox];
         buttonBoxClasses.push(this.state.display.introMessages === true ? classes.intro : '');
         return (
-            <PageModal className={"story"} onScreen={this.state.modalInView}>
+            <PageModal className={"story"} onScreen={this.state.modalInView} >
                 <div className={`${classes.pageWrapper}`}>
                     <div className={`${classes.messageWrapper}`}>
-                        {this.state.display.introMessages ? this.introMessages.first : null}
-                        {this.state.display.introMessages ? this.introMessages.second : null}
-                        {this.state.display.introMessages ? this.introMessages.third : null}
+                        {this.state.display.introMessages ? [
+                            this.introMessages.first,
+                            this.introMessages.second,
+                            this.introMessages.third
+                        ] : null}
                         {this.state.display.scene}
                     </div>
                     <div className={buttonBoxClasses.join(' ')}>
