@@ -69,23 +69,19 @@ class PortfolioPage extends Component {
                             <p>After code school, I decided that refactoring this website would be the perfect opportunity for me to learn a framework I had an eye on, React, and so I basically remade this from scratch using React for my front-end and Google's Firebase for my data hosting needs. </p>
                             <p>ES6</p>
                         </section>
-                        <section>
-                            <h3>Vistelse</h3>
-                            <p>This began with the intent of being something totally different. Initially, I had hoped to use this project as an opportunity to experiment with animation.</p>
-                            <ul>
-                                <li>
-                                    Axios
-                                </li>
-                                <li>
-                                    Google Firebase
-                                </li>
-                            </ul>
-                            <p></p>
-                        </section>
+
                     </PortfolioItem>
                     <PortfolioItem label="Projects" position={2} stateHandler={this.displayItem} fadeLabel={this.state.anItemIsActive} appearLabel={this.displayLabels} scrollable experiment>
                         <section>
-                            <h3>Under Construction...</h3>
+                            <h3>Vistelse</h3>
+                            <p>Vistelse is the name of my 'Choose Your Own Adventure" app. It retrieves a collection of JSON documents that represent CYOA stories and allows you to click through them, featuring branching story paths. <i>Now hiring authors.</i>
+                                <ul><h5>Tech Utilized:</h5>
+                                    <li>Axios</li>
+                                    <li>Google Firebase</li>
+                                    <li>React</li>
+                                    <li>Lot of promises for sequencing of events.</li>
+                                </ul>
+                            </p>
                             {/* <p>angry dice</p>
                             <p>weather api</p>
                             <p>python stuff</p>
@@ -94,7 +90,6 @@ class PortfolioPage extends Component {
                     </PortfolioItem>
                     <PortfolioItem label="Skills" position={3} stateHandler={this.displayItem} fadeLabel={this.state.anItemIsActive} appearLabel={this.displayLabels} scrollable experiment>
                         <section>
-                            <h3>Under Construction...</h3>
                             <h3>Web Development</h3>
                             <ul>
                                 <li>HTML5</li>
