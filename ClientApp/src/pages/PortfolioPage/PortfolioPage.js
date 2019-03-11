@@ -99,6 +99,7 @@ class PortfolioPage extends Component {
                                 <li>Some experience writing APIs and conducting back-end operations in Python 3, C# 7.0</li>
                                 <li>MongoDB/SQLite/Firebase - Basic database querying/write operations</li>
                                 <li>Hosting for static sites and apps</li>
+                                <li>git</li>
                             </ul>
                         </section>
                     </PortfolioItem>
