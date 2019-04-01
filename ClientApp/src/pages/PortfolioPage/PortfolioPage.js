@@ -73,7 +73,15 @@ class PortfolioPage extends Component {
                     </PortfolioItem>
                     <PortfolioItem label="Projects" position={2} stateHandler={this.displayItem} fadeLabel={this.state.anItemIsActive} appearLabel={this.displayLabels} scrollable experiment>
                         <section>
-                            <h3>Vistelse</h3>
+                            <a href="will-site.netlify.com">
+                                <h2>Will Lucas's Portfolio</h2>
+                            </a>
+                            <p>A single page detailing his photography. React.js.
+                                {/* using sanity.io CMS to let him manage his own images. */}
+                            </p>
+                        </section>
+                        <section>
+                            <h2>Vistelse</h2>
                             <p>Vistelse is the name of my 'Choose Your Own Adventure" app. It retrieves a collection of JSON documents that represent CYOA stories and allows you to click through them, featuring branching story paths. <i>Now hiring authors.</i>
                                 <ul><h5>Tech Utilized:</h5>
                                     <li>Axios</li>
@@ -82,10 +90,6 @@ class PortfolioPage extends Component {
                                     <li>Lot of promises for sequencing of events.</li>
                                 </ul>
                             </p>
-                            {/* <p>angry dice</p>
-                            <p>weather api</p>
-                            <p>python stuff</p>
-                            <p>django stuff</p> */}
                         </section>
                     </PortfolioItem>
                     <PortfolioItem label="Skills" position={3} stateHandler={this.displayItem} fadeLabel={this.state.anItemIsActive} appearLabel={this.displayLabels} scrollable experiment>
