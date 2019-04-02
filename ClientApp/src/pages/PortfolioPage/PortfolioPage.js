@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import { Route } from 'react-router';
+
 import PageModal from '../../components/PageModal/PageModal';
 import PortfolioItem from '../../components/PortfolioItem/PortfolioItem';
 
@@ -73,9 +75,12 @@ class PortfolioPage extends Component {
                     </PortfolioItem>
                     <PortfolioItem label="Projects" position={2} stateHandler={this.displayItem} fadeLabel={this.state.anItemIsActive} appearLabel={this.displayLabels} scrollable experiment>
                         <section>
-                            <a href="will-site.netlify.com">
+                        
+                            <a href="/will-site">
+                            
                                 <h2>Will Lucas's Portfolio</h2>
                             </a>
+                        
                             <p>A single page detailing his photography. React.js.
                                 {/* using sanity.io CMS to let him manage his own images. */}
                             </p>

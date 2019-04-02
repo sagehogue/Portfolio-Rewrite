@@ -167,6 +167,18 @@
     color: lightblue;
 }
 
+.Preview a {
+    pointer-events: none;
+}
+
+.Card h2 {
+    font-size: 1.7rem;
+}
+
+.Active h2 {
+    font-size: 2.5rem;
+}
+
 .Preview .Arrow {
     opacity: 1;
     border-bottom-color: var(--card-bg-color);
@@ -195,6 +207,7 @@
 }
 
 @media screen and (min-width: 700px) {
+
     .Active p,
     .Active li {
         padding-right: 15px;
@@ -202,9 +215,16 @@
     }
 }
 
+
 @media screen and (min-height: 800px) {
     .scrollWrapperInner {
         max-height: 550px;
+    }
+}
+
+@media screen and (min-height: 850px) {
+    .scrollWrapperInner {
+        max-height: 625px;
     }
 }
 

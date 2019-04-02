@@ -32,13 +32,13 @@ class PageContainer extends Component {
                 <Switch >
                     <Route path="/about" component={AboutPage} />
                     <Route path="/story" component={StoryPage} />
+                    <Route path='/will-site' component={() => { window.location = 'https://will-site.netlify.com'; return null;} }/>
                     <Route path="/portfolio" component={PortfolioPage} />
                     {/* <Route path="/contact" component={ContactForm} /> */}
                     <Route path="/" component={SplashPage} />
                 </Switch>
             </Layout>
         );
-        // return this.state.currentPage === "splash" ? this.splashPage : this.storyPage;
     }
 }
 
