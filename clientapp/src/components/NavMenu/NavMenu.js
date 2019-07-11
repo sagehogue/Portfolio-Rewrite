@@ -72,9 +72,9 @@ class NavMenu extends Component {
                         <TrayItem clickHandler={this.handlePageChange}>About</TrayItem>
                     </NavLink>
                     {/* <Link to="/about"><TrayItem>About</TrayItem></Link> */}
-                    <NavLink to="/portfolio" activeClassName={classes.active}>
+                    {/* <NavLink to="/portfolio" activeClassName={classes.active}>
                         <TrayItem clickHandler={this.handlePageChange}>Portfolio</TrayItem>
-                    </NavLink>
+                    </NavLink> */}
                 </NavTray>
                 <Backdrop isDisabled={this.state.menuIsClosed} menuHandler={this.toggleMenu} />
             </div>
@@ -89,9 +89,9 @@ class NavMenu extends Component {
                     <NavLink to="/about" activeClassName={classes.active}>
                         <TrayItem clickHandler={this.handlePageChange}>About</TrayItem>
                     </NavLink>
-                    <NavLink to="/portfolio" activeClassName={classes.active}>
+                    {/* <NavLink to="/portfolio" activeClassName={classes.active}>
                         <TrayItem clickHandler={this.handlePageChange}>Portfolio</TrayItem
-                        ></NavLink>
+                        ></NavLink> */}
                 </div>
             );
     }

@@ -131,9 +131,9 @@ class SplashPage extends Component {
                             <div className={classes.Link}>Contact Me</div>
                             {/* </Link> */}
                         </a>
-                        <Link to="/portfolio">
+                        {/* <Link to="/portfolio">
                             <div className={classes.Link}>Portfolio</div>
-                        </Link>
+                        </Link> */}
                     </div>
                 </TextModal>
             </div>)

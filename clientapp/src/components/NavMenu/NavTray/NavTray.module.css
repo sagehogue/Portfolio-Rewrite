@@ -5,19 +5,19 @@
     border: solid medium rgba(245,255,250,.84);
     border-top: none;
     display: flex;
-    flex-shrink: 1;
-    width: 70%;
+    width: 78vw;
     border-radius: 3px;
-    /* flex-direction: row-reverse; */
-    /* flex-wrap: wrap; */
-    /* justify-content: space-around; */
+    justify-content: space-between;
     align-items: center;
     z-index: 50;
-    /* margin-left: 1.5rem; */
 }
 
 .NavTray a, .NavTray a.active {
     text-decoration: none;
+}
+
+.NavTray a {
+    margin: 0 5px;
 }
 
 .NavTray a.active {

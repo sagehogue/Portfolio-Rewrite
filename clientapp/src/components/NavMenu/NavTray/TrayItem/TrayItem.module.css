@@ -1,5 +1,5 @@
 :root {
-    --tray-item-font-size: 1.1rem;
+    --tray-item-font-size: 1.5rem;
     --tray-item-font-weight: 700;
 }
 
@@ -55,7 +55,4 @@
         background-color: lightslategrey;
         color: red;
     }
-    /* .TrayItem:active {
-                                            background-color: lemonchiffon;
-                                        } */
 }

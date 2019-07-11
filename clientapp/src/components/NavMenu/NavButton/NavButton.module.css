@@ -4,9 +4,7 @@
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-end;
-    /* grid-column: 10 / 12;
-    grid-row: 1 / 2; */
-    max-width: 52%;
+    width: 25vw;
 }
 
 
@@ -20,7 +18,6 @@
 
 .NavButton .middle {
     transition: all .2s;
-    /* width: 45%; */
 }
 
 .NavButton .top {
@@ -33,15 +30,11 @@
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-end;
-    width: 100%;
+    width: 25vw;
 }
 
 .xButton > div {
     background-color: red;
-}
-
-.xButton:hover > div, .xButton > div:hover {
-    
 }
 
 .xButton div {
