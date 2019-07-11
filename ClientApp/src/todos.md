@@ -1,7 +1,6 @@
 # TODOS
 
 ## Observations
-* About/Portfolio pages need some styling. Currently the textwalls don't have a bg, not very readable or pretty.
 * Portfolio and About pages can likely be combined
 * Text modals on those 2 pages need to be standardized.
 * Vistelse needs some further observations and tinkering to make it better.
@@ -17,5 +16,10 @@
 * Implement intelligent scrolling to keep latest text in view, when text body will exceed visible space.
 
 ## About
+* Convert page into about/portfolio hybrid - under existing content, create a "My Work" section with content below.
+* Recode preview window to use an animation rather than a transition - the purpose of this is to ensure it goes one way. The opacity fading out over time after the .active .card window has been closed looks bad as it immediately gets squished into a grid but slowly fades from view.
 
 ## Portfolio
+
+## Completed
+* About/Portfolio pages need some styling. Currently the textwalls don't have a bg-col, not very readable or pretty.

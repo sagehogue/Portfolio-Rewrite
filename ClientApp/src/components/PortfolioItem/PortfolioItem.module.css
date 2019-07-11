@@ -31,30 +31,6 @@
     min-width: 13rem;
 }
 
-.First {
-    grid-row: var(--grid-first-item-row);
-    grid-column: var(--grid-first-item-column);
-}
-
-.Second {
-    grid-row: var(--grid-second-item-row);
-    grid-column: var(--grid-second-item-column);
-}
-
-.Third {
-    grid-row: var(--grid-third-item-row);
-    grid-column: var(--grid-third-item-column);
-}
-
-.Fourth {
-    grid-row: var(--grid-fourth-item-row);
-    grid-column: var(--grid-fourth-item-column);
-}
-
-.Fifth {
-    grid-row: var(--grid-fifth-item-row);
-    grid-column: var(--grid-fifth-item-column);
-}
 
 .FullItem {
     grid-row: 1 / -1;
@@ -82,6 +58,31 @@
 
 .noOverflow {
     overflow: hidden;
+}
+
+.First {
+    grid-row: var(--grid-first-item-row);
+    grid-column: var(--grid-first-item-column);
+}
+
+.Second {
+    grid-row: var(--grid-second-item-row);
+    grid-column: var(--grid-second-item-column);
+}
+
+.Third {
+    grid-row: var(--grid-third-item-row);
+    grid-column: var(--grid-third-item-column);
+}
+
+.Fourth {
+    grid-row: var(--grid-fourth-item-row);
+    grid-column: var(--grid-fourth-item-column);
+}
+
+.Fifth {
+    grid-row: var(--grid-fifth-item-row);
+    grid-column: var(--grid-fifth-item-column);
 }
 
 @media screen and (min-width: 600px) {

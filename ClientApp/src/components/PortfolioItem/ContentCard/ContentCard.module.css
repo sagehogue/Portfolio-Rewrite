@@ -9,6 +9,8 @@
     --card-font-family: 'League Spartan';
     --card-font-size: 1.8rem;
     --card-line-height: 3rem;
+    --card-transition-values: all .5s ease-in;
+    --card-transition-values: none;
 }
 
 /* Main styles used for the 'preview' AKA hover effect */
@@ -22,20 +24,20 @@
     z-index: 2;
     font-family: var(--card-font-family);
     padding: 1rem 2rem;
-    /* background-color: ; */
     text-align: center;
     border-radius: 5px;
     max-height: 8rem;
     opacity: 0;
     margin-top: 0;
     word-wrap: break-word;
-    transition: all .5s ease-in;
+    transition: var(--card-transition-values);
     position: relative;
     line-height: calc(var(--card-line-height) * .5);
     padding: .5rem 1rem;
     min-width: 15rem;
     transform: translateX(0) translateY(1rem);
 }
+
 
 .Card p {
     font-size: calc(var(--card-font-size) * .8);
@@ -63,21 +65,16 @@
     box-sizing: content-box;
     padding-right: 17px;
     width: 100%;
-    max-height: 60rem;
+    /* max-height: 60rem; */
+    max-height: 74vh;
 }
 
-.Active .scrollWrapperInner {
-    overflow-y: scroll;
-}
+
 
 .Preview {
     color: var(--card-font-color);
     background-color: var(--card-bg-color);
-    /* background-color: var(--card-color); */
-    /* max-height: 8rem; */
-    /* position: relative; */
     z-index: 25;
-    /* transition: all .5s ease-in; */
 }
 
 .Card h3 {
@@ -88,26 +85,46 @@
     font-weight: 600;
 }
 
+.Card section {
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-bottom: .5rem;
+}
+
 /* Styles used for the 'active' card, or the big version that opens on click */
 
 .Active {
     color: var(--card-font-color);
     background-color: var(--card-bg-color);
     margin-top: 0;
-    /* background-color: var(--theme-light-grey); */
     line-height: var(--card-line-height);
-    min-height: 95%;
-    /* transition: all 1s; */
+    min-height: 74vh;
+    max-height: 74vh;
+}
+
+.Active p {
+    /* background-color: rgba(101, 195, 226, 0.336); */
+    /* background-color: var(--card-p-bg-col); */
+}
+
+.Active p {
+    background-color: rgba(165, 222, 241, 0.432);
+    margin-top: 2rem;
 }
 
 .Active,
 .Preview {
     opacity: 1;
-    /* transition: all .7s; */
 }
 
 .Active h3 {
     text-align: center;
+}
+
+.Active h2 {
+    font-size: 2.5rem;
 }
 
 .Active p,
@@ -124,18 +141,12 @@
     transform: translateX(10px);
 }
 
-.Active p {
-    /* background-color: rgba(101, 195, 226, 0.336); */
-    background-color: var(--card-p-bg-col);
+.Active .scrollWrapperInner {
+    overflow-y: scroll;
 }
 
-.Card section {
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    margin-bottom: .5rem;
-}
+
+
 
 .Active section {
     box-sizing: content-box;
@@ -152,13 +163,13 @@
 .Arrow {
     width: 0px;
     height: 0px;
-    z-index: 200;
+    z-index: -5;
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
     opacity: 0;
     border: 15px solid transparent;
-    transition: all .5s ease-in;
+    transition: var(--card-transition-values);
     top: -2.5rem;
 }
 
@@ -175,9 +186,6 @@
     font-size: 1.7rem;
 }
 
-.Active h2 {
-    font-size: 2.5rem;
-}
 
 .Preview .Arrow {
     opacity: 1;
@@ -188,7 +196,19 @@
     justify-content: space-evenly;
 }
 
-@media screen and (max-height: 600px) {
+@media screen and (min-width: 700px) {
+
+    .Active p,
+    .Active li {
+        padding-right: 15px;
+        transform: translateX(25px);
+    }
+}
+ /* Things below here are unnecessary I think, 
+ but I'm keeping them present for the moment in case they are somehow a better solution than my new one,
+  limiting it to 74vh */
+
+/* @media screen and (max-height: 600px) {
     .scrollWrapperInner {
         max-height: 300px;
     }
@@ -204,19 +224,10 @@
     .scrollWrapperInner {
         max-height: 475px;
     }
-}
-
-@media screen and (min-width: 700px) {
-
-    .Active p,
-    .Active li {
-        padding-right: 15px;
-        transform: translateX(25px);
-    }
-}
+} */
 
 
-@media screen and (min-height: 800px) {
+/* @media screen and (min-height: 800px) {
     .scrollWrapperInner {
         max-height: 550px;
     }
@@ -238,4 +249,4 @@
     .scrollWrapperInner {
         max-height: 1075px;
     }
-}
+} */

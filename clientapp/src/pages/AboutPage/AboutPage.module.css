@@ -10,7 +10,7 @@
     width: 100%;
     height: 100%;
     display: flex;
-    flex-direction: row;
+    flex-flow: row wrap;
     justify-content: space-around;
 }
 
@@ -28,28 +28,22 @@
     flex-direction: column;
     justify-content: space-evenly;
     min-width: 500px;
-    /* min-width: 1100px; */
     font-weight: 600;
     min-height: 350px;
-    /* transform: translateY(-130%) rotate(-35deg); */
     position: relative;
     top: -90%;
-    /* transform: rotate(-20deg) translateX(-15%) translateY(-10%); */
 }
 
 .bannerTypography {
     margin-top: 1rem;
     transform: translateX(-15%);
     text-align: center;
-    /* background-color: cornsilk; */
     max-width: 220px;
-    /* min-height: 10rem; */
     padding: 1rem;
-    /* clip-path: polygon(100% 15%, 100% 54%, 0 100%, 0 62%); */
     font-size: 2.5rem;
-    /* transform: translateX(15%); */
     transform: translateX(15%) rotate(-8deg);
     color: var(--theme-green);
+    /* opacity: .5; */
 }
 
 .yellowFont {
@@ -61,7 +55,6 @@
     clip-path: polygon(80% 0%, 100% 20%, 0 100%, 0% 70%);
     min-width: 20rem;
     min-height: 10rem;
-    /* background-color: teal; */
     transform: translateX(-15%) rotate(-5deg);
     background-color: #5F6062;
     box-shadow: 0 0 1rem 2rem #5F6062;
@@ -89,9 +82,6 @@
         min-width: 75rem;
         min-height: 10rem;
     }
-    /* .bannerTypography {
-      
-    } */
 }
 
 @media screen and (min-width: 600px) {
@@ -127,7 +117,6 @@
 
 @media screen and (min-width: 1200px) {
     .bannerTypography {
-        /* text-align: center; */
         transform: translateX(50%) rotate(-3deg);
     }
 }

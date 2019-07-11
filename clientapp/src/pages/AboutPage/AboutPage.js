@@ -85,8 +85,71 @@ class aboutPage extends Component {
 
                         </section>
                     </PortfolioItem>
+                    <PortfolioItem 
+                    label="This Website"
+                     stateHandler={this.displayItem} 
+                     fadeLabel={this.state.anItemIsActive} 
+                     appearLabel={this.displayLabels} 
+                     scrollable experiment>
+                        <section>
+                            <h3>Construction Details</h3>
+                            <p>I originally started this website to provide direction for my learning during code school and to serve as a visual repository for my projects. I initially built it with a vanilla JavaScript front-end and a python backend powered by Django. I was very much learning everything as I went, and so the resulting product was ugly and of poor quality.
+
+                            </p>
+                            <p>After code school, I decided that refactoring this website would be the perfect opportunity for me to learn a framework I had an eye on, React, and so I basically remade this from scratch using React for my front-end and Google's Firebase for my data hosting needs. </p>
+                            <p>ES6</p>
+                        </section>
+
+                    </PortfolioItem>
+                    <PortfolioItem label="Projects"
+                     stateHandler={this.displayItem}
+                      fadeLabel={this.state.anItemIsActive} 
+                      appearLabel={this.displayLabels} 
+                      scrollable experiment>
+                        <section>
+                        
+                            <a href="/will-site">
+                            
+                                <h2>Will Lucas's Portfolio</h2>
+                            </a>
+                        
+                            <p>A single page detailing his photography. React.js.
+                                {/* using sanity.io CMS to let him manage his own images. */}
+                            </p>
+                        </section>
+                        <section>
+                            <h2>Vistelse</h2>
+                            <p>Vistelse is the name of my 'Choose Your Own Adventure" app. It retrieves a collection of JSON documents that represent CYOA stories and allows you to click through them, featuring branching story paths. <i>Now hiring authors.</i>
+                                <ul><h5>Tech Utilized:</h5>
+                                    <li>Axios</li>
+                                    <li>Google Firebase</li>
+                                    <li>React</li>
+                                    <li>Lot of promises for sequencing of events.</li>
+                                </ul>
+                            </p>
+                        </section>
+                    </PortfolioItem>
+                    <PortfolioItem label="Skills"
+                     stateHandler={this.displayItem} 
+                     fadeLabel={this.state.anItemIsActive} 
+                     appearLabel={this.displayLabels} 
+                     scrollable experiment>
+                        <section>
+                            <h3>Web Development</h3>
+                            <ul>
+                                <li>HTML5</li>
+                                <li>CSS3, SASS</li>
+                                <li>JavaScript, ES6</li>
+                                <li>React.js, react-router</li>
+                                <li>Some experience writing APIs and conducting back-end operations in Python 3, C# 7.0</li>
+                                <li>MongoDB/SQLite/Firebase - Basic database querying/write operations</li>
+                                <li>Hosting for static sites and apps</li>
+                                <li>git</li>
+                            </ul>
+                        </section>
+                    </PortfolioItem>
                 </div>
-                <div className={classes.Banner}>
+                {/* <div className={classes.Banner}>
 
                     <div className={classes.bannerStripe} />
                     <span className={[classes.firstTypography, classes.bannerTypography].join(' ')}>
@@ -98,7 +161,7 @@ class aboutPage extends Component {
                         </span>
                     <div className={classes.bannerStripe} />
                     <div className={classes.bannerStripe} />
-                </div>
+                </div> */}
             </PageModal>
         )
     }
