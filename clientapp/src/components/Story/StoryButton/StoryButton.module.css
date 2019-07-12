@@ -21,7 +21,6 @@
     transition: all .3s;
     flex-shrink: 1;
     flex-grow: 1;
-
     padding: 1rem 2rem;
     border-radius: 3px;
     border: .5rem solid var(--link-border-col);
@@ -56,18 +55,18 @@
 
 
 .Story {
-    font-size: 2.5rem;
+    font-size: 1.75rem;
     /* background-color: #; */
     padding: 3rem 5rem;
     flex-basis: 33%;
     max-width: 75%;
-    
+    padding: 1.5rem 2.5rem;
 }
 
 @media (min-width: 600px) {
     .Option {
         font-size: 1.75rem;
-        padding: 2rem 3rem;
+        padding: 3rem 5rem;
         max-width: 75%;
         /* flex-basis: 1; */
     }

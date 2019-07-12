@@ -1,10 +1,7 @@
 :root {
     --link-bg-col: rgba(245, 255, 250, 1);
     --link-border-col: #544D56;
-    /* --modal-bg-col: rgba(245, 255, 250, 1); */
     --link-text-col: var(--link-border-col);
-    /* --type-col-1: cornflowerblue;
-    --type-col-2: rgba(143, 5, 143, 0.61); */
     --type-col-1: var(--theme-yellow);
     --type-col-2: var(--theme-green);
 }
@@ -14,12 +11,13 @@
     margin: 0;
 }
 
-.fontCol2 {
-    font-size: 2rem;
+.fontCol1 {
+    color: var(--type-col-1);
 }
 
-.sage {
-    font-size: 2.5rem;
+.fontCol2 {
+    font-size: 2rem;
+    color: var(--type-col-2);
 }
 
 .greeting {
@@ -27,21 +25,8 @@
     animation-name: slide-in-to-right;
 }
 
-.fontCol1 {
-    color: var(--type-col-1);
-}
-
-.fontCol2 {
-    color: var(--type-col-2);
-}
-
-@keyframes slide-in-to-right {
-    from {
-        transform: translateX(-30rem) rotate(45deg);
-    }
-    to {
-        transform: translateX(0) rotate(0);
-    }
+.sage {
+    font-size: 2.5rem;
 }
 
 .Hide {
@@ -90,7 +75,7 @@
 }
 
 .textModal:last-child {
-    width: 100%;
+    width: 75%;
 }
 
 .ToCenter {
@@ -112,14 +97,7 @@
     align-self: left;
 }
 
-/* .ToLeft:hover {
-        transform: translateY(-1.5rem) translateX(1.5rem);
-        z-index: 20;
-        box-shadow: 1rem 2rem 5px 1px rgba(3, 3, 3, .5);
-} */
-
 .ToRight {
-    /* position: relative; */
     text-align: center;
     align-self: flex-end;
     transform: translateX(-1.5rem);
@@ -127,44 +105,43 @@
     justify-content: flex-end;
 }
 
-.ToRight>div {
-    /* position: absolute; */
-    /* right: 20%; */
-}
-
-/* .ToRight:hover {
-    transform: translateY(-1.5rem) translateX(-1.5rem);
-    z-index: 20;
-    box-shadow: 1rem 2rem 5px 1px rgba(3, 3, 3, .5);
-} */
-
 .spaceFromTop {
     margin-top: 10rem;
 }
 
-.SpaceFromBottom {
-    /* margin-bottom: 20rem; */
+@keyframes slide-in-to-right {
+    from {
+        transform: translateX(-30rem) rotate(45deg);
+    }
+
+    to {
+        transform: translateX(0) rotate(0);
+    }
 }
 
 @media (min-width: 600px) {
     .flexContainer {
         display: flex;
         flex-flow: row wrap;
-        justify-content: space-between;
+        justify-content: space-around;
     }
+    
     .fontCol2 {
         font-size: 3.2rem;
     }
+    
     .sage {
         font-size: 3.5rem;
     }
 }
 
 @media (min-width: 1100px) {
+
     .textModal:nth-child(1),
     .textModal:nth-child(2) {
         width: 90%;
     }
+
     .Hide {
         transform: translate(-200rem) !important
     }
@@ -174,9 +151,11 @@
     .textModal {
         margin: .75rem 0rem;
     }
+
     .textModal p {
         font-size: 1.6rem;
     }
+
     .textModal h3 {
         font-size: 1.75rem;
     }
@@ -186,14 +165,17 @@
     .Link {
         padding: .5rem 1rem;
     }
+
     .flexContainer div {
         font-size: 1.75rem;
     }
 }
+
 @media (max-width: 350px) {
     .Link {
         padding: .25rem .5rem;
     }
+
     .flexContainer div {
         font-size: 1.6rem;
     }

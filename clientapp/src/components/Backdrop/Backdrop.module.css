@@ -6,7 +6,7 @@
     min-height: 100vh;
     background-color: rgba(3, 3, 3, .4);
     z-index: 25;
-    transition: all .15s;
+    transition: opacity .15s;
 }
 
 .Hide {

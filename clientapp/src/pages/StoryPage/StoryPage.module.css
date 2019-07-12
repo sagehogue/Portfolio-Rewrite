@@ -30,6 +30,10 @@
     width: 100%;
 }
 
+.messageWrapper > div {
+
+}
+
 /* Wraps buttons */
 
 .ButtonBox {
@@ -94,6 +98,7 @@
 
 .sceneModal {
     margin-top: 1rem;
+    margin-left: 1.75rem;
     justify-content: center;
     width: 90%;
 }
@@ -141,7 +146,11 @@
 }
 
 @media (min-width: 1000px) {
-
+    .ButtonBox div:not(:hover) {
+        transform: scale(.95);
+        opacity: .5;
+        box-shadow: 1px 3px 2px 1px var(--box-shadow-nothover);
+    }
 }
 
 @media (max-width: 360px) {
