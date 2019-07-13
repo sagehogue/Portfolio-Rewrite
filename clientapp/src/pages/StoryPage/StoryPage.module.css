@@ -23,6 +23,7 @@
     flex-direction: column;
     align-items: center;
     overflow-y: scroll;
+    overflow-x: hidden;
     box-sizing: content-box;
     padding-right: 18px;
     text-align: center;
@@ -106,6 +107,21 @@
 .sceneModal div {
     display: inline-block;
     width: 100%;
+}
+/* Styles for the welcome message, 'Select your experience' */
+
+.initiallyDisplayedMessage {
+
+}
+
+/* Opacity classes for animating words in and out of view. */
+
+.visible {
+    opacity: 1;
+}
+
+.invisible {
+    opacity: 0;
 }
 
 .multiLine {

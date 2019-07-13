@@ -4,9 +4,12 @@ import axios from '../../axios-orders';
 
 import PageModal from '../../components/PageModal/PageModal';
 import TextModal from '../../components/TextModal/TextModal';
+import Intro_modal from '../../components/Story/Modals/IntroModal/IntroModal';
 import StoryButton from '../../components/Story/StoryButton/StoryButton';
 
 // I like the idea of messages coming into view from left, exiting to the right. Nice and orderly, like a play!
+
+import wait from '../../Utilities/wait';
 
 import classes from './StoryPage.module.css';
 
@@ -19,8 +22,12 @@ import classes from './StoryPage.module.css';
 class storyPage extends Component {
     state = {
         // modalInView: false, not rdy
+        waiting: false,
         display: {
             introMessages: true,
+            first: false,
+            second: false,
+            third: false,
             buttonBox: false,
             storyButtons: [],
             shouldGenerateStoryButtons: false,
@@ -38,31 +45,63 @@ class storyPage extends Component {
     }
 
     componentDidMount() {
-        let retrievedStories;
-        if (localStorage.getItem('storyInfoLoaded')) {
-            retrievedStories = JSON.parse(localStorage.getItem('stories'));
-            console.log(retrievedStories)
-            this.addStoriesToState(retrievedStories);
-            this.setInitialState(retrievedStories)
-        } else {
-            retrievedStories = this.getAllStories().then((res) => {
-                console.log(res)
-                return res;
-            }).then((data) => {
-                const storyArray = Object.values(data[0]).map(val => val);
-                this.addStoriesToState(storyArray)
-                localStorage.setItem("stories", JSON.stringify(storyArray));
-                localStorage.setItem("storyInfoLoaded", "true");
-                return storyArray;
-            }).then((data => {
-                this.setInitialState(data);
-            }))
-        }
+        // Code animating the initial messages into view goes here
+        wait()
+            .then(response => this.loadMessage("first"))
+            .then(response => wait())
+            .then(response => this.loadMessage("second"))
+            .then(response => wait())
+            .then(response => this.loadMessage("third"))
+            .then(response => wait())
+            .then(response => {
+                let retrievedStories;
+                if (localStorage.getItem('storyInfoLoaded')) {
+                    retrievedStories = JSON.parse(localStorage.getItem('stories'));
+                    this.addStoriesToState(retrievedStories);
+                    this.setInitialState(retrievedStories);
+                } else {
+                    retrievedStories = this.getAllStories().then((res) => {
+                        return res;
+                    }).then((data) => {
+                        const storyArray = Object.values(data[0]).map(val => val);
+                        this.addStoriesToState(storyArray)
+                        localStorage.setItem("stories", JSON.stringify(storyArray));
+                        localStorage.setItem("storyInfoLoaded", "true");
+                        return storyArray;
+                    }).then((data => {
+                        this.setInitialState(data);
+                    }))
+                }
+            })
+            // .then(response => this.loadButtons("type: story")) // accepts ternary values
+        // Code below should run ASAP, but buttons should not appear until
+        // animations have completed. 
+        
+        // Code below deduces if stories are in memory and if not, queries them and stores in memory.
     }
     componentDidUpdate() {
         if (this.state.shouldGenerateStoryButtons) {
             this.generateStoryButtons()
         }
+    }
+
+    pageModalRef = React.createRef();
+    scrollPageModal = () => window.scrollTo(0, this.pageModalRef.current.offsetTop)
+
+    loadMessage(MsgToDisplay) {
+        return new Promise((res) => {
+            this.setState((oldState) => {
+                const newState = {
+                    ...oldState,
+                    ...oldState.display,
+                    ...oldState.story,
+                    ...oldState.storyCollection
+                }
+                newState.display[MsgToDisplay] = true;
+                return newState
+            })
+                res(`Loaded ${MsgToDisplay} message`)
+        })
     }
 
     generateStoryButtons() {
@@ -183,7 +222,8 @@ class storyPage extends Component {
 
     switchToSelectedStory = (e) => {
         e.stopPropagation();
-        const storyToLoad = e.target.getAttribute("data-id"); // this probably will return undefined, I don't think I've found a way to store the data properly yet.
+        const storyToLoad = e.target.getAttribute("data-id"); 
+        console.log(storyToLoad);
         const selectedStory = this.state.storyCollection.filter(story => {
             if (story.title === storyToLoad) {
                 return true
@@ -194,6 +234,9 @@ class storyPage extends Component {
                 ...oldState, display: {
                     ...oldState.display,
                     introMessages: false,
+                    first: false,
+                    second: false,
+                    third: false,
                     storyButtons: false,
                     optionButtons: [...Object.values(selectedStory[0].scenes.first.options).map((optionKeyValArray, index) => {
                         return <StoryButton title={optionKeyValArray.label} description={optionKeyValArray.text} associatedScene={optionKeyValArray.associatedScene} key={index} option clickHandler={this.optionHandler} />
@@ -231,6 +274,9 @@ class storyPage extends Component {
                 },
                 display: {
                     introMessages: true,
+                    first: true,
+                    second: true,
+                    third: true,
                     buttonBox: false,
                     storyButtons: [],
                     shouldGenerateStoryButtons: false,
@@ -271,7 +317,7 @@ class storyPage extends Component {
         third: (
             <div className={`${classes.introModal} ${classes.textModal} ${this.state.display.introMessages ? '' : classes.Hide} ${classes.thirdIntro} `}>
                 <TextModal>
-                    <p >
+                    <p className={classes.initiallyDisplayedMessage}>
                         Select your <i className={classes.Papyrus}>experience.</i>
                     </p>
                 </TextModal>
@@ -286,11 +332,20 @@ class storyPage extends Component {
             <PageModal className={"story"} onScreen={this.state.modalInView} >
                 <div className={`${classes.pageWrapper}`}>
                     <div className={`${classes.messageWrapper}`}>
-                        {this.state.display.introMessages ? [
-                            this.introMessages.first,
-                            this.introMessages.second,
-                            this.introMessages.third
-                        ] : null}
+
+                        {/* 
+                        I think I will need to rewrite some of this. Problem is, they aren't rendered
+                        until they are supposed to be onscreen in the correct place. 
+                        So how can they be animated in from the left or right?I'll probably have to 
+                        make some offscreenLeft and offscreenRight classes to use to control these.
+                        Perhaps by introducing logic into the introMessages to determine what classes
+                        they need to have, depending on the state. The loadMessage function could manage that.
+                        Perhaps a removeMessage function could be created to control the animation off screen. 
+                        */}
+                        {this.state.display.first ? this.introMessages.first : null}
+                        {this.state.display.second ? this.introMessages.second : null}
+                        {this.state.display.third ? this.introMessages.third : null}
+                        {<Intro_modal type="slide" show={this.state.display.introMessages}>Hello from the modal</Intro_modal>}
                         {this.state.display.scene}
                     </div>
                     <div className={buttonBoxClasses.join(' ')}>

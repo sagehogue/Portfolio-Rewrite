@@ -1,0 +1,23 @@
+.IntroModal {
+    transition: transform .5s ease-out;
+
+}
+
+.modalSlide {
+}
+
+.offscreenLeft {
+    transform: translateX(-100vw);
+}
+
+.offscreenRight {
+    transform: translateX(100vw);
+}
+
+.onscreen {
+    transform: translateX(0);
+}
+
+.invisible {
+    opacity: 0;
+}
