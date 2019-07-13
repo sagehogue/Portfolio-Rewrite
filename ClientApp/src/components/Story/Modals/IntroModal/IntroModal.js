@@ -58,9 +58,33 @@ class introModal extends Component {
                             }
                         })
                         console.log(this.state.classList)
-                    } else {
+                        break;
+                    } 
+                    else {
                         break
                     }
+                    case "transitioningInvisible" :
+                            wait().then(res => {
+                                this.setState(oldState => {
+                                    return {
+                                        ...oldState,
+                                        effectStage: "offscreen"
+                                    }
+                                })
+                            })
+                            break;
+                    case "offscreen" :
+                            this.setState(oldState => {
+                                return {
+                                    ...oldState,
+                                    effectStage: "deleting",
+                                    deleteSelf: true,
+                                    classList: [classes.IntroModal, classes.offscreenRight]
+                                }
+                            })
+                            break
+                    case "deleting" :
+                            break;
             break;
             // case "false" :
                 
@@ -70,7 +94,7 @@ class introModal extends Component {
     }
 
     render() {
-        return (
+        return this.state.deleteSelf? null : (
             <div className={this.state.classList.join(' ')}>
                 <TextModal>
                     {this.props.children}
