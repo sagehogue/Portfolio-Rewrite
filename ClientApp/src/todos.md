@@ -18,6 +18,7 @@
 * Implement scroll indicator for long text passages. [Med Priority]
 * Implement intelligent scrolling to keep latest text in view, when text body will exceed visible space. [Med Priority]
 * Add 2 stories to demonstrate the sweet cycling available in my app. [Med Priority]
+* Implement fixed dimensions to buttonBox to prevent resizing when buttons are removed or added. [Low Priority]
 * Should hide buttons from appearing before text has fully been animated into appearance [Low Priority]
 * Make default styling of buttons greyed out - only hovered/active buttons should have the bright styling. [Low Priority]
 * Story buttons could use background images to differentiate them from one another based on content or genre. [Low Priority]

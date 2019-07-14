@@ -4,7 +4,7 @@ import axios from '../../axios-orders';
 
 import PageModal from '../../components/PageModal/PageModal';
 import TextModal from '../../components/TextModal/TextModal';
-import Intro_modal from '../../components/Story/Modals/IntroModal/IntroModal';
+import IntroModal from '../../components/Story/Modals/IntroModal/IntroModal';
 import StoryButton from '../../components/Story/StoryButton/StoryButton';
 
 // I like the idea of messages coming into view from left, exiting to the right. Nice and orderly, like a play!
@@ -30,13 +30,13 @@ class storyPage extends Component {
             third: false,
             buttonBox: false,
             storyButtons: [],
-            shouldGenerateStoryButtons: false,
         },
         story: {
             selected: null,
             currentScene: null,
             isEndScene: false,
         },
+        buttonsInvisible: true,
         // Initial repository of story data. Used to generate more specific groups of data.
         storyCollection: [], // generates arrays of JSX
         // true after componentDidMount, next update triggers button rendering
@@ -54,7 +54,9 @@ class storyPage extends Component {
                 if (localStorage.getItem('storyInfoLoaded')) {
                     retrievedStories = JSON.parse(localStorage.getItem('stories'));
                     this.addStoriesToState(retrievedStories);
-                    this.setInitialState(retrievedStories);
+                    this.setInitialState(retrievedStories)
+                    // .then(res => setTimeout(() => {this.buttonFadeIn()}, 1000))
+                    // console.log(this)
                 } 
                 else {
                     retrievedStories = this.getAllStories()
@@ -65,8 +67,7 @@ class storyPage extends Component {
                         localStorage.setItem("storyInfoLoaded", "true");
                         return storyArray;
                     })
-                    .then((data => this.setInitialState(data))
-                    );
+                    .then((data => this.setInitialState(data, this.buttonFadeIn)))
                 }
             })
             // .then(response => this.loadButtons("type: story")) // accepts ternary values
@@ -102,10 +103,9 @@ class storyPage extends Component {
         })
     }
 
-    
+    // Make array of storybutton components, returning null if story.scenes has no data.
 
     generateStoryButtons() {
-        // Make array of storybutton components, returning null if story.scenes has no data.
         const storyButtons = this.state.storyCollection.map((story, index) => {
             if (story.scenes) {
                 return <StoryButton key={story["_id"] + index} 
@@ -113,7 +113,7 @@ class storyPage extends Component {
                 title={story.title} 
                 description={story.description} 
                 clickHandler={this.switchToSelectedStory} 
-                invisible/>
+                invisible={this.state.buttonsInvisible}/>
             } else {
                 return null;
             }
@@ -125,21 +125,31 @@ class storyPage extends Component {
                 display: {
                     ...oldState.display,
                     storyButtons: storyButtons
-                }, shouldGenerateStoryButtons: false,
+                }, 
+                shouldGenerateStoryButtons: false,
                 storyCollection: [...oldState.storyCollection],
             }
         })
     }
 
-    setInitialState(retrievedStories) {
-        this.setState((oldState) => {
+    setInitialState(retrievedStories, callback, timer=0) {
+
+        return new Promise((res) => this.setState((oldState) => {
             return {
                 ...oldState,
                 display: { ...oldState.display },
                 storyCollection: [...retrievedStories],
                 shouldGenerateStoryButtons: true,
             }
-        })
+        }, () => res()));// () => {setTimeout(callback, timer)}
+        // this.setState((oldState) => {
+        //     return {
+        //         ...oldState,
+        //         display: { ...oldState.display },
+        //         storyCollection: [...retrievedStories],
+        //         shouldGenerateStoryButtons: true,
+        //     }
+        // }, () => {setTimeout(callback, timer)})
     }
 
     addStoriesToState = storyInput => {
@@ -225,45 +235,116 @@ class storyPage extends Component {
         })
     }
 
+    // Animations
+
+    textFadeIn(timer) {
+        return new Promise((res => {
+            this.setState()
+            setTimeout(() => {
+                res();
+            }, timer)
+        }))
+    }
+
+    textFadeOut(timer) {
+        return new Promise((res => {
+            this.setState()
+            setTimeout(() => {
+                res();
+            }, timer)
+        }))
+    }
+
+    buttonFadeOut(timer=500) {
+        return new Promise((res => {
+            this.setState()
+            setTimeout(() => {
+                res();
+            }, timer)
+        }))
+    }
+
+    buttonFadeIn(timer=500) {
+        console.log('hello')
+        return new Promise((res => {
+            this.setState(oldState => {
+                return {
+                    ...oldState,
+                    display: {...oldState.display},
+                    story: {...oldState.story},
+                    // storyCollection: [...oldState.storyCollection],
+                    buttonsInvisible: false
+                }
+            })
+            setTimeout(() => {
+                res();
+            }, timer)
+        }))
+    }
+
+    introSlideOut(timer) {
+        return new Promise((res => {
+            this.setState()
+            setTimeout(() => {
+                res();
+            }, timer)
+        }))
+    }
+
+    sceneModalSlideIn(timer) {
+        return new Promise((res => {
+            this.setState()
+            setTimeout(() => {
+                res();
+            }, timer)
+        }))
+    }
+
+
     switchToSelectedStory = (e) => {
-        e.stopPropagation();
         const storyToLoad = e.target.getAttribute("data-id"); 
-        console.log(storyToLoad);
         const selectedStory = this.state.storyCollection.filter(story => {
             if (story.title === storyToLoad) {
                 return true
             } else return false;
         });
-        this.setState((oldState) => {
-            return {
-                ...oldState, display: {
-                    ...oldState.display,
-                    introMessages: false,
-                    first: false,
-                    second: false,
-                    third: false,
-                    storyButtons: false,
-                    optionButtons: [...Object.values(selectedStory[0].scenes.first.options).map((optionKeyValArray, index) => {
-                        return <StoryButton title={optionKeyValArray.label} description={optionKeyValArray.text} associatedScene={optionKeyValArray.associatedScene} key={index} option clickHandler={this.optionHandler} />
-                    })],
-                    scene: (
-                        <div className={`${classes.sceneModal} ${classes.textModal}`}>
-                            <TextModal title={selectedStory[0].scenes.first.title}>
-
-                                {Array.isArray(selectedStory[0].scenes.first.text) ? selectedStory[0].scenes.first.text.map((textLine, key) => { return <p className={classes.multiLine} key={key}>{textLine}</p> }) : selectedStory[0].scenes.first.text}
-                                {/* <p>{Array.isArray(selectedStory[0].scenes.first.text)? selectedStory[0].scenes.first.text.join('\n') : selectedStory[0].scenes.first.text}</p> */}
-                                {/* <p>{selectedStory[0].scenes.first.`text}</p> */}
-                            </TextModal>
-                        </div>
-                    )
-                },
-                storyCollection: [...oldState.storyCollection],
-                story: {
-                    selected: selectedStory[0],
-                    currentScene: { ...selectedStory[0].scenes.first, scene: "first" },
-                    sceneOptions: Object.values(selectedStory[0].scenes.first.options)
+        e.stopPropagation();
+        this.buttonFadeOut()
+        .then(res => this.introSlideOut())
+        .then(res => this.sceneModalSlideIn())
+        .then(this.textFadeIn())
+        .then(res => {
+            this.setState(oldState => {
+                return {
+                    ...oldState, display: {
+                        ...oldState.display,
+                        introMessages: false,
+                        first: false,
+                        second: false,
+                        third: false,
+                        storyButtons: false,
+                        optionButtons: [...Object.values(selectedStory[0].scenes.first.options).map((optionKeyValArray, index) => {
+                            return <StoryButton title={optionKeyValArray.label} description={optionKeyValArray.text} associatedScene={optionKeyValArray.associatedScene} key={index} option clickHandler={this.optionHandler} />
+                        })],
+                        scene: (
+                            <div className={`${classes.sceneModal} ${classes.textModal}`}>
+                                <TextModal title={selectedStory[0].scenes.first.title}>
+    
+                                    {Array.isArray(selectedStory[0].scenes.first.text) ? selectedStory[0].scenes.first.text.map((textLine, key) => { return <p className={classes.multiLine} key={key}>{textLine}</p> }) : selectedStory[0].scenes.first.text}
+                                    {/* <p>{Array.isArray(selectedStory[0].scenes.first.text)? selectedStory[0].scenes.first.text.join('\n') : selectedStory[0].scenes.first.text}</p> */}
+                                    {/* <p>{selectedStory[0].scenes.first.`text}</p> */}
+                                </TextModal>
+                            </div>
+                        )
+                    },
+                    storyCollection: [...oldState.storyCollection],
+                    story: {
+                        selected: selectedStory[0],
+                        currentScene: { ...selectedStory[0].scenes.first, scene: "first" },
+                        sceneOptions: Object.values(selectedStory[0].scenes.first.options)
+                    }
                 }
-            }
+            })
         })
     }
 
@@ -284,7 +365,6 @@ class storyPage extends Component {
                     third: true,
                     buttonBox: false,
                     storyButtons: [],
-                    shouldGenerateStoryButtons: false,
                 },
             };
         })
@@ -305,25 +385,25 @@ class storyPage extends Component {
     // Some JSX I wanted to get out of the render method. 
     introMessages = {
         first: 
-        <Intro_modal type="slide" show={this.state.display.introMessages}>
+        <IntroModal type="slide" show={this.state.display.introMessages}>
             <div className={`${classes.introModal} ${classes.textModal} ${classes.firstIntro} ${this.state.display.introMessages ? '' : classes.Hide}`}>
                 <TextModal>
                     <h3>Welcome to <span className={classes.textEmphasis}>Vistelse!</span></h3>
                     <p>Vistelse is the Swedish word for sojourn, but more importantly, it's the name of this 'choose your own adventure' app.</p>
                 </TextModal>
             </div>
-        </Intro_modal>,
+        </IntroModal>,
         second:
-            <Intro_modal  type="slide" show={this.state.display.introMessages}>
+            <IntroModal  type="slide" show={this.state.display.introMessages}>
                 <div className={`${classes.introModal} ${classes.textModal} ${this.state.display.introMessages ? '' : classes.Hide} ${classes.secondIntro}`}>
                     <TextModal>
                         <p>Right now I only have one story, but I'm capable of holding a lot more. Check back soon!</p>
                     </TextModal>
                 </div>
-            </Intro_modal>
+            </IntroModal>
         ,
         third: 
-        <Intro_modal type="slide" show={this.state.display.introMessages}>
+        <IntroModal type="slide" show={this.state.display.introMessages}>
             <div className={`${classes.introModal} ${classes.textModal} ${this.state.display.introMessages ? '' : classes.Hide} ${classes.thirdIntro} `}>
                 <TextModal>
                     <p className={classes.initiallyDisplayedMessage}>
@@ -331,7 +411,7 @@ class storyPage extends Component {
                     </p>
                 </TextModal>
             </div>
-        </Intro_modal>
+        </IntroModal>
         
     }
 

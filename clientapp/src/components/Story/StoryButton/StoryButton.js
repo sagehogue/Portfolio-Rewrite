@@ -9,18 +9,27 @@ class StoryButton extends Component {
             this.props.option ? classes.Option : classes.Story]
     }
 
-    componentDidMount() {
-        setTimeout(() => {
+    // Automatically makes button visible after timer - refactoring to control visibility in main file.
+
+    // componentDidMount() {
+    //     setTimeout(() => {
+            // this.setState({
+            //     classList: this.state.classList.filter(styleClass => styleClass !== classes.invisible)
+            // })
+    //     }, 500)
+    // }
+    
+    render() {
+        if (!this.props.invisible && this.state.classList.includes(classes.invisible)) {
             this.setState({
                 classList: this.state.classList.filter(styleClass => styleClass !== classes.invisible)
             })
-        }, 500)
-    }
-    
-    render() {
-        // this.classList = [];
-        // this.props.option ? this.classList.push(classes.Option) : this.classList.push(classes.Story);
-        console.log(this.state.classList)
+        }
+        if (this.props.invisible && !this.state.classList.includes(classes.invisible)) {
+            this.setState({
+                classList: [classes.invisible, ...this.state.classList]
+            })
+        }
         return (
             <div className={this.state.classList.join(' ')} data-id={this.props.id} onClick={this.props.clickHandler} data-associatedscene={this.props.associatedScene}>
                 {this.props.title ? <h3 data-id={this.props.id} data-associatedscene={this.props.associatedScene}>{this.props.title}</h3> : null}
