@@ -11,6 +11,7 @@
 }
 
 .StoryButton {
+    opacity: 1;
     display: flex;
     padding: 1rem 2rem;
     border-radius: 5px;
@@ -18,14 +19,14 @@
     display: flex;
     flex-direction: column;
     align-items: center;  
-    transition: all .3s;
+    transition: transform .5s, color .3s, opacity 1.5s, box-shadow .5s;
     flex-shrink: 1;
     flex-grow: 1;
     padding: 1rem 2rem;
     border-radius: 3px;
     border: .5rem solid var(--link-border-col);
     background-color: var(--link-bg-col);
-    transition: all .3s;
+    /* transition: all .3s; */
     color: var(--link-text-col);
     box-shadow: 0 .75rem 2px 2px var(--box-shadow-black);
 }
@@ -42,6 +43,12 @@
     box-shadow: 0 1rem 5px 1px var(--box-shadow-click); 
     transform: translateY(3px);
 }
+
+.invisible {
+    opacity: 0;
+    transition: opacity .5s ease-out;
+}
+
 .Option {
     font-size: 2rem;
     padding: 3rem 5rem;
@@ -79,5 +86,17 @@
     .Story {
         padding: 1.5rem 3rem;
         font-size: 2rem;
+    }
+}
+
+@media (min-width: 1000px) {
+    /* This causes some weird side effects with the opacity animation. */
+    .StoryButton:not(:hover) {
+        transform: scale(.95);
+        box-shadow: 1px 3px 2px 1px var(--box-shadow-nothover);
+    }
+    
+    .StoryButton:not(:hover):not(.invisible) {
+        opacity: .5;
     }
 }

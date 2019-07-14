@@ -22,7 +22,7 @@ import classes from './StoryPage.module.css';
 class storyPage extends Component {
     state = {
         // modalInView: false, not rdy
-        waiting: false,
+        // waiting: false,
         display: {
             introMessages: true,
             first: false,
@@ -46,31 +46,27 @@ class storyPage extends Component {
 
     componentDidMount() {
         // Code animating the initial messages into view goes here
-        wait()
-            .then(response => this.loadMessage("first"))
-            .then(response => wait())
-            .then(response => this.loadMessage("second"))
-            .then(response => wait())
-            .then(response => this.loadMessage("third"))
-            .then(response => wait())
+            this.loadMessage("first", 1000)
+            .then(response => this.loadMessage("second", 1000))
+            .then(response => this.loadMessage("third", 2000))
             .then(response => {
                 let retrievedStories;
                 if (localStorage.getItem('storyInfoLoaded')) {
                     retrievedStories = JSON.parse(localStorage.getItem('stories'));
                     this.addStoriesToState(retrievedStories);
                     this.setInitialState(retrievedStories);
-                } else {
-                    retrievedStories = this.getAllStories().then((res) => {
-                        return res;
-                    }).then((data) => {
+                } 
+                else {
+                    retrievedStories = this.getAllStories()
+                    .then(data => {
                         const storyArray = Object.values(data[0]).map(val => val);
                         this.addStoriesToState(storyArray)
                         localStorage.setItem("stories", JSON.stringify(storyArray));
                         localStorage.setItem("storyInfoLoaded", "true");
                         return storyArray;
-                    }).then((data => {
-                        this.setInitialState(data);
-                    }))
+                    })
+                    .then((data => this.setInitialState(data))
+                    );
                 }
             })
             // .then(response => this.loadButtons("type: story")) // accepts ternary values
@@ -88,7 +84,7 @@ class storyPage extends Component {
     pageModalRef = React.createRef();
     scrollPageModal = () => window.scrollTo(0, this.pageModalRef.current.offsetTop)
 
-    loadMessage(MsgToDisplay) {
+    loadMessage(MsgToDisplay, timer=0) {
         return new Promise((res) => {
             this.setState((oldState) => {
                 const newState = {
@@ -100,15 +96,24 @@ class storyPage extends Component {
                 newState.display[MsgToDisplay] = true;
                 return newState
             })
+            setTimeout(() => {
                 res(`Loaded ${MsgToDisplay} message`)
+            }, timer)
         })
     }
+
+    
 
     generateStoryButtons() {
         // Make array of storybutton components, returning null if story.scenes has no data.
         const storyButtons = this.state.storyCollection.map((story, index) => {
             if (story.scenes) {
-                return <StoryButton key={story["_id"] + index} id={story.title} title={story.title} description={story.description} clickHandler={this.switchToSelectedStory} />
+                return <StoryButton key={story["_id"] + index} 
+                id={story.title} 
+                title={story.title} 
+                description={story.description} 
+                clickHandler={this.switchToSelectedStory} 
+                invisible/>
             } else {
                 return null;
             }
@@ -299,22 +304,26 @@ class storyPage extends Component {
     )
     // Some JSX I wanted to get out of the render method. 
     introMessages = {
-        first: (
+        first: 
+        <Intro_modal type="slide" show={this.state.display.introMessages}>
             <div className={`${classes.introModal} ${classes.textModal} ${classes.firstIntro} ${this.state.display.introMessages ? '' : classes.Hide}`}>
                 <TextModal>
                     <h3>Welcome to <span className={classes.textEmphasis}>Vistelse!</span></h3>
                     <p>Vistelse is the Swedish word for sojourn, but more importantly, it's the name of this 'choose your own adventure' app.</p>
                 </TextModal>
             </div>
-        ),
-        second: (
-            <div className={`${classes.introModal} ${classes.textModal} ${this.state.display.introMessages ? '' : classes.Hide} ${classes.secondIntro}`}>
-                <TextModal>
-                    <p>Right now I only have one story, but I'm capable of holding a lot more. Check back soon!</p>
-                </TextModal>
-            </div>
-        ),
-        third: (
+        </Intro_modal>,
+        second:
+            <Intro_modal  type="slide" show={this.state.display.introMessages}>
+                <div className={`${classes.introModal} ${classes.textModal} ${this.state.display.introMessages ? '' : classes.Hide} ${classes.secondIntro}`}>
+                    <TextModal>
+                        <p>Right now I only have one story, but I'm capable of holding a lot more. Check back soon!</p>
+                    </TextModal>
+                </div>
+            </Intro_modal>
+        ,
+        third: 
+        <Intro_modal type="slide" show={this.state.display.introMessages}>
             <div className={`${classes.introModal} ${classes.textModal} ${this.state.display.introMessages ? '' : classes.Hide} ${classes.thirdIntro} `}>
                 <TextModal>
                     <p className={classes.initiallyDisplayedMessage}>
@@ -322,7 +331,8 @@ class storyPage extends Component {
                     </p>
                 </TextModal>
             </div>
-        )
+        </Intro_modal>
+        
     }
 
     render() {
@@ -342,10 +352,10 @@ class storyPage extends Component {
                         they need to have, depending on the state. The loadMessage function could manage that.
                         Perhaps a removeMessage function could be created to control the animation off screen. 
                         */}
+                        {}
                         {this.state.display.first ? this.introMessages.first : null}
                         {this.state.display.second ? this.introMessages.second : null}
                         {this.state.display.third ? this.introMessages.third : null}
-                        {<Intro_modal type="slide" show={this.state.display.introMessages}>Hello from the modal</Intro_modal>}
                         {this.state.display.scene}
                     </div>
                     <div className={buttonBoxClasses.join(' ')}>

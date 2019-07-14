@@ -8,6 +8,7 @@ import classes from './IntroModal.module.css';
 
 class introModal extends Component {
     state = {
+        // I would like to figure out how to implement these features for more control over the animation. 
         effectInDuration: this.props.durationMount, // for slideIn/fadeIn
         effectOutDuration: this.props.durationUnmount, // for slideOut/fadeOut
         effectType: this.props.type, // slide or fade

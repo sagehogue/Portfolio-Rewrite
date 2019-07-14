@@ -52,11 +52,6 @@
     flex-flow: row wrap;
 }
 
-.ButtonBox:hover div:not(:hover) {
-    transform: scale(.95);
-    opacity: .5;
-    box-shadow: 1px 3px 2px 1px var(--box-shadow-nothover);
-}
 
 .ButtonBox div {
     margin: 1rem 2rem;
@@ -77,10 +72,10 @@
 
 /* Styling specific to introductory messages */
 
-.introModal {
+/* .introModal {
     text-align: center;
     max-width: 85%;
-}
+} */
 
 .introModal p {
     font-weight: 600;
@@ -111,7 +106,7 @@
 /* Styles for the welcome message, 'Select your experience' */
 
 .initiallyDisplayedMessage {
-
+    
 }
 
 /* Opacity classes for animating words in and out of view. */
@@ -140,6 +135,10 @@
     color: var(--theme-green);
 }
 
+/* .ButtonBox:hover div:not(:hover) {
+    transform: scale(.95);
+    box-shadow: 1px 3px 2px 1px var(--box-shadow-nothover);
+} */
 @media (min-width: 600px) {
     .messageWrapper {
         grid-column: 1 / -1;
@@ -162,11 +161,11 @@
 }
 
 @media (min-width: 1000px) {
-    .ButtonBox div:not(:hover) {
+    /* .ButtonBox div:not(:hover) {
         transform: scale(.95);
         opacity: .5;
         box-shadow: 1px 3px 2px 1px var(--box-shadow-nothover);
-    }
+    } */
 }
 
 @media (max-width: 360px) {
