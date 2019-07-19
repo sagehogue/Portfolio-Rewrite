@@ -267,7 +267,15 @@ class storyPage extends Component {
 
     buttonFadeOut(timer=500) {
         return new Promise((res => {
-            this.setState()
+            this.setState(oldState => {
+                return {
+                    ...oldState,
+                    display: {...oldState.display},
+                    story: {...oldState.story},
+                    buttonsInvisible: true,
+                    // storyCollection: [...oldState.storyCollection],
+                }
+                })
             setTimeout(() => {
                 res();
             }, timer)
@@ -294,7 +302,16 @@ class storyPage extends Component {
 
     introSlideOut(timer) {
         return new Promise((res => {
-            this.setState()
+            this.setState((oldState => {
+                return {
+                    ...oldState,
+                    story: {...oldState.story},
+                    display: {
+                        ...oldState.display,
+                        introMessages: false
+                    }
+                }
+            }))
             setTimeout(() => {
                 res();
             }, timer)
@@ -312,6 +329,7 @@ class storyPage extends Component {
 
 
     switchToSelectedStory = (e) => {
+        
         const storyToLoad = e.target.getAttribute("data-id"); 
         const selectedStory = this.state.storyCollection.filter(story => {
             if (story.title === storyToLoad) {
@@ -319,8 +337,8 @@ class storyPage extends Component {
             } else return false;
         });
         e.stopPropagation();
-        this.buttonFadeOut()
-        .then(res => this.introSlideOut())
+        this.buttonFadeOut(1000)
+        .then(res => this.introSlideOut(1000))
         .then(res => this.sceneModalSlideIn())
         .then(this.textFadeIn())
         .then(res => {
@@ -359,24 +377,40 @@ class storyPage extends Component {
     }
 
     selectStoryHandler = (e) => {
-        this.setState((oldState) => {
+        this.setState((oldState) => { 
+            console.log(oldState)
             return {
                 ...oldState,
-                shouldGenerateStoryButtons: true,
                 story: {
-                    selected: null,
-                    currentScene: null,
-                    isEndScene: false,
+                    ...oldState.story
                 },
                 display: {
-                    introMessages: true,
-                    first: true,
-                    second: true,
-                    third: true,
-                    buttonBox: false,
-                    storyButtons: [],
-                },
-            };
+                    ...oldState.display,
+                    introMessages: false
+                }
+                
+            }
+
+        })
+        .then(res => {
+            this.setState((oldState) => {
+                return {
+                    ...oldState,
+                    shouldGenerateStoryButtons: true,
+                    story: {
+                        selected: null,
+                        currentScene: null,
+                        isEndScene: false,
+                    },
+                    display: {
+                        first: true,
+                        second: true,
+                        third: true,
+                        buttonBox: false,
+                        storyButtons: [],
+                    },
+                };
+            })
         })
     }
 
@@ -393,41 +427,70 @@ class storyPage extends Component {
         <StoryButton title="Select Another Story?" option clickHandler={this.selectStoryHandler} />
     )
     // Some JSX I wanted to get out of the render method. 
-    introMessages = {
-        first: 
-        <IntroModal type="slide" show={this.state.display.introMessages}>
-            <div className={`${classes.introModal} ${classes.textModal} ${classes.firstIntro} ${this.state.display.introMessages ? '' : classes.Hide}`}>
-                <TextModal>
-                    <h3>Welcome to <span className={classes.textEmphasis}>Vistelse!</span></h3>
-                    <p>Vistelse is the Swedish word for sojourn, but more importantly, it's the name of this 'choose your own adventure' app.</p>
-                </TextModal>
-            </div>
-        </IntroModal>,
-        second:
-            <IntroModal  type="slide" show={this.state.display.introMessages}>
-                <div className={`${classes.introModal} ${classes.textModal} ${this.state.display.introMessages ? '' : classes.Hide} ${classes.secondIntro}`}>
-                    <TextModal>
-                        <p>Right now I only have one story, but I'm capable of holding a lot more. Check back soon!</p>
-                    </TextModal>
-                </div>
-            </IntroModal>
-        ,
-        third: 
-        <IntroModal type="slide" show={this.state.display.introMessages}>
-            <div className={`${classes.introModal} ${classes.textModal} ${this.state.display.introMessages ? '' : classes.Hide} ${classes.thirdIntro} `}>
-                <TextModal>
-                    <p className={classes.initiallyDisplayedMessage}>
-                        Select your <i className={classes.Papyrus}>experience.</i>
-                    </p>
-                </TextModal>
-            </div>
-        </IntroModal>
-        
-    }
+    // introMessages = {
+    //     first: 
+    //     <IntroModal type="slide" show={this.state.display.introMessages}>
+    //         <div className={`${classes.introModal} ${classes.textModal} ${classes.firstIntro} ${this.state.display.introMessages ? '' : classes.Hide}`}>
+    //             <TextModal>
+    //                 <h3>Welcome to <span className={classes.textEmphasis}>Vistelse!</span></h3>
+    //                 <p>Vistelse is the Swedish word for sojourn, but more importantly, it's the name of this 'choose your own adventure' app.</p>
+    //             </TextModal>
+    //         </div>
+    //     </IntroModal>,
+    //     second:
+    //         <IntroModal  type="slide" show={this.state.display.introMessages}>
+    //             <div className={`${classes.introModal} ${classes.textModal} ${this.state.display.introMessages ? '' : classes.Hide} ${classes.secondIntro}`}>
+    //                 <TextModal>
+    //                     <p>Right now I only have one story, but I'm capable of holding a lot more. Check back soon!</p>
+    //                 </TextModal>
+    //             </div>
+    //         </IntroModal>
+    //     ,
+    //     third: 
+    //     <IntroModal type="slide" show={this.state.display.introMessages}>
+    //         <div className={`${classes.introModal} ${classes.textModal} ${this.state.display.introMessages ? '' : classes.Hide} ${classes.thirdIntro} `}>
+    //             <TextModal>
+    //                 <p className={classes.initiallyDisplayedMessage}>
+    //                     Select your <i className={classes.Papyrus}>experience.</i>
+    //                 </p>
+    //             </TextModal>
+    //         </div>
+    //     </IntroModal>
+    // }
 
     render() {
         let buttonBoxClasses = [classes.ButtonBox];
         buttonBoxClasses.push(this.state.display.introMessages === true ? classes.intro : '');
+        const introMessages = {
+            first: 
+            <IntroModal type="slide" show={this.state.display.introMessages}>
+                <div className={`${classes.introModal} ${classes.textModal} ${classes.firstIntro} ${this.state.display.introMessages ? '' : classes.Hide}`}>
+                    <TextModal>
+                        <h3>Welcome to <span className={classes.textEmphasis}>Vistelse!</span></h3>
+                        <p>Vistelse is the Swedish word for sojourn, but more importantly, it's the name of this 'choose your own adventure' app.</p>
+                    </TextModal>
+                </div>
+            </IntroModal>,
+            second:
+                <IntroModal  type="slide" show={this.state.display.introMessages}>
+                    <div className={`${classes.introModal} ${classes.textModal} ${this.state.display.introMessages ? '' : classes.Hide} ${classes.secondIntro}`}>
+                        <TextModal>
+                            <p>Right now I only have one story, but I'm capable of holding a lot more. Check back soon!</p>
+                        </TextModal>
+                    </div>
+                </IntroModal>
+            ,
+            third: 
+            <IntroModal type="slide" show={this.state.display.introMessages}>
+                <div className={`${classes.introModal} ${classes.textModal} ${this.state.display.introMessages ? '' : classes.Hide} ${classes.thirdIntro} `}>
+                    <TextModal>
+                        <p className={classes.initiallyDisplayedMessage}>
+                            Select your <i className={classes.Papyrus}>experience.</i>
+                        </p>
+                    </TextModal>
+                </div>
+            </IntroModal>
+        }
         return (
             <PageModal className={"story"} onScreen={this.state.modalInView} >
                 <div className={`${classes.pageWrapper}`}>
@@ -443,9 +506,9 @@ class storyPage extends Component {
                         Perhaps a removeMessage function could be created to control the animation off screen. 
                         */}
                         
-                        {this.state.display.first ? this.introMessages.first : null}
-                        {this.state.display.second ? this.introMessages.second : null}
-                        {this.state.display.third ? this.introMessages.third : null}
+                        {this.state.display.first ? introMessages.first : null}
+                        {this.state.display.second ? introMessages.second : null}
+                        {this.state.display.third ? introMessages.third : null}
                         {this.state.display.scene}
 
                     </div>
