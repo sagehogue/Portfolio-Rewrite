@@ -88,6 +88,7 @@
 
 .introModal div {
     width: 95%;
+    padding: 0;
     margin: 1rem;
     display: inline-block;
 }

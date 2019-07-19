@@ -28,7 +28,7 @@ class introModal extends Component {
     componentDidUpdate() {
         switch(this.state.effectStage) {
             case "offscreenLeft" :
-                    wait().then(res => {
+                    // wait().then(res => {
                         this.setState(oldState => {
                             return {
                                 ...oldState,
@@ -36,7 +36,7 @@ class introModal extends Component {
                                 effectStage: "transitioningVisible"
                             }
                         })
-                    })
+                    // })
                 break;
             case "transitioningVisible" :
                     wait().then(res => {

@@ -3,6 +3,7 @@
 ## Observations
 
 * Ensure design is appropriately responsive. [High Priority]
+* Document your code! Write comments explaining functions, purpose behind components. [High Priority]
 * Lots of sloppy code in this repo. Worth your time to clean out dead code and format some. [High Priority]
 * Vistelse needs some further observations and tinkering to make it better. [Med Priority]
 
@@ -13,6 +14,7 @@
 
 ## Vistelse
 
+* Figure out how to implement storybuttons correctly so that value of state is not read and used, but rather the link is established. Perhaps you could do this by containing them within an array in state.
 * Create sanity.io api for story creation. [High Priority]
 * Implement textFadeIn/textFadeOut features from original project. Should smoothly animate words into view individually, fade out all when an option is selected. [High Priority] 
 * Implement scroll indicator for long text passages. [Med Priority]

@@ -18,11 +18,9 @@ import classes from './StoryPage.module.css';
 
 // TODOS
 // Refactor scene updating logic - function should take a scene object and normalize state based off of that. should return a promise that can be consumed by another function which will render the HTML based off of the new and updated state!
-
+// Fix jolting issue with resizing frames during initial loading. 
 class storyPage extends Component {
     state = {
-        // modalInView: false, not rdy
-        // waiting: false,
         display: {
             introMessages: true,
             first: false,
@@ -37,15 +35,21 @@ class storyPage extends Component {
             isEndScene: false,
         },
         buttonsInvisible: true,
+
         // Initial repository of story data. Used to generate more specific groups of data.
+
         storyCollection: [], // generates arrays of JSX
+
         // true after componentDidMount, next update triggers button rendering
+
         shouldGenerateStoryButtons: false,
 
     }
 
     componentDidMount() {
-        // Code animating the initial messages into view goes here
+
+        // Code animating the initial pageview goes here
+
             this.loadMessage("first", 1000)
             .then(response => this.loadMessage("second", 1000))
             .then(response => this.loadMessage("third", 2000))
@@ -54,9 +58,7 @@ class storyPage extends Component {
                 if (localStorage.getItem('storyInfoLoaded')) {
                     retrievedStories = JSON.parse(localStorage.getItem('stories'));
                     this.addStoriesToState(retrievedStories);
-                    this.setInitialState(retrievedStories)
-                    // .then(res => setTimeout(() => {this.buttonFadeIn()}, 1000))
-                    // console.log(this)
+                    this.setInitialState(retrievedStories, this.generateStoryButtons)
                 } 
                 else {
                     retrievedStories = this.getAllStories()
@@ -67,15 +69,17 @@ class storyPage extends Component {
                         localStorage.setItem("storyInfoLoaded", "true");
                         return storyArray;
                     })
-                    .then((data => this.setInitialState(data, this.buttonFadeIn)))
+                    .then((data => this.setInitialState(data, this.generateStoryButtons)))
                 }
             })
+            .then(res => wait(100)).then(res => this.buttonFadeIn())
             // .then(response => this.loadButtons("type: story")) // accepts ternary values
         // Code below should run ASAP, but buttons should not appear until
         // animations have completed. 
         
         // Code below deduces if stories are in memory and if not, queries them and stores in memory.
     }
+    
     componentDidUpdate() {
         if (this.state.shouldGenerateStoryButtons) {
             this.generateStoryButtons()
@@ -103,22 +107,26 @@ class storyPage extends Component {
         })
     }
 
-    // Make array of storybutton components, returning null if story.scenes has no data.
-
     generateStoryButtons() {
-        const storyButtons = this.state.storyCollection.map((story, index) => {
-            if (story.scenes) {
-                return <StoryButton key={story["_id"] + index} 
-                id={story.title} 
-                title={story.title} 
-                description={story.description} 
-                clickHandler={this.switchToSelectedStory} 
-                invisible={this.state.buttonsInvisible}/>
-            } else {
-                return null;
-            }
-        })
+        // Make array of storybutton components, returning null if story.scenes has no data.
+        const storyButtons = this.state.storyCollection? true : false;
+        
+        // .map((story, index) => {
+        //     if (story.scenes) {
+        //         return <StoryButton key={story["_id"] + index} 
+        //         id={story.title} 
+        //         title={story.title} 
+        //         description={story.description} 
+        //         // I may be able to avoid a lot of extensive coding by putting the fadeOut thing in switchToSelectedStory
+        //         clickHandler={this.switchToSelectedStory} 
+        //         invisible={this.state.buttonsInvisible}/>
+        //     } else {
+        //         return null;
+        //     }
+        // })
+
         // Updates state, shouldGenerateStoryButtons made false to avoid getting stuck in loop
+
         this.setState((oldState) => {
             return {
                 ...oldState,
@@ -128,6 +136,7 @@ class storyPage extends Component {
                 }, 
                 shouldGenerateStoryButtons: false,
                 storyCollection: [...oldState.storyCollection],
+                buttonsInvisible: true
             }
         })
     }
@@ -140,6 +149,7 @@ class storyPage extends Component {
                 display: { ...oldState.display },
                 storyCollection: [...retrievedStories],
                 shouldGenerateStoryButtons: true,
+                buttonsInvisible: true
             }
         }, () => res()));// () => {setTimeout(callback, timer)}
         // this.setState((oldState) => {
@@ -432,14 +442,30 @@ class storyPage extends Component {
                         they need to have, depending on the state. The loadMessage function could manage that.
                         Perhaps a removeMessage function could be created to control the animation off screen. 
                         */}
-                        {}
+                        
                         {this.state.display.first ? this.introMessages.first : null}
                         {this.state.display.second ? this.introMessages.second : null}
                         {this.state.display.third ? this.introMessages.third : null}
                         {this.state.display.scene}
+
                     </div>
                     <div className={buttonBoxClasses.join(' ')}>
-                        {this.state.display.storyButtons}
+                        {this.state.display.storyButtons? 
+                        this.state.storyCollection.map((story, index) => {
+            if (story.scenes) {
+                return <StoryButton key={story["_id"] + index} 
+                id={story.title} 
+                title={story.title} 
+                description={story.description} 
+                // I may be able to avoid a lot of extensive coding by putting the fadeOut thing in switchToSelectedStory
+                clickHandler={this.switchToSelectedStory} 
+                invisible={this.state.buttonsInvisible}/>
+            } else {
+                return null;
+            }
+        }) : null}
+                        {/* Perhaps I could store these as an array, or do a ternary operation to decide whether 
+                        to show the visible or invisible button option and see if the transitions still function.  */}
                         {this.state.display.optionButtons ? this.state.display.optionButtons : null}
                         {this.state.story.isEndScene ? this.selectAnotherStoryButton : null}
                     </div>
