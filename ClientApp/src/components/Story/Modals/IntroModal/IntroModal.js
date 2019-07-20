@@ -29,6 +29,9 @@ class introModal extends Component {
         switch(this.state.effectStage) {
             case "offscreenLeft" :
                     // wait().then(res => {
+                        if (this.props.reset) {
+                            break
+                        }
                         this.setState(oldState => {
                             return {
                                 ...oldState,
@@ -85,6 +88,16 @@ class introModal extends Component {
                             })
                             break
                     case "deleting" :
+                        if (this.props.reset) {
+                            this.setState(oldState => {
+                                return {
+                                    ...oldState,
+                                    deleteSelf: false,
+                                    classList: [classes.IntroModal, classes.offscreenLeft, this.props.invisible? classes.invisible : ''],
+                                    effectStage: "offscreenLeft"
+                                }
+                            })
+                        }
                             break;
             break;
             // case "false" :

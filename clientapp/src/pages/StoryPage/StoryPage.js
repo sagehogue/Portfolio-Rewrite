@@ -52,7 +52,7 @@ class storyPage extends Component {
 
             this.loadMessage("first", 1000)
             .then(response => this.loadMessage("second", 1000))
-            .then(response => this.loadMessage("third", 2000))
+            .then(response => this.loadMessage("third", 1000))
             .then(response => {
                 let retrievedStories;
                 if (localStorage.getItem('storyInfoLoaded')) {
@@ -86,8 +86,90 @@ class storyPage extends Component {
         }
     }
 
-    pageModalRef = React.createRef();
-    scrollPageModal = () => window.scrollTo(0, this.pageModalRef.current.offsetTop)
+    setInitialState(retrievedStories, callback, timer=0) {
+
+        return new Promise((res) => this.setState((oldState) => {
+            return {
+                ...oldState,
+                display: { ...oldState.display },
+                storyCollection: [...retrievedStories],
+                shouldGenerateStoryButtons: true,
+                buttonsInvisible: true
+            }
+        }, () => res()));// () => {setTimeout(callback, timer)}
+        // this.setState((oldState) => {
+        //     return {
+        //         ...oldState,
+        //         display: { ...oldState.display },
+        //         storyCollection: [...retrievedStories],
+        //         shouldGenerateStoryButtons: true,
+        //     }
+        // }, () => {setTimeout(callback, timer)})
+    }
+
+    switchToSelectedStory = (e) => {
+        const storyToLoad = e.target.getAttribute("data-id"); 
+        const selectedStory = this.state.storyCollection.filter(story => {
+            if (story.title === storyToLoad) {
+                return true
+            } else return false;
+        })[0];
+        e.stopPropagation();
+        this.buttonFadeOut(1000)
+        .then(res => this.introSlideOut(1000))
+        .then(res => {
+            this.setState(oldState => {
+                return {
+                    ...oldState,
+                    display: {
+                        ...oldState.display,
+                        storyButtons: false,
+                        optionButtons: true
+                    },
+                    story: {
+                        selected: selectedStory,
+                        currentScene: {
+                            ...selectedStory.scenes.first, 
+                            scene: "first",
+                            options: Object.values(selectedStory.scenes.first.options)
+                        },
+                        sceneOptions: Object.values(selectedStory.scenes.first.options)
+                    }
+                }
+            })
+        })
+        .then(res => this.sceneModalSlideIn(1000))
+        .then(res => this.buttonFadeIn())
+        // Function's legacy content
+        // .then(res => {
+        //     this.setState(oldState => {
+        //         return {
+        //             ...oldState, display: {
+        //                 ...oldState.display,
+        //                 optionButtons: [...Object.values(selectedStory.scenes.first.options).map((optionKeyValArray, index) => {
+        //                     return <StoryButton title={optionKeyValArray.label} description={optionKeyValArray.text} associatedScene={optionKeyValArray.associatedScene} key={index} option clickHandler={this.optionHandler} />
+        //                 })],
+        //                 scene: (
+        //                     <div className={`${classes.sceneModal} ${classes.textModal}`}>
+        //                         <TextModal title={selectedStory.scenes.first.title}>
+    
+        //                             {Array.isArray(selectedStory.scenes.first.text) ? selectedStory.scenes.first.text.map((textLine, key) => { return <p className={classes.multiLine} key={key}>{textLine}</p> }) : selectedStory.scenes.first.text}
+        //                             {/* <p>{Array.isArray(selectedStory[0].scenes.first.text)? selectedStory[0].scenes.first.text.join('\n') : selectedStory[0].scenes.first.text}</p> */}
+        //                             {/* <p>{selectedStory[0].scenes.first.`text}</p> */}
+        //                         </TextModal>
+        //                     </div>
+        //                 )
+        //             },
+        //             storyCollection: [...oldState.storyCollection],
+        //             story: {
+        //                 selected: selectedStory,
+        //                 currentScene: { ...selectedStory.scenes.first, scene: "first" },
+        //                 sceneOptions: Object.values(selectedStory.scenes.first.options)
+        //             }
+        //         }
+        //     })
+        // })
+    }
 
     loadMessage(MsgToDisplay, timer=0) {
         return new Promise((res) => {
@@ -141,27 +223,6 @@ class storyPage extends Component {
         })
     }
 
-    setInitialState(retrievedStories, callback, timer=0) {
-
-        return new Promise((res) => this.setState((oldState) => {
-            return {
-                ...oldState,
-                display: { ...oldState.display },
-                storyCollection: [...retrievedStories],
-                shouldGenerateStoryButtons: true,
-                buttonsInvisible: true
-            }
-        }, () => res()));// () => {setTimeout(callback, timer)}
-        // this.setState((oldState) => {
-        //     return {
-        //         ...oldState,
-        //         display: { ...oldState.display },
-        //         storyCollection: [...retrievedStories],
-        //         shouldGenerateStoryButtons: true,
-        //     }
-        // }, () => {setTimeout(callback, timer)})
-    }
-
     addStoriesToState = storyInput => {
         let storyArray;
         if (!Array.isArray(storyInput)) {
@@ -187,9 +248,22 @@ class storyPage extends Component {
         return new Promise((res, rej) => {
             // const allStories = 
             axios.get(this.apiPaths.test).then((res) => {
-                // console.log(JSON.parse(res.request.response));
                 return [JSON.parse(res.request.response)]
             }).then(response => res(response));
+        })
+    }
+
+    resetSceneModal() {
+        return new Promise((res, rej) => {
+            this.setState(oldState => {
+                return {
+                    ...oldState,
+                    display: {...oldState.display},
+                    story: {...oldState.story},
+                    resetSceneModal: true
+                }
+            })
+            setTimeout(res, 100)
         })
     }
 
@@ -197,13 +271,23 @@ class storyPage extends Component {
     optionHandler = (e) => {
         const nextSceneLocator = e.target.getAttribute("data-associatedscene");
         const nextScene = this.state.story.selected.scenes[nextSceneLocator];
-        this.updateStateToNextScene(nextScene, nextSceneLocator);
+        this.buttonFadeOut(750)
+        .then(res => this.sceneModalSlideOut(1000))
+        .then(res => {
+            this.updateStateToNextScene(nextScene, nextSceneLocator);
+            return new Promise((res, rej) => {
+                res()
+            })
+        })
+        .then(res => this.resetSceneModal())
+        .then(res => this.sceneModalSlideIn(1000))
+        // Right here the buttons need to be updated.
+        .then(res => this.buttonFadeIn(1000))
     }
 
     updateStateToNextScene = async (scene, identifier) => {
         this.setState((oldState) => {
             let isEndScene;
-            // console.log(scene.options.first)
             try {
                 scene.options === undefined ? isEndScene = true : isEndScene = false;
                 let nextOptionButtons;
@@ -220,21 +304,25 @@ class storyPage extends Component {
                         introMessages: false,
                         storyButtons: false,
                         optionButtons: nextOptionButtons,
-                        scene: (
-                            <div className={`${classes.sceneModal} ${classes.textModal}`}>
-                                <TextModal title={scene.title}>
-                                    {Array.isArray(scene.text) ? scene.text.map((textLine, key) => { return <p className={classes.multiLine} key={key}>{textLine}</p> }) : scene.text}
-                                    {/* <p>{Array.isArray(scene.text)? scene.text.join('\n') : scene.text}</p> */}
-                                    {/* <p>{scene.text}</p> */}
-                                </TextModal>
-                            </div>
-                        )
+                        // scene: (
+                        //     <div className={`${classes.sceneModal} ${classes.textModal}`}>
+                        //         <TextModal title={scene.title}>
+                        //             {Array.isArray(scene.text) ? scene.text.map((textLine, key) => { return <p className={classes.multiLine} key={key}>{textLine}</p> }) : scene.text}
+                        //             {/* <p>{Array.isArray(scene.text)? scene.text.join('\n') : scene.text}</p> */}
+                        //             {/* <p>{scene.text}</p> */}
+                        //         </TextModal>
+                        //     </div>
+                        // )
                     },
                     storyCollection: [...oldState.storyCollection],
                     story: {
                         ...oldState.story,
                         selected: oldState.story.selected,
-                        currentScene: { ...scene, scene: identifier },
+                        currentScene: {
+                            ...scene, 
+                            scene: identifier,
+                            options: [...Object.values(scene.options)]
+                        },
                         isEndScene: isEndScene,
                     }
                 }
@@ -264,24 +352,7 @@ class storyPage extends Component {
             }, timer)
         }))
     }
-
-    buttonFadeOut(timer=500) {
-        return new Promise((res => {
-            this.setState(oldState => {
-                return {
-                    ...oldState,
-                    display: {...oldState.display},
-                    story: {...oldState.story},
-                    buttonsInvisible: true,
-                    // storyCollection: [...oldState.storyCollection],
-                }
-                })
-            setTimeout(() => {
-                res();
-            }, timer)
-        }))
-    }
-
+    
     buttonFadeIn(timer=500) {
         console.log('hello')
         return new Promise((res => {
@@ -300,7 +371,24 @@ class storyPage extends Component {
         }))
     }
 
-    introSlideOut(timer) {
+    buttonFadeOut(timer=500) {
+        return new Promise((res => {
+            this.setState(oldState => {
+                return {
+                    ...oldState,
+                    display: {...oldState.display},
+                    story: {...oldState.story},
+                    buttonsInvisible: true,
+                    // storyCollection: [...oldState.storyCollection],
+                }
+                })
+            setTimeout(() => {
+                res();
+            }, timer)
+        }))
+    }
+
+    introSlideOut(timer=500) {
         return new Promise((res => {
             this.setState((oldState => {
                 return {
@@ -318,67 +406,61 @@ class storyPage extends Component {
         }))
     }
 
-    sceneModalSlideIn(timer) {
+    sceneModalSlideIn(timer=500) {
+        console.log('my friend')
         return new Promise((res => {
-            this.setState()
+            this.setState(oldState => {
+                return {
+                    ...oldState,
+                    display: {
+                        ...oldState.display,
+                        sceneModal: true
+                    },
+                    story: {
+                        ...oldState.story
+                    },
+                    resetSceneModal: false
+                }
+            })
+            setTimeout(() => {
+                console.log('my pal')
+                res();
+            }, timer)
+        }))
+    }
+
+    sceneModalSlideOut(timer=500) {
+        return new Promise((res => {
+            this.setState(oldState => {
+                return {
+                    ...oldState,
+                    display: {
+                        ...oldState.display,
+                        sceneModal: false
+                    },
+                    story: {...oldState.story},
+                    // storyCollection: [...oldState.storyCollection],
+                }
+                })
             setTimeout(() => {
                 res();
             }, timer)
         }))
     }
 
+    pageModalRef = React.createRef();
+    scrollPageModal = () => window.scrollTo(0, this.pageModalRef.current.offsetTop)
 
-    switchToSelectedStory = (e) => {
-        
-        const storyToLoad = e.target.getAttribute("data-id"); 
-        const selectedStory = this.state.storyCollection.filter(story => {
-            if (story.title === storyToLoad) {
-                return true
-            } else return false;
-        });
-        e.stopPropagation();
-        this.buttonFadeOut(1000)
-        .then(res => this.introSlideOut(1000))
-        .then(res => this.sceneModalSlideIn())
-        .then(this.textFadeIn())
-        .then(res => {
-            this.setState(oldState => {
-                return {
-                    ...oldState, display: {
-                        ...oldState.display,
-                        introMessages: false,
-                        first: false,
-                        second: false,
-                        third: false,
-                        storyButtons: false,
-                        optionButtons: [...Object.values(selectedStory[0].scenes.first.options).map((optionKeyValArray, index) => {
-                            return <StoryButton title={optionKeyValArray.label} description={optionKeyValArray.text} associatedScene={optionKeyValArray.associatedScene} key={index} option clickHandler={this.optionHandler} />
-                        })],
-                        scene: (
-                            <div className={`${classes.sceneModal} ${classes.textModal}`}>
-                                <TextModal title={selectedStory[0].scenes.first.title}>
-    
-                                    {Array.isArray(selectedStory[0].scenes.first.text) ? selectedStory[0].scenes.first.text.map((textLine, key) => { return <p className={classes.multiLine} key={key}>{textLine}</p> }) : selectedStory[0].scenes.first.text}
-                                    {/* <p>{Array.isArray(selectedStory[0].scenes.first.text)? selectedStory[0].scenes.first.text.join('\n') : selectedStory[0].scenes.first.text}</p> */}
-                                    {/* <p>{selectedStory[0].scenes.first.`text}</p> */}
-                                </TextModal>
-                            </div>
-                        )
-                    },
-                    storyCollection: [...oldState.storyCollection],
-                    story: {
-                        selected: selectedStory[0],
-                        currentScene: { ...selectedStory[0].scenes.first, scene: "first" },
-                        sceneOptions: Object.values(selectedStory[0].scenes.first.options)
-                    }
-                }
-            })
-        })
+    // Object holding different API pathway reference attributes.
+    apiPaths = {
+        // gets all test data
+        everything: "https://localhost:5001/api/story",
+        firebase: "https://websage-mph.firebaseio.com/",
+        test: 'https://websage-mph.firebaseio.com/stories.json',
     }
 
     selectStoryHandler = (e) => {
         this.setState((oldState) => { 
-            console.log(oldState)
             return {
                 ...oldState,
                 story: {
@@ -388,9 +470,7 @@ class storyPage extends Component {
                     ...oldState.display,
                     introMessages: false
                 }
-                
             }
-
         })
         .then(res => {
             this.setState((oldState) => {
@@ -414,51 +494,25 @@ class storyPage extends Component {
         })
     }
 
-    // Object holding different API pathway reference attributes.
-    apiPaths = {
-        // gets all test data
-        everything: "https://localhost:5001/api/story",
-        firebase: "https://websage-mph.firebaseio.com/",
-        test: 'https://websage-mph.firebaseio.com/stories.json',
-    }
-
-
     selectAnotherStoryButton = (
         <StoryButton title="Select Another Story?" option clickHandler={this.selectStoryHandler} />
     )
-    // Some JSX I wanted to get out of the render method. 
-    // introMessages = {
-    //     first: 
-    //     <IntroModal type="slide" show={this.state.display.introMessages}>
-    //         <div className={`${classes.introModal} ${classes.textModal} ${classes.firstIntro} ${this.state.display.introMessages ? '' : classes.Hide}`}>
-    //             <TextModal>
-    //                 <h3>Welcome to <span className={classes.textEmphasis}>Vistelse!</span></h3>
-    //                 <p>Vistelse is the Swedish word for sojourn, but more importantly, it's the name of this 'choose your own adventure' app.</p>
-    //             </TextModal>
-    //         </div>
-    //     </IntroModal>,
-    //     second:
-    //         <IntroModal  type="slide" show={this.state.display.introMessages}>
-    //             <div className={`${classes.introModal} ${classes.textModal} ${this.state.display.introMessages ? '' : classes.Hide} ${classes.secondIntro}`}>
-    //                 <TextModal>
-    //                     <p>Right now I only have one story, but I'm capable of holding a lot more. Check back soon!</p>
-    //                 </TextModal>
-    //             </div>
-    //         </IntroModal>
-    //     ,
-    //     third: 
-    //     <IntroModal type="slide" show={this.state.display.introMessages}>
-    //         <div className={`${classes.introModal} ${classes.textModal} ${this.state.display.introMessages ? '' : classes.Hide} ${classes.thirdIntro} `}>
-    //             <TextModal>
-    //                 <p className={classes.initiallyDisplayedMessage}>
-    //                     Select your <i className={classes.Papyrus}>experience.</i>
-    //                 </p>
-    //             </TextModal>
-    //         </div>
+
+    // scene = (
+    //     <IntroModal type="slide" show={this.state.display.sceneModal}>
+    //     <div className={`${classes.sceneModal} ${classes.textModal}`}>
+    //         <TextModal title={this.state.story.selected.scenes.first.title}>
+    //             {Array.isArray(this.state.story.selected.scenes.first.text) ? this.state.story.selected.scenes.first.text.map((textLine, key) => { return <p className={classes.multiLine} key={key}>{textLine}</p> }) : this.state.story.selected.scenes.first.text}
+    //             {/* <p>{Array.isArray(selectedStory[0].scenes.first.text)? selectedStory[0].scenes.first.text.join('\n') : selectedStory[0].scenes.first.text}</p> */}
+    //             {/* <p>{selectedStory[0].scenes.first.`text}</p> */}
+    //         </TextModal>
+    //     </div>
     //     </IntroModal>
-    // }
+    // )
 
     render() {
+        let scene;
+        let buttons;
         let buttonBoxClasses = [classes.ButtonBox];
         buttonBoxClasses.push(this.state.display.introMessages === true ? classes.intro : '');
         const introMessages = {
@@ -491,45 +545,58 @@ class storyPage extends Component {
                 </div>
             </IntroModal>
         }
+        if (this.state.story.selected) {
+            scene = (
+                <IntroModal type="slide" show={this.state.display.sceneModal} reset={this.state.resetSceneModal? true : false}>
+                <div className={`${classes.sceneModal} ${classes.textModal}`}>
+                    <TextModal>
+                        {Array.isArray(this.state.story.currentScene.text) ? 
+                            this.state.story.currentScene.text.map((textLine, key) => { return <p className={classes.multiLine} key={key}>{textLine}</p> }) 
+                            : this.state.story.currentScene.text}
+                        {/* <p>{Array.isArray(selectedStory[0].scenes.first.text)? selectedStory[0].scenes.first.text.join('\n') : selectedStory[0].scenes.first.text}</p> */}
+                        {/* <p>{selectedStory[0].scenes.first.`text}</p> */}
+                    </TextModal>
+                </div>
+                </IntroModal>
+            )
+        }
+        if (this.state.display.optionButtons) {
+            buttons = this.state.story.currentScene.options.map((optionKeyValArray, index) => {
+                return <StoryButton title={optionKeyValArray.label} description={optionKeyValArray.text} associatedScene={optionKeyValArray.associatedScene} key={index} option invisible={this.state.buttonsInvisible} clickHandler={this.optionHandler} />
+            })
+            // buttons = [...Object.values(this.state.story.selected.scenes.first.options).map((optionKeyValArray, index) => {
+            //     return <StoryButton title={optionKeyValArray.label} description={optionKeyValArray.text} associatedScene={optionKeyValArray.associatedScene} key={index} option invisible={this.state.buttonsInvisible} clickHandler={this.optionHandler} />
+            // })]
+        }
         return (
             <PageModal className={"story"} onScreen={this.state.modalInView} >
                 <div className={`${classes.pageWrapper}`}>
                     <div className={`${classes.messageWrapper}`}>
 
-                        {/* 
-                        I think I will need to rewrite some of this. Problem is, they aren't rendered
-                        until they are supposed to be onscreen in the correct place. 
-                        So how can they be animated in from the left or right?I'll probably have to 
-                        make some offscreenLeft and offscreenRight classes to use to control these.
-                        Perhaps by introducing logic into the introMessages to determine what classes
-                        they need to have, depending on the state. The loadMessage function could manage that.
-                        Perhaps a removeMessage function could be created to control the animation off screen. 
-                        */}
-                        
                         {this.state.display.first ? introMessages.first : null}
                         {this.state.display.second ? introMessages.second : null}
                         {this.state.display.third ? introMessages.third : null}
-                        {this.state.display.scene}
-
+                        {/* Legacy method of displaying scene modal. Fallback */}
+                        {/* {this.state.display.scene} */}
+                        {scene? scene : null}
                     </div>
                     <div className={buttonBoxClasses.join(' ')}>
                         {this.state.display.storyButtons? 
                         this.state.storyCollection.map((story, index) => {
-            if (story.scenes) {
-                return <StoryButton key={story["_id"] + index} 
-                id={story.title} 
-                title={story.title} 
-                description={story.description} 
-                // I may be able to avoid a lot of extensive coding by putting the fadeOut thing in switchToSelectedStory
-                clickHandler={this.switchToSelectedStory} 
-                invisible={this.state.buttonsInvisible}/>
-            } else {
-                return null;
-            }
-        }) : null}
-                        {/* Perhaps I could store these as an array, or do a ternary operation to decide whether 
-                        to show the visible or invisible button option and see if the transitions still function.  */}
-                        {this.state.display.optionButtons ? this.state.display.optionButtons : null}
+                        if (story.scenes) {
+                            return <StoryButton key={story["_id"] + index} 
+                            id={story.title} 
+                            title={story.title} 
+                            description={story.description} 
+                            // I may be able to avoid a lot of extensive coding by putting the fadeOut thing in switchToSelectedStory
+                            clickHandler={this.switchToSelectedStory} 
+                            invisible={this.state.buttonsInvisible}/>
+                        } 
+                        else {return null;}
+                        }) : null}
+                        {/* Legacy method of displaying buttons. Fallback */}
+                        {/* {this.state.display.optionButtons ? this.state.display.optionButtons : null} */}
+                        {this.state.display.optionButtons ? buttons : null}
                         {this.state.story.isEndScene ? this.selectAnotherStoryButton : null}
                     </div>
                 </div>
