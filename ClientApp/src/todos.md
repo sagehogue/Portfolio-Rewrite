@@ -14,9 +14,11 @@
 
 ## Vistelse
 
-* Figure out how to implement storybuttons correctly so that value of state is not read and used, but rather the link is established. Perhaps you could do this by containing them within an array in state.
 * Create sanity.io api for story creation. [High Priority]
-* Implement textFadeIn/textFadeOut features from original project. Should smoothly animate words into view individually, fade out all when an option is selected. [High Priority] 
+* Implement textFadeIn/textFadeOut features from original project. Should smoothly animate words into view individually, fade out all when an option is selected. [High Priority]
+* Fix selectAnotherStoryButton functionality. selectAnotherStoryHandler broken. [High Priority]
+* Animate selectAnotherStoryButton [High Priority]
+* Animate story resetting functionality [High Priority]
 * Implement scroll indicator for long text passages. [Med Priority]
 * Implement intelligent scrolling to keep latest text in view, when text body will exceed visible space. [Med Priority]
 * Add 2 stories to demonstrate the sweet cycling available in my app. [Med Priority]
@@ -37,6 +39,7 @@
 
 ## Completed
 
+* Figure out how to implement storybuttons correctly so that value of state is not read and used, but rather the link is established. Perhaps you could do this by containing them within an array in state. [High Priority]
 * Story selection buttons don't really scale down on mobile. [High Priority]
 * About/Portfolio pages need some styling. Currently the textwalls don't have a bg-col, not very readable or pretty.
 * Convert page into about/portfolio hybrid.
